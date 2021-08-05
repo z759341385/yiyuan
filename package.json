@@ -12,8 +12,11 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.3",
     "good-storage": "^1.1.1",
+    "moment": "^2.29.1",
     "qs": "^6.9.6",
+    "swiper": "^6.8.1",
     "vue": "^2.6.11",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.2.0",
@@ -35,7 +38,8 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "typescript": "~3.9.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuex-module-decorators": "^1.0.1"
   },
   "eslintConfig": {
     "root": true,
