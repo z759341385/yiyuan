@@ -2,8 +2,8 @@
   <div class="home flex ju_c am_c">
     <el-button type="primary" @click="skipView('/patients')">患者简介</el-button>
     <el-button type="primary" @click="skipView('/patients/1')">患者详情</el-button>
-    <!-- <el-button type="primary" @click="skipView('Patient')">护理运转</el-button>
-    <el-button type="primary" @click="skipView('Patient')">护理标识</el-button> -->
+    <el-button type="primary" @click="skipView('/nursing/operation')">护理运转</el-button>
+    <el-button type="primary" @click="skipView('/nursing/info')">护理标识</el-button>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   name: "Home",
-  components: {}
+  components: {},
 })
 export default class extends Vue {
   skipView(path: string) {

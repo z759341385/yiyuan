@@ -53,11 +53,41 @@ const json = {
       remindType: null,
       remindName: "跌倒",
       remindDate: null
+    },
+    {
+      id: "3",
+      bedNum: "3",
+      remindName: "跌倒"
+    },
+    {
+      id: "4",
+      bedNum: "4",
+      remindName: "跌倒"
+    },
+    {
+      id: "5",
+      bedNum: "5",
+      remindName: "跌倒"
+    },
+    {
+      id: "6",
+      bedNum: "6",
+      remindName: "跌倒"
+    },
+    {
+      id: "7",
+      bedNum: "7",
+      remindName: "跌倒"
+    },
+    {
+      id: "8",
+      bedNum: "8",
+      remindName: "跌倒"
     }
   ],
   patientlist: [
     {
-      id: "2",
+      id: "1",
       isNewRecord: false,
       remarks: null,
       createDate: null,
@@ -182,7 +212,59 @@ const json = {
     },
     {
       id: "3",
+      bedNum: "3",
+      devUid: null,
+      sickNum: "202007080001",
+      name: "阿斯蒂芬",
+      sex: "女",
+      age: 60,
+      insuranceType: "新农合",
+      chargeDoctorName: "主治医生",
+      admissionTime: "2021-06-30 00:00:00",
+      nursingGrade: "二级"
+    },
+    {
+      id: "4",
       bedNum: "4",
+      devUid: null,
+      sickNum: "202007080001",
+      name: "阿斯蒂芬",
+      sex: "女",
+      age: 60,
+      insuranceType: "新农合",
+      chargeDoctorName: "主治医生",
+      admissionTime: "2021-06-30 00:00:00",
+      nursingGrade: "二级"
+    },
+    {
+      id: "5",
+      bedNum: "5",
+      devUid: null,
+      sickNum: "202007080001",
+      name: "阿斯蒂芬",
+      sex: "女",
+      age: 60,
+      insuranceType: "新农合",
+      chargeDoctorName: "主治医生",
+      admissionTime: "2021-06-30 00:00:00",
+      nursingGrade: "二级"
+    },
+    {
+      id: "6",
+      bedNum: "6",
+      devUid: null,
+      sickNum: "202007080001",
+      name: "阿斯蒂芬",
+      sex: "女",
+      age: 60,
+      insuranceType: "新农合",
+      chargeDoctorName: "主治医生",
+      admissionTime: "2021-06-30 00:00:00",
+      nursingGrade: "二级"
+    },
+    {
+      id: "7",
+      bedNum: "7",
       devUid: null,
       sickNum: "202007080001",
       name: "阿斯蒂芬",
@@ -248,6 +330,41 @@ const json = {
       callType: null,
       callName: "增援呼叫",
       callDate: null
+    },
+    {
+      id: "3",
+      bedNum: "3",
+      callName: "增援呼叫"
+    },
+    {
+      id: "4",
+      bedNum: "4",
+      callName: "增援呼叫"
+    },
+    {
+      id: "5",
+      bedNum: "5",
+      callName: "增援呼叫"
+    },
+    {
+      id: "6",
+      bedNum: "6",
+      callName: "增援呼叫"
+    },
+    {
+      id: "7",
+      bedNum: "7",
+      callName: "增援呼叫"
+    },
+    {
+      id: "8",
+      bedNum: "8",
+      callName: "增援呼叫"
+    },
+    {
+      id: "9",
+      bedNum: "9",
+      callName: "增援呼叫"
     }
   ],
   depName: "心内科"

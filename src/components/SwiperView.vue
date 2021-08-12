@@ -1,54 +1,62 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
-    <swiper-slide>Slide 4</swiper-slide>
-    <swiper-slide>Slide 5</swiper-slide>
-    <swiper-slide>Slide 6</swiper-slide>
-    <swiper-slide>Slide 7</swiper-slide>
-    <swiper-slide>Slide 8</swiper-slide>
-    <swiper-slide>Slide 9</swiper-slide>
-    <swiper-slide>Slide 10</swiper-slide>
-    <div class="swiper-pagination" slot="pagination"></div>
+  <swiper :key="type" class="swiper" :options="swiperOption">
+    <swiper-slide v-for="item in list" :key="item.id">
+      <div>{{ item.bedNum }}</div>
+      <div>{{ isRemind ? item.remindName : item.callName }}</div>
+    </swiper-slide>
   </swiper>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
+import SwiperCore, { Autoplay } from "swiper";
+SwiperCore.use([Autoplay]);
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
+import "swiper/swiper-bundle.css";
 
 @Component({
-  name: "swiper-example-slides-per-column",
+  name: "SwiperView",
   components: {
     Swiper,
     SwiperSlide,
   },
 })
 export default class extends Vue {
+  @Prop() type!: string;
+  @Prop() list!: any;
+
+  get isRemind() {
+    return this.type == "remind";
+  }
+
   swiperOption = {
     slidesPerView: 3,
     slidesPerColumn: 2,
-    spaceBetween: 30,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
+    spaceBetween: 20,
+    autoplay: {
+      delay: 2000,
+      stopOnLastSlide: false,
+      disableOnInteraction: true,
     },
   };
 }
 </script>
 
 <style lang="less" scoped>
-@import "./base.scss";
-
 .swiper {
-  height: 430px;
+  height: 320px;
   margin-left: auto;
   margin-right: auto;
 
   .swiper-slide {
-    height: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #5389e2 inset;
+    padding: 15px;
   }
 }
 </style>
