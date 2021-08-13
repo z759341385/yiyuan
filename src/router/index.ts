@@ -5,6 +5,7 @@ import PatientsList from "../views/patients/list/index.vue";
 import PatientsDetail from "../views/patients/detail/index.vue";
 import NursingOperation from "../views/nursing/operation/index.vue";
 import NursingInfo from "../views/nursing/info/index.vue";
+import Schedule from "../views/schedule/index.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes: Array<RouteConfig> = [
     path: "/nursing/info",
     name: "NursingInfo",
     component: NursingInfo
+  },
+  {
+    path: "/schedule",
+    name: "Schedule",
+    component: Schedule
   }
 ];
 
