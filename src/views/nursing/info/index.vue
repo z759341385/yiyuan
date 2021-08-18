@@ -5,7 +5,6 @@
       <div class="title_box flex am_c">
         <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
           <div>{{ item.label }}</div>
-          <div>{{ item.eng }}</div>
         </div>
       </div>
       <div class="list_box">
@@ -40,14 +39,14 @@ export default class extends Vue {
   operation = operation;
 
   titleList = [
-    { label: "序号", eng: "num", style: "width: 80px" },
-    { label: "姓名", eng: "name", style: "width: 100px" },
-    { label: "性别", eng: "sex", style: "width: 80px" },
-    { label: "年龄", eng: "age", style: "width: 80px" },
-    { label: "护理等级", eng: "nursingGrade", style: "flex: 1" },
-    { label: "病情状态", eng: "illnessState", style: "width: 240px" },
-    { label: "过敏信息", eng: "allergyInfo", style: "width: 240px" },
-    { label: "饮食类型", eng: "dietType", style: "width: 240px" },
+    { label: "序号", eng: "num", style: "width: 180px" },
+    { label: "姓名", eng: "name", style: "width: 180px" },
+    { label: "性别", eng: "sex", style: "width: 180px" },
+    { label: "年龄", eng: "age", style: "width: 180px" },
+    { label: "护理等级", eng: "nursingGrade", style: "width: 240px" },
+    { label: "病情状态", eng: "illnessState", style: "flex: 1" },
+    { label: "过敏信息", eng: "allergyInfo", style: "flex: 1" },
+    { label: "饮食类型", eng: "dietType", style: "flex: 1" },
   ];
 }
 </script>
