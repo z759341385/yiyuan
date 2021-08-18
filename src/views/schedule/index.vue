@@ -5,7 +5,7 @@
       <div class="title_box flex am_c">
         <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
           <div>{{ item.label }}</div>
-          <div>{{ item.eng }}</div>
+          <!-- <div>{{ item.eng }}</div> -->
         </div>
       </div>
       <div class="list_box">
@@ -39,16 +39,16 @@ export default class extends Vue {
   operation = operation;
 
   titleList = [
-    { label: "序号", eng: "num", style: "width: 80px" },
-    { label: "姓名", eng: "name", style: "width: 100px" },
-    { label: "性别", eng: "sex", style: "width: 80px" },
-    { label: "年龄", eng: "age", style: "width: 80px" },
+    { label: "序号", eng: "num", style: "width: 180px" },
+    { label: "姓名", eng: "name", style: "width: 180px" },
+    { label: "性别", eng: "sex", style: "width: 180px" },
+    { label: "年龄", eng: "age", style: "width: 180px" },
     { label: "事件名称", eng: "eventName", style: "flex: 1" },
-    { label: "时间", eng: "eventDate", style: "width: 180px" },
-    { label: "手术间", eng: "operateRoom", style: "width: 180px" },
-    { label: "手术名称", eng: "operateName", style: "width: 180px" },
-    { label: "麻醉方式", eng: "anesthesiaMode", style: "width: 180px" },
-    { label: "主刀医生", eng: "chiefSurgeon", style: "width: 180px" },
+    { label: "时间", eng: "eventDate", style: "flex: 1" },
+    { label: "手术间", eng: "operateRoom", style: "flex: 1" },
+    { label: "手术名称", eng: "operateName", style: "flex: 1" },
+    { label: "麻醉方式", eng: "anesthesiaMode", style: "flex: 1" },
+    { label: "主刀医生", eng: "chiefSurgeon", style: "flex: 1" },
   ];
 }
 </script>
