@@ -1,8 +1,8 @@
 <template>
   <swiper :key="type" class="swiper" :options="swiperOption">
-    <swiper-slide v-for="item in list" :key="item.id">
-      <div>{{ item.bedNum }}</div>
-      <div>{{ isRemind ? item.remindName : item.callName }}</div>
+    <swiper-slide v-for="item in list" :key="item.id" :class="[isRemind ? 'warning' : 'calling']">
+      <div class="f28 fw_b">{{ item.bedNum }}</div>
+      <div class="f18 mt_10">{{ isRemind ? item.remindName : item.callName }}</div>
     </swiper-slide>
   </swiper>
 </template>
@@ -57,6 +57,42 @@ export default class extends Vue {
     border-radius: 8px;
     box-shadow: 0 0 10px #5389e2 inset;
     padding: 15px;
+  }
+  .warning {
+    animation: flashing_warning 1s infinite linear;
+  }
+  .calling {
+    animation: flashing_calling 1s infinite linear;
+  }
+  @keyframes flashing_warning {
+    0% {
+      box-shadow: 0 0 10px #5389e2 inset;
+      border: 3px solid #5389e2;
+    }
+    50% {
+      color: #ef561f;
+      box-shadow: 0 0 10px #ef561f inset;
+      border: 3px solid #ef561f;
+    }
+    100% {
+      box-shadow: 0 0 10px #5389e2 inset;
+      border: 3px solid #5389e2;
+    }
+  }
+  @keyframes flashing_calling {
+    0% {
+      box-shadow: 0 0 10px #5389e2 inset;
+      border: 3px solid #5389e2;
+    }
+    50% {
+      color: #dfcc79;
+      box-shadow: 0 0 10px #dfcc79 inset;
+      border: 3px solid #dfcc79;
+    }
+    100% {
+      box-shadow: 0 0 10px #5389e2 inset;
+      border: 3px solid #5389e2;
+    }
   }
 }
 </style>

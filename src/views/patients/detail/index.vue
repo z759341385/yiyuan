@@ -38,7 +38,7 @@
           <div class="title">风险管理</div>
           <div class="mt_20 flex3">风险类型：{{ info.patient.riskType }}</div>
           <div class="view_risk flex1 flex am_c ju_e">
-            <span @click="skipView('/risk/record')">点击查看评估记录<i class="el-icon-arrow-right"></i></span>
+            <span @click="skipView('/risk')">点击查看评估记录<i class="el-icon-arrow-right"></i></span>
           </div>
         </div>
         <div class="flex1 card flex col ju_b ml_40">

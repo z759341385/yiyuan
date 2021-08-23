@@ -18,8 +18,8 @@
             <div class="t_ct col_item" :style="titleList[4].style">{{ item.eventName }}</div>
             <div class="t_ct col_item" :style="titleList[5].style">{{ item.eventDate }}</div>
           </div>
-        </div></vue-seamless-scroll
-      >
+        </div>
+      </vue-seamless-scroll>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ import vueSeamlessScroll from "vue-seamless-scroll";
 const operation = require("@/assets/nursing_operation.js").json;
 
 @Component({
-  name: "operation",
+  name: "NursingOperation",
   components: { Header, vueSeamlessScroll },
 })
 export default class extends Vue {
@@ -70,7 +70,8 @@ export default class extends Vue {
   .list_box {
     height: calc(100vh - 171px);
     overflow: hidden;
-    border: 1px dashed #979797;
+    box-shadow: 0 0 10px #5389e2 inset;
+    border-radius: 8px;
     .list_item {
       padding: 15px 0;
       .col_item {

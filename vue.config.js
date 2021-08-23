@@ -1,4 +1,4 @@
-const devServerPort = 8080; // TODO: get this variable from setting.ts
+const devServerPort = 8001; // TODO: get this variable from setting.ts
 
 // const name = "济宁第一人民医院"; // TODO: get this variable from setting.ts
 const name = "xxxx"; // TODO: get this variable from setting.ts
@@ -14,24 +14,24 @@ module.exports = {
     disableHostCheck: true,
     overlay: {
       warnings: false,
-      errors: true,
+      errors: true
     },
     progress: false,
     proxy: {
       "api/": {
         target: process.env.VUE_APP_BASE_API,
         secure: false,
-        changeOrigin: true,
-      },
-    },
+        changeOrigin: true
+      }
+    }
   },
   chainWebpack(config) {
     // provide the app's title in html-webpack-plugin's options list so that
     // it can be accessed in index.html to inject the correct title.
     // https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-plugin
-    config.plugin("html").tap((args) => {
+    config.plugin("html").tap(args => {
       args[0].title = name;
       return args;
     });
-  },
+  }
 };

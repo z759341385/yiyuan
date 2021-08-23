@@ -8,7 +8,7 @@
     <el-button type="primary" @click="skipView('/nursing/station')">护理站</el-button>
     <el-button type="primary" @click="skipView('/fire/info')">消防信息</el-button>
     <el-button type="primary" @click="skipView('/announcement/home')">公告信息</el-button>
-
+    <el-button type="primary" @click="skipView('/risk')">风险评估记录</el-button>
   </div>
 </template>
 
