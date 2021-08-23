@@ -53,6 +53,18 @@ export default class extends Vue {
     { label: "事件名称", eng: "eventName", style: "flex: 5" },
     { label: "时间", eng: "eventDate", style: "flex: 2" },
   ];
+  titleList1 = [
+    { label: "序号", eng: "num", style: "width: 180px" },
+    { label: "姓名", eng: "name", style: "width: 180px" },
+    { label: "性别", eng: "sex", style: "width: 180px" },
+    { label: "年龄", eng: "age", style: "width: 180px" },
+    { label: "事件名称", eng: "eventName", style: "flex: 1" },
+    { label: "时间", eng: "eventDate", style: "flex: 1" },
+    { label: "手术间", eng: "operateRoom", style: "flex: 1" },
+    { label: "手术名称", eng: "operateName", style: "flex: 1" },
+    { label: "麻醉方式", eng: "anesthesiaMode", style: "flex: 1" },
+    { label: "主刀医生", eng: "chiefSurgeon", style: "flex: 1" },
+  ];
 
   classOption = {
     step: 1, // 数值越大速度滚动越快
