@@ -8,6 +8,8 @@ import NursingInfo from "../views/nursing/info/index.vue";
 import NursingStation from "../views/nursing/station/index.vue"
 import Schedule from "../views/schedule/index.vue";
 import FireInfo from "../views/fire/index.vue";
+import RiskRecord from "../views/risk/index.vue";
+
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -50,6 +52,11 @@ const routes: Array<RouteConfig> = [
     path: "/fire/info",
     name: "FireInfo",
     component: FireInfo
+  },
+  {
+    path: "/risk/record",
+    name: "RiskRecord",
+    component: RiskRecord
   }
 ];
 

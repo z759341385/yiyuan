@@ -38,7 +38,7 @@
           <div class="title">风险管理</div>
           <div class="mt_20 flex3">风险类型：{{ info.patient.riskType }}</div>
           <div class="view_risk flex1 flex am_c ju_e">
-            <span @click="navigate()">点击查看评估记录<i class="el-icon-arrow-right"></i></span>
+            <span @click="skipView('/risk/record')">点击查看评估记录<i class="el-icon-arrow-right"></i></span>
           </div>
         </div>
         <div class="flex1 card flex col ju_b ml_40">
@@ -69,13 +69,13 @@ const info = require("@/assets/patient_detail.js").json;
 })
 export default class extends Vue {
   info = info;
-
   // 跳转评估记录
-  navigate() {
-    // this.$router.push({ name: name });
+  skipView(path: string) {
+    this.$router.push({ path: path });
   }
 }
 </script>
+
 <style lang="less" scoped>
 .patients_detail_box {
   margin: 40px;
