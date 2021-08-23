@@ -5,7 +5,7 @@ import PatientsList from "../views/patients/list/index.vue";
 import PatientsDetail from "../views/patients/detail/index.vue";
 import NursingOperation from "../views/nursing/operation/index.vue";
 import NursingInfo from "../views/nursing/info/index.vue";
-import NursingStation from "../views/nursing/station/index.vue"
+import NursingStation from "../views/nursing/station/index.vue";
 import Schedule from "../views/schedule/index.vue";
 import FireInfo from "../views/fire/index.vue";
 import RiskRecord from "../views/risk/index.vue";
@@ -54,7 +54,7 @@ const routes: Array<RouteConfig> = [
     component: FireInfo
   },
   {
-    path: "/risk/record",
+    path: "/risk",
     name: "RiskRecord",
     component: RiskRecord
   }
