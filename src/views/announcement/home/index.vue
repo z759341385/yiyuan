@@ -12,7 +12,8 @@
         <div class="title_box" v-show="tab == 0">
           <vue-seamless-scroll :data="operation.list" :class-option="classOption">
             <div v-for="item in operation.list" :key="item.label" class="list_item">
-              <div class="list_item">{{ item.content }}</div>
+              <div class="list_item" @click="skipView('/announcement/detail')">{{ item.content }}</div>
+
             </div>
           </vue-seamless-scroll>
         </div>
@@ -20,6 +21,7 @@
           <vue-seamless-scroll :data="operation.list1" :class-option="classOption">
             <div v-for="item in operation.list1" :key="item.label" class="list_item">
               <div class="list_item">{{ item.content }}</div>
+              
             </div>
           </vue-seamless-scroll>
         </div>
@@ -48,7 +50,9 @@ const operation = require("@/assets/notice.js").json;
 })
 export default class extends Vue {
   operation = operation;
-
+  skipView(path: string) {
+    this.$router.push({ path: path });
+  }
   tab = 0;
 
   selectTab(tab: number) {
