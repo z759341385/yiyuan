@@ -1,9 +1,17 @@
 import request from "@/utils/request";
 
-export const build = (params?: any) =>
+// 患者简介
+export const interList = (params?: any) =>
   request({
-    url: "build",
+    url: "patient/inter/list",
     method: "get",
-    params,
+    params
   });
 
+// 排程安排
+export const planList = (params?: any) =>
+  request({
+    url: "patient/inter/planlist",
+    method: "get",
+    params
+  });

@@ -59,6 +59,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import SwiperView from "@/components/SwiperView.vue";
+import { interList } from "@/api";
 const patient = require("@/assets/patient.js").json;
 
 @Component({
@@ -67,6 +68,11 @@ const patient = require("@/assets/patient.js").json;
 })
 export default class extends Vue {
   patient = patient;
+
+  mounted() {
+    const res = interList({ depid: 1 });
+    console.log(res);
+  }
 
   skipView(name: string) {
     this.$router.push({ name: name });

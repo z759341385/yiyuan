@@ -18,7 +18,7 @@ module.exports = {
     },
     progress: false,
     proxy: {
-      "api/": {
+      "a/": {
         target: process.env.VUE_APP_BASE_API,
         secure: false,
         changeOrigin: true

@@ -1,36 +1,48 @@
 <template>
   <div class="page">
     <Header :title="info.depName"></Header>
-    <div class="patients_detail_box flex col">
-      <div class="flex flex2 ">
-        <div class="detail_info card flex col ju_a">
-            <div class ='subTitle' style="text-align:center">消防消散平面图</div>
-
-         <img class ='mt_20 flex4' url="https://img-home.csdnimg.cn/images/20210817020654.png"  style="width:100%; height:160px;">
+    <div class="patients_detail_box flex">
+      <div class="flex5 flex col">
+        <div class="flex1 card flex col ju_a">
+          <div class="title" style="text-align: center">消防消散平面图</div>
+          <img class="mt_20 flex4" url="https://img-home.csdnimg.cn/images/20210817020654.png" style="width: 100%; height: 160px" />
         </div>
-    
-        <div class="flex2 card flex col ml_40">
-            
-       <div class="operation_box">
-           <div class ='subTitle' style="text-align:center">消防器材巡检记录</div>
-      <div class="title_box flex am_c">
-        <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
-          <div>{{ item.label }}</div>
-          <!-- <div>{{ item.eng }}</div> -->
-        </div>
-      </div>
-      <div class="list_box">
-        <div v-for="item in info.list" :key="item.label" class="flex am_c list_item">
-          <div class="t_ct" :style="titleList[0].style">{{ item.id }}</div>
-          <div class="t_ct" :style="titleList[1].style">{{ item.name }}</div>
-          <div class="t_ct" :style="titleList[2].style">{{ item.sex }}</div>
-          <div class="t_ct" :style="titleList[2].style">{{ item.eventDate }}</div>
+        <div class="add_record flex am_c">
+          <div class="title">巡检记录新增</div>
+          <div class="flex am_c">
+            <div class="mr_20">选择设备</div>
+            <el-select v-model="equipment" placeholder="请选择">
+              <el-option v-for="item in equipments" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+            </el-select>
+          </div>
+          <div class="flex am_c ml_40">
+            <div class="mr_20">检查人</div>
+            <el-select v-model="checker" placeholder="请选择">
+              <el-option v-for="item in checkers" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+            </el-select>
+          </div>
+          <el-button class="ml_40" type="primary">确定</el-button>
         </div>
       </div>
-    </div>
+      <div class="flex2 card flex col ml_40">
+        <div class="operation_box">
+          <div class="title" style="text-align: center">消防器材巡检记录</div>
+          <div class="title_box flex am_c">
+            <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
+              <div>{{ item.label }}</div>
+              <!-- <div>{{ item.eng }}</div> -->
+            </div>
+          </div>
+          <div class="list_box">
+            <div v-for="item in info.list" :key="item.label" class="flex am_c list_item">
+              <div class="t_ct" :style="titleList[0].style">{{ item.id }}</div>
+              <div class="t_ct" :style="titleList[1].style">{{ item.name }}</div>
+              <div class="t_ct" :style="titleList[2].style">{{ item.sex }}</div>
+              <div class="t_ct" :style="titleList[2].style">{{ item.eventDate }}</div>
+            </div>
+          </div>
         </div>
       </div>
-     
     </div>
   </div>
 </template>
@@ -51,7 +63,24 @@ export default class extends Vue {
     { label: "检查内容", eng: "name", style: "flex: 1" },
     { label: "检查人", eng: "sex", style: "flex: 1" },
     { label: "检查时间", eng: "sex", style: "flex: 1" },
+  ];
 
+  equipment = "";
+  equipments = [
+    { value: "选项1", label: "黄金糕" },
+    { value: "选项2", label: "双皮奶" },
+    { value: "选项3", label: "蚵仔煎" },
+    { value: "选项4", label: "龙须面" },
+    { value: "选项5", label: "北京烤鸭" },
+  ];
+
+  checker = "";
+  checkers = [
+    { value: "选项1", label: "黄金糕" },
+    { value: "选项2", label: "双皮奶" },
+    { value: "选项3", label: "蚵仔煎" },
+    { value: "选项4", label: "龙须面" },
+    { value: "选项5", label: "北京烤鸭" },
   ];
 
   // 跳转评估记录
@@ -61,13 +90,6 @@ export default class extends Vue {
 }
 </script>
 <style lang="less" scoped>
- .subTitle {
-    color: #00a3ff;
-    font-weight: 600;
-    font-size: 22px;
-    // display: flex;
-    // align-items: center;
-  }
 .patients_detail_box {
   margin: 40px;
   font-size: 20px;
@@ -75,40 +97,49 @@ export default class extends Vue {
   .title {
     color: #00a3ff;
     font-weight: 600;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    flex: 1;
+    font-size: 24px;
   }
-   
+
   .card {
     // border: 8px solid #1e47cc;
     box-shadow: 0 0 10px #5389e2 inset;
     border-radius: 12px;
     padding: 40px;
   }
-  .detail_info {
-    flex: 5;
-  }
-  .operation_box {
-  margin: 0px 0px;
-  font-size: 18px;
-  .title_box {
-    .title_item {
-      padding: 15px 10px;
+  .add_record {
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    box-shadow: 0 0 10px #5389e2 inset;
+    border-radius: 12px;
+    padding: 40px;
+    .title {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #0f0f10;
     }
   }
-  .list_box {
-    height: 100%;
-    overflow: hidden;
-    border: 1px dashed #979797;
-    .list_item {
-      padding: 15px 0;
-      .col_item {
-        padding: 0 10px;
+  .operation_box {
+    margin: 0px 0px;
+    font-size: 18px;
+    .title_box {
+      .title_item {
+        padding: 15px 10px;
+      }
+    }
+    .list_box {
+      height: 100%;
+      overflow: hidden;
+      border: 1px dashed #979797;
+      .list_item {
+        padding: 15px 0;
+        .col_item {
+          padding: 0 10px;
+        }
       }
     }
   }
-}
 }
 </style>
