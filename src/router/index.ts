@@ -9,7 +9,7 @@ import NursingStation from "../views/nursing/station/index.vue";
 import Schedule from "../views/schedule/index.vue";
 import FireInfo from "../views/fire/index.vue";
 import RiskRecord from "../views/risk/index.vue";
-
+import AnnouncementHome from "../views/announcement/home/index.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -57,6 +57,10 @@ const routes: Array<RouteConfig> = [
     path: "/risk",
     name: "RiskRecord",
     component: RiskRecord
+  },{
+    path: "/announcement/home",
+    name: "AnnouncementHome",
+    component: AnnouncementHome
   }
 ];
 

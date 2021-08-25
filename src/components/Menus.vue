@@ -29,6 +29,8 @@ export default class extends Vue {
     { title: "消防信息", icon: "man", page: "FireInfo" },
     { title: "风险评估", icon: "man", page: "RiskRecord" },
     { title: "护理站", icon: "man", page: "NursingStation" },
+    { title: "公告信息", icon: "man", page: "AnnouncementHome" },
+
   ];
 
   get curPage() {

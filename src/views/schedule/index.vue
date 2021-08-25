@@ -7,13 +7,19 @@
         <div class="tab_item" :class="{ selected: tab === 1 }" @click="selectTab(1)">检查预约</div>
       </div>
       <div>
-        <div class="title_box flex am_c">
+        <div class="title_box flex am_c" v-show="tab == 0 ">
           <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
             <div>{{ item.label }}</div>
             <!-- <div>{{ item.eng }}</div> -->
           </div>
         </div>
-        <vue-seamless-scroll :data="operation.list" class="list_box" :class-option="classOption">
+         <div class="title_box flex am_c" v-show="tab == 1 ">
+          <div v-for="item in titleList1" :key="item.label" class="flex col am_c title_item" :style="item.style">
+            <div>{{ item.label }}</div>
+            <!-- <div>{{ item.eng }}</div> -->
+          </div>
+        </div>
+        <vue-seamless-scroll :data="operation.list" class="list_box" :class-option="classOption" v-show="tab == 0 ">
           <div>
             <div v-for="item in operation.list" :key="item.label" class="flex am_c list_item">
               <div class="t_ct col_item" :style="titleList[0].style">{{ item.id }}</div>
@@ -22,6 +28,23 @@
               <div class="t_ct col_item" :style="titleList[3].style">{{ item.age }}</div>
               <div class="t_ct col_item" :style="titleList[4].style">{{ item.eventName }}</div>
               <div class="t_ct col_item" :style="titleList[5].style">{{ item.eventDate }}</div>
+            </div>
+          </div>
+        </vue-seamless-scroll>
+         <vue-seamless-scroll :data="operation.list1" class="list_box" :class-option="classOption" v-show="tab == 1 ">
+          <div>
+            <div v-for="item in operation.list" :key="item.label" class="flex am_c list_item">
+              <div class="t_ct col_item" :style="titleList1[0].style">{{ item.id }}</div>
+              <div class="t_ct col_item" :style="titleList1[1].style">{{ item.name }}</div>
+              <div class="t_ct col_item" :style="titleList1[2].style">{{ item.sex }}</div>
+              <div class="t_ct col_item" :style="titleList1[3].style">{{ item.age }}</div>
+              <div class="t_ct col_item" :style="titleList1[4].style">{{ item.eventName }}</div>
+              <div class="t_ct col_item" :style="titleList1[5].style">{{ item.eventDate }}</div>
+              <div class="t_ct col_item" :style="titleList1[6].style">{{ item.eventDate }}</div>
+              <div class="t_ct col_item" :style="titleList1[7].style">{{ item.eventDate }}</div>
+              <div class="t_ct col_item" :style="titleList1[8].style">{{ item.eventDate }}</div>
+
+
             </div>
           </div>
         </vue-seamless-scroll>
