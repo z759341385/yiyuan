@@ -50,14 +50,16 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
-const info = require("@/assets/patient_detail.js").json;
+import { fireList } from "@/api/index";
+// const info = require("@/assets/patient_detail.js").json;
 
 @Component({
   name: "FireInfo",
   components: { Header },
 })
 export default class extends Vue {
-  info = info;
+  info: any = {};
+
   titleList = [
     { label: "编号", eng: "num", style: "flex: 1" },
     { label: "检查内容", eng: "name", style: "flex: 1" },
@@ -82,6 +84,16 @@ export default class extends Vue {
     { value: "选项4", label: "龙须面" },
     { value: "选项5", label: "北京烤鸭" },
   ];
+
+  mounted() {
+    this.getData();
+  }
+
+  async getData() {
+    const pid = this.$route.query.depid;
+    const res = await fireList({ depid: pid });
+    this.info = res;
+  }
 
   // 跳转评估记录
   navigate() {

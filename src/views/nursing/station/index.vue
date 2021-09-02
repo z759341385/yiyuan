@@ -1,15 +1,14 @@
 <template>
   <div class="page">
-    <Header :title="patient.depName"></Header>
+    <Header :title="info.depName"></Header>
     <div class="flex am_s p_20">
       <div class="left_box flex1 flex f_warp">
-        <div v-for="item in patient.patientlist" :key="item.id" class="card_item" style="text-align:center">
-         <img class ='mt_40 flex4' url="https://img-home.csdnimg.cn/images/20210817020654.png"  style="width:130px; height:160px;">
-          <div class="mt_40 mb_40 flex4" style="text-align:center;">职务</div>
-            <div class="mt_20 mb_60 flex4" style="text-align:center;">张三三</div>
+        <div v-for="item in info.patientlist" :key="item.id" class="card_item" style="text-align: center">
+          <img class="mt_40 flex4" url="https://img-home.csdnimg.cn/images/20210817020654.png" style="width: 130px; height: 160px" />
+          <div class="mt_40 mb_40 flex4" style="text-align: center">职务</div>
+          <div class="mt_20 mb_60 flex4" style="text-align: center">张三三</div>
         </div>
       </div>
-    
     </div>
   </div>
 </template>
@@ -18,14 +17,25 @@
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import SwiperView from "@/components/SwiperView.vue";
-const patient = require("@/assets/patient.js").json;
+import { userlist } from "@/api/index";
+// const info = require("@/assets/patient.js").json;
 
 @Component({
   name: "NursingStation",
   components: { Header, SwiperView },
 })
 export default class extends Vue {
-  patient = patient;
+  info: any = {};
+
+  mounted() {
+    this.getData();
+  }
+
+  async getData() {
+    const pid = this.$route.query.depid;
+    const res = await userlist({ depid: pid });
+    this.info = res;
+  }
 
   skipView(name: string) {
     this.$router.push({ name: name });
@@ -44,7 +54,7 @@ export default class extends Vue {
       margin: 50px 10px 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px #5389e2 inset;
-    
+
       .lable_icon {
         width: 18px;
         height: 18px;
@@ -82,20 +92,17 @@ export default class extends Vue {
           box-shadow: 0 2px 5px #1e47cc;
         }
       }
-   
+
       .title {
         font-weight: 600;
         color: #5389e2;
         margin-left: 5px;
       }
-       .mb_60 {
-    margin-bottom: 60px;
-  }
-       
-      
+      .mb_60 {
+        margin-bottom: 60px;
+      }
     }
   }
-
 }
 
 @media screen and (min-width: 2440px) {
@@ -103,7 +110,7 @@ export default class extends Vue {
     width: calc(10% - 20px);
   }
 }
- @media screen and (min-width: 1500px) and (max-width: 2440px) {
+@media screen and (min-width: 1500px) and (max-width: 2440px) {
   .card_item {
     width: calc(16% - 20px);
   }

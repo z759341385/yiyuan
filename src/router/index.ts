@@ -65,11 +65,10 @@ const routes: Array<RouteConfig> = [
     component: AnnouncementHome
   },
   {
-    path: "/announcement/detail",
+    path: "/announcement/detail/:id(\\d+)",
     name: "AnnouncementDetail",
     component: AnnouncementDetail
   }
-  
 ];
 
 const router = new VueRouter({

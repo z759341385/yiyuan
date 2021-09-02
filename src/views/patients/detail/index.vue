@@ -61,14 +61,25 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
-const info = require("@/assets/patient_detail.js").json;
+import { interDetail } from "@/api/index";
+// const info = require("@/assets/patient_detail.js").json;
 
 @Component({
   name: "PatientsDetail",
   components: { Header },
 })
 export default class extends Vue {
-  info = info;
+  info: any = {};
+
+  mounted() {
+    this.getData();
+  }
+
+  async getData() {
+    const res = await interDetail({ id: 1 });
+    this.info = res;
+  }
+
   // 跳转评估记录
   skipView(path: string) {
     this.$router.push({ path: path });

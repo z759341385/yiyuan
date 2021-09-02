@@ -61,7 +61,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import SwiperView from "@/components/SwiperView.vue";
-import { interList } from "@/api";
+import { interList } from "@/api/index";
 // const patient = require("@/assets/patient.js").json;
 
 @Component({
@@ -78,7 +78,6 @@ export default class extends Vue {
   async getData() {
     const res = await interList({ depid: 1 });
     this.info = res;
-    console.log(res);
   }
 
   skipView(name: string) {

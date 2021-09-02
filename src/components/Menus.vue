@@ -1,7 +1,7 @@
 <template>
   <div class="menu_box flex am_c">
     <router-link
-      :to="{ name: item.page }"
+      :to="{ path: `${item.path}${query}` }"
       v-for="item in menus"
       :key="item.page"
       class="item_card flex col am_c ju_c"
@@ -22,19 +22,23 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class extends Vue {
   menus = [
-    { title: "患者简介", icon: "man", page: "PatientsList" },
-    { title: "护理运转", icon: "man", page: "NursingOperation" },
-    { title: "护理标识", icon: "man", page: "NursingInfo" },
-    { title: "排程信息", icon: "man", page: "Schedule" },
-    { title: "消防信息", icon: "man", page: "FireInfo" },
-    { title: "风险评估", icon: "man", page: "RiskRecord" },
-    { title: "护理站", icon: "man", page: "NursingStation" },
-    { title: "公告信息", icon: "man", page: "AnnouncementHome" },
-
+    { title: "患者简介", icon: "man", page: "PatientsList", path: "/patients" },
+    { title: "护理运转", icon: "man", page: "NursingOperation", path: "/nursing/operation" },
+    { title: "护理标识", icon: "man", page: "NursingInfo", path: "/nursing/info" },
+    { title: "排程信息", icon: "man", page: "Schedule", path: "/schedule" },
+    { title: "消防信息", icon: "man", page: "FireInfo", path: "/fire/info" },
+    { title: "风险评估", icon: "man", page: "RiskRecord", path: "/risk" },
+    { title: "护理站", icon: "man", page: "NursingStation", path: "/nursing/station" },
+    { title: "公告信息", icon: "man", page: "AnnouncementHome", path: "/announcement/home" },
   ];
 
   get curPage() {
     return this.$route.name;
+  }
+
+  get query() {
+    const depid = this.$route.query.depid;
+    return depid ? "?depid=" + depid : "";
   }
 }
 </script>

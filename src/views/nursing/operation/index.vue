@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header :title="operation.depName"></Header>
+    <Header :title="info.depName"></Header>
     <div class="operation_box">
       <div class="title_box flex am_c">
         <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
@@ -8,9 +8,9 @@
           <!-- <div>{{ item.eng }}</div> -->
         </div>
       </div>
-      <vue-seamless-scroll :data="operation.list" class="list_box" :class-option="classOption">
+      <vue-seamless-scroll :data="info.list" class="list_box" :class-option="classOption">
         <div>
-          <div v-for="item in operation.list" :key="item.label" class="flex am_c list_item">
+          <div v-for="item in info.list" :key="item.label" class="flex am_c list_item">
             <div class="t_ct col_item" :style="titleList[0].style">{{ item.id }}</div>
             <div class="t_ct col_item" :style="titleList[1].style">{{ item.name }}</div>
             <div class="t_ct col_item" :style="titleList[2].style">{{ item.sex }}</div>
@@ -28,14 +28,15 @@
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import vueSeamlessScroll from "vue-seamless-scroll";
-const operation = require("@/assets/nursing_operation.js").json;
+import { eventlist } from "@/api/index";
+// const info = require("@/assets/nursing_operation.js").json;
 
 @Component({
   name: "NursingOperation",
   components: { Header, vueSeamlessScroll },
 })
 export default class extends Vue {
-  operation = operation;
+  info: any = {};
 
   titleList = [
     { label: "序号", eng: "num", style: "flex: 1" },
@@ -56,6 +57,15 @@ export default class extends Vue {
     singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
     waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
   };
+
+  mounted() {
+    this.getData();
+  }
+
+  async getData() {
+    const res = await eventlist({ depid: 1 });
+    this.info = res;
+  }
 }
 </script>
 <style lang="less" scoped>
