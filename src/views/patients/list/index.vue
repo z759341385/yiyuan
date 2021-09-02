@@ -1,9 +1,9 @@
 <template>
   <div class="page">
-    <Header :title="patient.depName"></Header>
+    <Header :title="info.depName"></Header>
     <div class="flex am_s p_20">
       <div class="left_box flex1 flex f_warp">
-        <div v-for="item in patient.patientlist" :key="item.id" class="card_item">
+        <div v-for="item in info.patientlist" :key="item.id" class="card_item">
           <div class="bed_num_box f20 fw_b t_ct">{{ item.bedNum }}</div>
           <div class="flex am_c ju_b">
             <div class="t_ct f20 name_box line_1">{{ item.name }}</div>
@@ -30,7 +30,9 @@
           </div>
           <div class="flex am_c ju_b mt_15 mb_5">
             <div class="flex am_c">
-              <img class="lable_icon" :src="require('@/assets/images/id_card.png')" alt="" />
+              <router-link :to="{ name: 'PatientsDetail', params: { id: item.id } }">
+                <img class="lable_icon" :src="require('@/assets/images/id_card.png')" alt="" />
+              </router-link>
               <img class="lable_icon ml_10" v-if="item.nursingGrade == '一级'" :src="require('@/assets/images/number_1.png')" alt="" />
               <img class="lable_icon ml_10" v-else-if="item.nursingGrade == '二级'" :src="require('@/assets/images/number_2.png')" alt="" />
             </div>
@@ -44,11 +46,11 @@
       <div class="right_box">
         <div>
           <div class="right_title">高危及异常提醒</div>
-          <SwiperView type="remind" :list="patient.remindlist"></SwiperView>
+          <SwiperView type="remind" :list="info.remindlist"></SwiperView>
         </div>
         <div class="mt_20">
           <div class="right_title">呼叫动态提醒</div>
-          <SwiperView type="call" :list="patient.calllist"></SwiperView>
+          <SwiperView type="call" :list="info.calllist"></SwiperView>
         </div>
       </div>
     </div>
@@ -60,17 +62,22 @@ import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import SwiperView from "@/components/SwiperView.vue";
 import { interList } from "@/api";
-const patient = require("@/assets/patient.js").json;
+// const patient = require("@/assets/patient.js").json;
 
 @Component({
   name: "PatientsList",
   components: { Header, SwiperView },
 })
 export default class extends Vue {
-  patient = patient;
+  info: any = {};
 
   mounted() {
-    const res = interList({ depid: 1 });
+    this.getData();
+  }
+
+  async getData() {
+    const res = await interList({ depid: 1 });
+    this.info = res;
     console.log(res);
   }
 

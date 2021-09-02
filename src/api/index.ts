@@ -4,14 +4,14 @@ import request from "@/utils/request";
 export const interList = (params?: any) =>
   request({
     url: "patient/inter/list",
-    method: "get",
-    params
+    method: "post",
+    data: params
   });
 
 // 排程安排
 export const planList = (params?: any) =>
   request({
     url: "patient/inter/planlist",
-    method: "get",
-    params
+    method: "post",
+    data: params
   });
