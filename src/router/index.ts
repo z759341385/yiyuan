@@ -27,7 +27,7 @@ const routes: Array<RouteConfig> = [
     meta: { title: "患者简介" }
   },
   {
-    path: "/patients/:id(\\d+)",
+    path: "/patients/:id",
     name: "PatientsDetail",
     component: PatientsDetail,
     meta: { title: "患者详情" }
@@ -75,7 +75,7 @@ const routes: Array<RouteConfig> = [
     meta: { title: "公告信息" }
   },
   {
-    path: "/announcement/detail/:id(\\d+)",
+    path: "/announcement/detail/:id",
     name: "AnnouncementDetail",
     component: AnnouncementDetail,
     meta: { title: "公告详情" }

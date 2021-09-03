@@ -4,8 +4,9 @@
     <div class="patients_detail_box flex col">
       <div class="flex flex2">
         <div class="detail_info card">
-          <div class="subTitle" style="text-align: center">公告标题</div>
-          <div>公告内容</div>
+          <div class="time">发布时间：{{ info.newsInfo.createDate }}</div>
+          <div class="subTitle" style="text-align: center">{{ info.newsInfo.title }}</div>
+          <div>{{ info.newsInfo.newsContent }}</div>
         </div>
       </div>
     </div>
@@ -24,13 +25,6 @@ import { getNews } from "@/api/index";
 })
 export default class extends Vue {
   info: any = {};
-
-  titleList = [
-    { label: "编号", eng: "num", style: "flex: 1" },
-    { label: "检查内容", eng: "name", style: "flex: 1" },
-    { label: "检查人", eng: "sex", style: "flex: 1" },
-    { label: "检查时间", eng: "sex", style: "flex: 1" },
-  ];
 
   mounted() {
     this.getData();
@@ -71,6 +65,12 @@ export default class extends Vue {
   }
   .detail_info {
     flex: 5;
+    position: relative;
+    .time {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+    }
   }
   .operation_box {
     margin: 0px 0px;
