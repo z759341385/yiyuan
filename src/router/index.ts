@@ -17,57 +17,68 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: { title: "首页" }
   },
   {
     path: "/patients",
     name: "PatientsList",
-    component: PatientsList
+    component: PatientsList,
+    meta: { title: "患者简介" }
   },
   {
     path: "/patients/:id(\\d+)",
     name: "PatientsDetail",
-    component: PatientsDetail
+    component: PatientsDetail,
+    meta: { title: "患者详情" }
   },
   {
     path: "/nursing/operation",
     name: "NursingOperation",
-    component: NursingOperation
+    component: NursingOperation,
+    meta: { title: "护理运转" }
   },
   {
     path: "/nursing/station",
     name: "NursingStation",
-    component: NursingStation
+    component: NursingStation,
+    meta: { title: "护理站" }
   },
   {
     path: "/nursing/info",
     name: "NursingInfo",
-    component: NursingInfo
+    component: NursingInfo,
+    meta: { title: "护理标识" }
   },
   {
     path: "/schedule",
     name: "Schedule",
-    component: Schedule
+    component: Schedule,
+    meta: { title: "首页" }
   },
   {
     path: "/fire/info",
     name: "FireInfo",
-    component: FireInfo
+    component: FireInfo,
+    meta: { title: "消防信息" }
   },
   {
     path: "/risk",
     name: "RiskRecord",
-    component: RiskRecord
+    component: RiskRecord,
+    meta: { title: "风险评估" }
   },
   {
     path: "/announcement/home",
     name: "AnnouncementHome",
-    component: AnnouncementHome
+    component: AnnouncementHome,
+    meta: { title: "公告信息" }
   },
   {
     path: "/announcement/detail/:id(\\d+)",
     name: "AnnouncementDetail",
-    component: AnnouncementDetail
+    component: AnnouncementDetail,
+    meta: { title: "公告详情" }
   }
 ];
 

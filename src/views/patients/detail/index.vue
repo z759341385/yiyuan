@@ -76,7 +76,7 @@ export default class extends Vue {
   }
 
   async getData() {
-    const res = await interDetail({ id: 1 });
+    const res = await interDetail({ id: this.$route.params.id });
     this.info = res;
   }
 

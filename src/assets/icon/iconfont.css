@@ -1,0 +1,537 @@
+@font-face {
+  font-family: "hospital"; /* Project id 2788981 */
+  src: url("iconfont.woff2?t=1630663616822") format("woff2"), url("iconfont.woff?t=1630663616822") format("woff"),
+    url("iconfont.ttf?t=1630663616822") format("truetype");
+}
+
+[class*="hos-"] {
+  font-family: "hospital" !important;
+  font-size: 18px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hos-bangzhu:before {
+  content: "\e62a";
+}
+
+.hos-chaoshengbo:before {
+  content: "\e62b";
+}
+
+.hos-bingdu:before {
+  content: "\e62c";
+}
+
+.hos-dingyue:before {
+  content: "\e62d";
+}
+
+.hos-danao:before {
+  content: "\e62e";
+}
+
+.hos-erke:before {
+  content: "\e62f";
+}
+
+.hos-fanghukaiqi:before {
+  content: "\e630";
+}
+
+.hos-gengduocaozuo:before {
+  content: "\e631";
+}
+
+.hos-hecishebei:before {
+  content: "\e632";
+}
+
+.hos-hecishebei1:before {
+  content: "\e633";
+}
+
+.hos-jiyin:before {
+  content: "\e634";
+}
+
+.hos-jijiudianhua:before {
+  content: "\e635";
+}
+
+.hos-huli:before {
+  content: "\e636";
+}
+
+.hos-jiuhuche:before {
+  content: "\e637";
+}
+
+.hos-jiuzhen:before {
+  content: "\e638";
+}
+
+.hos-keshi:before {
+  content: "\e639";
+}
+
+.hos-mimabaohu:before {
+  content: "\e63a";
+}
+
+.hos-shiyan:before {
+  content: "\e63b";
+}
+
+.hos-shoushu:before {
+  content: "\e63c";
+}
+
+.hos-wenduji:before {
+  content: "\e63d";
+}
+
+.hos-xianweijing:before {
+  content: "\e63e";
+}
+
+.hos-shuye:before {
+  content: "\e63f";
+}
+
+.hos-xiaodu:before {
+  content: "\e640";
+}
+
+.hos-xindiantu:before {
+  content: "\e641";
+}
+
+.hos-xinzang:before {
+  content: "\e642";
+}
+
+.hos-xinxi:before {
+  content: "\e643";
+}
+
+.hos-yangqishebei:before {
+  content: "\e644";
+}
+
+.hos-yachi:before {
+  content: "\e645";
+}
+
+.hos-yiliaoanquan:before {
+  content: "\e646";
+}
+
+.hos-yiliaofuzhushebei:before {
+  content: "\e647";
+}
+
+.hos-yiliaowenjian:before {
+  content: "\e648";
+}
+
+.hos-yixueziliao:before {
+  content: "\e649";
+}
+
+.hos-yiyuan:before {
+  content: "\e64a";
+}
+
+.hos-yingerbaoyu:before {
+  content: "\e64b";
+}
+
+.hos-zhiming:before {
+  content: "\e64c";
+}
+
+.hos-yiyongzhaoming:before {
+  content: "\e64d";
+}
+
+.hos-zhushe:before {
+  content: "\e64e";
+}
+
+.hos-bianji:before {
+  content: "\e64f";
+}
+
+.hos-dengdai:before {
+  content: "\e650";
+}
+
+.hos-dianzhenduanyi:before {
+  content: "\e651";
+}
+
+.hos-guanbi:before {
+  content: "\e652";
+}
+
+.hos-bianji1:before {
+  content: "\e653";
+}
+
+.hos-guanlian:before {
+  content: "\e654";
+}
+
+.hos-jijiubao:before {
+  content: "\e655";
+}
+
+.hos-qiyong:before {
+  content: "\e656";
+}
+
+.hos-jiandao:before {
+  content: "\e657";
+}
+
+.hos-neikuijing:before {
+  content: "\e658";
+}
+
+.hos-jinyong:before {
+  content: "\e659";
+}
+
+.hos-qiyong1:before {
+  content: "\e65a";
+}
+
+.hos-shanchu:before {
+  content: "\e65b";
+}
+
+.hos-shuiliaoyi:before {
+  content: "\e65c";
+}
+
+.hos-tianjia:before {
+  content: "\e65d";
+}
+
+.hos-tingzhenqi:before {
+  content: "\e65e";
+}
+
+.hos-tongzhi:before {
+  content: "\e65f";
+}
+
+.hos-tupian:before {
+  content: "\e660";
+}
+
+.hos-yao:before {
+  content: "\e661";
+}
+
+.hos-yao1:before {
+  content: "\e662";
+}
+
+.hos-yisheng:before {
+  content: "\e663";
+}
+
+.hos-yufang:before {
+  content: "\e664";
+}
+
+.hos-Xguangxiangpian:before {
+  content: "\e665";
+}
+
+.hos-bangong:before {
+  content: "\e666";
+}
+
+.hos-baofeishebei:before {
+  content: "\e667";
+}
+
+.hos-daixiu:before {
+  content: "\e668";
+}
+
+.hos-dayin:before {
+  content: "\e669";
+}
+
+.hos-daiban:before {
+  content: "\e66a";
+}
+
+.hos-fapiao:before {
+  content: "\e66b";
+}
+
+.hos-gengduo:before {
+  content: "\e66c";
+}
+
+.hos-fanzhuan:before {
+  content: "\e66d";
+}
+
+.hos-guanbi1:before {
+  content: "\e66e";
+}
+
+.hos-hetong:before {
+  content: "\e66f";
+}
+
+.hos-jihua:before {
+  content: "\e670";
+}
+
+.hos-jiexiu:before {
+  content: "\e671";
+}
+
+.hos-jine:before {
+  content: "\e672";
+}
+
+.hos-queren:before {
+  content: "\e673";
+}
+
+.hos-querengongdan:before {
+  content: "\e674";
+}
+
+.hos-shebei:before {
+  content: "\e675";
+}
+
+.hos-rili:before {
+  content: "\e676";
+}
+
+.hos-sousuo:before {
+  content: "\e677";
+}
+
+.hos-waixiu:before {
+  content: "\e678";
+}
+
+.hos-waixiu1:before {
+  content: "\e679";
+}
+
+.hos-weixiugongdan:before {
+  content: "\e67a";
+}
+
+.hos-weitongguo:before {
+  content: "\e67b";
+}
+
+.hos-cigongzhen:before {
+  content: "\e67c";
+}
+
+.hos-dianziyiqi:before {
+  content: "\e67d";
+}
+
+.hos-baoxiu:before {
+  content: "\e67e";
+}
+
+.hos-diwenzhiliao:before {
+  content: "\e67f";
+}
+
+.hos-cigongzhenchengxiang:before {
+  content: "\e680";
+}
+
+.hos-erbihou:before {
+  content: "\e681";
+}
+
+.hos-fangshezhiliaoshebei:before {
+  content: "\e682";
+}
+
+.hos-fubu:before {
+  content: "\e683";
+}
+
+.hos-duancengsaomiao:before {
+  content: "\e684";
+}
+
+.hos-fangdumianju:before {
+  content: "\e685";
+}
+
+.hos-gouwuche:before {
+  content: "\e686";
+}
+
+.hos-guke:before {
+  content: "\e687";
+}
+
+.hos-hecigongzhenjiancha:before {
+  content: "\e688";
+}
+
+.hos-shaoshang:before {
+  content: "\e689";
+}
+
+.hos-hushi:before {
+  content: "\e68a";
+}
+
+.hos-kongneirong:before {
+  content: "\e68b";
+}
+
+.hos-miniao:before {
+  content: "\e68c";
+}
+
+.hos-yiyongguangxue:before {
+  content: "\e68d";
+}
+
+.hos-yiyuan1:before {
+  content: "\e68e";
+}
+
+.hos-yonghu:before {
+  content: "\e68f";
+}
+
+.hos-yunfu:before {
+  content: "\e690";
+}
+
+.hos-CTjiancha:before {
+  content: "\e691";
+}
+
+.hos-dangan:before {
+  content: "\e692";
+}
+
+.hos-MRIjiancha:before {
+  content: "\e693";
+}
+
+.hos-gongzuotai:before {
+  content: "\e694";
+}
+
+.hos-ECT:before {
+  content: "\e695";
+}
+
+.hos-PET:before {
+  content: "\e696";
+}
+
+.hos-peizhi:before {
+  content: "\e697";
+}
+
+.hos-zhikong:before {
+  content: "\e698";
+}
+
+.hos-shishi:before {
+  content: "\e699";
+}
+
+.hos-weixiu:before {
+  content: "\e69a";
+}
+
+.hos-xinzeng:before {
+  content: "\e69b";
+}
+
+.hos-wendangchaxun:before {
+  content: "\e69c";
+}
+
+.hos-biaoqianku:before {
+  content: "\e69d";
+}
+
+.hos-pinpai:before {
+  content: "\e69e";
+}
+
+.hos-biaoqianjianguanxi:before {
+  content: "\e69f";
+}
+
+.hos-zuzhi:before {
+  content: "\e6a0";
+}
+
+.hos-SPUguanli:before {
+  content: "\e6a1";
+}
+
+.hos-jiguang:before {
+  content: "\e6a2";
+}
+
+.hos-gaopin:before {
+  content: "\e6a3";
+}
+
+.hos-geren:before {
+  content: "\e6a4";
+}
+
+.hos-saoyisao:before {
+  content: "\e6a5";
+}
+
+.hos-shouji:before {
+  content: "\e6a6";
+}
+
+.hos-weixiujilu:before {
+  content: "\e6a7";
+}
+
+.hos-PM:before {
+  content: "\e6a8";
+}
+
+.hos-xunjian:before {
+  content: "\e6a9";
+}
+
+.hos-zichanguanli:before {
+  content: "\e6aa";
+}
+
+.hos-jifen:before {
+  content: "\e6ab";
+}
+
+.hos-bingli:before {
+  content: "\e629";
+}

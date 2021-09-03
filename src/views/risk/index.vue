@@ -3,16 +3,11 @@
     <Header :title="info.depName"></Header>
     <div class="flex am_s p_20">
       <div class="left_box flex1 flex f_warp">
-        <div v-for="item in info.patientlist" :key="item.id" class="card_item" style="text-align: center">
-          <div class="mt_20 mb_20 flex4" style="text-align: center">风险项1</div>
-          <div class="mt_20 mb_20 flex4" style="text-align: center">①风险评估记录：.......................</div>
-          <div class="mt_10 mb_20 flex4" style="text-align: center">②风险评估记录：.......................</div>
-          <div class="mt_10 mb_20 flex4" style="text-align: center">③风险评估记录：.......................</div>
-          <div class="mt_10 mb_20 flex4" style="text-align: center">④风险评估记录：.......................</div>
-          <div class="mt_10 mb_20 flex4" style="text-align: center">⑤风险评估记录：.......................</div>
-          <div class="mt_10 mb_20 flex4" style="text-align: center">⑥风险评估记录：.......................</div>
-          <div class="mt_30 mb_10 flex4" style="text-align: center">预计下次评估时间:</div>
-          <div class="mt_10 mb_10 flex1" style="text-align: center">2020-12-12</div>
+        <div v-for="item in info.riskArr" :key="item.id" class="card_item flex col am_c">
+          <div class="mt_20 mb_20">{{ item.name }}</div>
+          <div class="mt_10" v-for="log in item.logArr" :key="log.logDate">{{ log.logUser }} {{ log.logDate }}</div>
+          <div class="mt_30">预计下次评估时间:</div>
+          <div class="mt_10">2020-12-12</div>
         </div>
       </div>
     </div>
@@ -52,7 +47,7 @@ export default class extends Vue {
     .card_item {
       position: relative;
       padding: 15px;
-      height: 300pt;
+      min-height: 300pt;
       margin: 50px 10px 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px #5389e2 inset;

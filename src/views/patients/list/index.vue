@@ -30,7 +30,7 @@
           </div>
           <div class="flex am_c ju_b mt_15 mb_5">
             <div class="flex am_c">
-              <router-link :to="{ name: 'PatientsDetail', params: { id: item.id } }">
+              <router-link :to="{ name: 'PatientsDetail', params: { id: item.id } }" class="flex am_c">
                 <img class="lable_icon" :src="require('@/assets/images/id_card.png')" alt="" />
               </router-link>
               <img class="lable_icon ml_10" v-if="item.nursingGrade == '一级'" :src="require('@/assets/images/number_1.png')" alt="" />
@@ -76,7 +76,8 @@ export default class extends Vue {
   }
 
   async getData() {
-    const res = await interList({ depid: 1 });
+    const pid = this.$route.query.depid;
+    const res = await interList({ depid: pid });
     this.info = res;
   }
 

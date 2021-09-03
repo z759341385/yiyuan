@@ -3,9 +3,9 @@
     <Header :title="info.depName"></Header>
     <div class="patients_detail_box flex">
       <div class="flex5 flex col">
-        <div class="flex1 card flex col ju_a">
-          <div class="title" style="text-align: center">消防消散平面图</div>
-          <img class="mt_20 flex4" url="https://img-home.csdnimg.cn/images/20210817020654.png" style="width: 100%; height: 160px" />
+        <div class="card img_box flex col">
+          <div class="title t_ct">消防消散平面图</div>
+          <img class="mt_20 img" :src="info.fireControl.contorlPic" />
         </div>
         <div class="add_record flex am_c">
           <div class="title">巡检记录新增</div>
@@ -34,11 +34,10 @@
             </div>
           </div>
           <div class="list_box">
-            <div v-for="item in info.list" :key="item.label" class="flex am_c list_item">
-              <div class="t_ct" :style="titleList[0].style">{{ item.id }}</div>
-              <div class="t_ct" :style="titleList[1].style">{{ item.name }}</div>
-              <div class="t_ct" :style="titleList[2].style">{{ item.sex }}</div>
-              <div class="t_ct" :style="titleList[2].style">{{ item.eventDate }}</div>
+            <div v-for="item in info.checklist" :key="item.label" class="flex am_c list_item">
+              <div class="t_ct" :style="titleList[1].style">{{ item.explain }}</div>
+              <div class="t_ct" :style="titleList[2].style">{{ item.checkUserName }}</div>
+              <div class="t_ct" :style="titleList[2].style">{{ item.checkDate }}</div>
             </div>
           </div>
         </div>
@@ -61,10 +60,9 @@ export default class extends Vue {
   info: any = {};
 
   titleList = [
-    { label: "编号", eng: "num", style: "flex: 1" },
     { label: "检查内容", eng: "name", style: "flex: 1" },
     { label: "检查人", eng: "sex", style: "flex: 1" },
-    { label: "检查时间", eng: "sex", style: "flex: 1" },
+    { label: "检查时间", eng: "sex", style: "flex: 2" },
   ];
 
   equipment = "";
@@ -117,6 +115,14 @@ export default class extends Vue {
     box-shadow: 0 0 10px #5389e2 inset;
     border-radius: 12px;
     padding: 40px;
+    .img {
+      width: 100%;
+      height: calc(100% - 48px);
+      object-fit: contain;
+    }
+  }
+  .img_box {
+    height: calc(100% - 240px);
   }
   .add_record {
     position: relative;

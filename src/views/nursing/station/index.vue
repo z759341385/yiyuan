@@ -1,13 +1,23 @@
 <template>
   <div class="page">
     <Header :title="info.depName"></Header>
-    <div class="flex am_s p_20">
-      <div class="left_box flex1 flex f_warp">
-        <div v-for="item in info.patientlist" :key="item.id" class="card_item" style="text-align: center">
-          <img class="mt_40 flex4" url="https://img-home.csdnimg.cn/images/20210817020654.png" style="width: 130px; height: 160px" />
-          <div class="mt_40 mb_40 flex4" style="text-align: center">职务</div>
-          <div class="mt_20 mb_60 flex4" style="text-align: center">张三三</div>
-        </div>
+    <div class="flex pl_20 pr_20">
+      <div class="card_item flex col am_c">
+        <img class="mt_40 img" :src="info.hsz.photo" />
+        <div class="mt_40 mb_40">{{ info.hsz.type }}</div>
+        <div class="mt_20 mb_60">{{ info.hsz.name }}</div>
+      </div>
+      <div class="card_item flex col am_c">
+        <img class="mt_40 img" :src="info.hlbzr.photo" />
+        <div class="mt_40 mb_40">{{ info.hlbzr.type }}</div>
+        <div class="mt_20 mb_60">{{ info.hlbzr.name }}</div>
+      </div>
+    </div>
+    <div class="flex f_warp pl_20 pr_20">
+      <div v-for="item in info.zbhsArr" :key="item.id" class="card_item flex col am_c">
+        <img class="mt_40 img" :src="item.photo" />
+        <div class="mt_40 mb_40">{{ item.type }}</div>
+        <div class="mt_20 mb_60">{{ item.name }}</div>
       </div>
     </div>
   </div>
@@ -45,62 +55,63 @@ export default class extends Vue {
 <style lang="less" scoped>
 .page {
   color: #bdf0fc;
-  .left_box {
-    margin: 0 -10px;
-    .card_item {
-      position: relative;
-      padding: 15px;
-      height: 300pt;
-      margin: 50px 10px 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #5389e2 inset;
-
-      .lable_icon {
-        width: 18px;
-        height: 18px;
-      }
-      .bed_num_box {
+  .card_item {
+    position: relative;
+    padding: 15px;
+    height: 300pt;
+    margin: 50px 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #5389e2 inset;
+    .img {
+      width: 130px;
+      height: 160px;
+      object-fit: cover;
+    }
+    .lable_icon {
+      width: 18px;
+      height: 18px;
+    }
+    .bed_num_box {
+      position: absolute;
+      top: -10px;
+      left: -5px;
+      width: 50px;
+      height: 26px;
+      line-height: 26px;
+      border-radius: 4px 4px 0 0;
+      background-color: #1e47cc;
+      box-shadow: 0 2px 5px #1e47cc;
+      &::before {
+        content: "";
         position: absolute;
-        top: -10px;
         left: -5px;
-        width: 50px;
-        height: 26px;
-        line-height: 26px;
-        border-radius: 4px 4px 0 0;
+        top: 10px;
+        height: 20px;
+        width: 5px;
         background-color: #1e47cc;
+        border-radius: 4px 0 4px 4px;
         box-shadow: 0 2px 5px #1e47cc;
-        &::before {
-          content: "";
-          position: absolute;
-          left: -5px;
-          top: 10px;
-          height: 20px;
-          width: 5px;
-          background-color: #1e47cc;
-          border-radius: 4px 0 4px 4px;
-          box-shadow: 0 2px 5px #1e47cc;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          right: -5px;
-          top: 10px;
-          height: 20px;
-          width: 5px;
-          background-color: #1e47cc;
-          border-radius: 0 4px 4px 4px;
-          box-shadow: 0 2px 5px #1e47cc;
-        }
       }
+      &::after {
+        content: "";
+        position: absolute;
+        right: -5px;
+        top: 10px;
+        height: 20px;
+        width: 5px;
+        background-color: #1e47cc;
+        border-radius: 0 4px 4px 4px;
+        box-shadow: 0 2px 5px #1e47cc;
+      }
+    }
 
-      .title {
-        font-weight: 600;
-        color: #5389e2;
-        margin-left: 5px;
-      }
-      .mb_60 {
-        margin-bottom: 60px;
-      }
+    .title {
+      font-weight: 600;
+      color: #5389e2;
+      margin-left: 5px;
+    }
+    .mb_60 {
+      margin-bottom: 60px;
     }
   }
 }

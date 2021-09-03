@@ -77,5 +77,5 @@ export const userlist = (params?: any) =>
   request({
     url: "patient/inter/userlist",
     method: "post",
-    data: params
+    params
   });

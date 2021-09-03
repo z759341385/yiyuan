@@ -1,34 +1,37 @@
 <template>
   <div class="page">
-    <Header :title="公告信息"></Header>
+    <Header :title="info.depName"></Header>
     <div class="operation_box">
       <div class="flex am_c">
-        <div class="tab_item" :class="{ selected: tab === 0 }" @click="selectTab(0)">全院公告</div>
-        <div class="tab_item" :class="{ selected: tab === 1 }" @click="selectTab(1)">病区公告</div>
-        <div class="tab_item" :class="{ selected: tab === 2 }" @click="selectTab(2)">宣教信息</div>
+        <div class="tab_item" :class="{ selected: tab === 0 }" @click="selectTab(0)">全院公告<i class="hos-yiyuan f24 ml_5" /></div>
+        <div class="tab_item" :class="{ selected: tab === 1 }" @click="selectTab(1)">病区公告<i class="hos-keshi f24 ml_5" /></div>
+        <div class="tab_item" :class="{ selected: tab === 2 }" @click="selectTab(2)">宣教信息<i class="hos-yisheng f24 ml_5" /></div>
       </div>
       <div class="list_box">
-        <div class="title_box" v-show="tab == 0">
-          <vue-seamless-scroll :data="info.list" :class-option="classOption">
-            <router-link :to="{ path: '/announcement/detail/' + item.id }" v-for="item in info.list" :key="item.label" class="list_item">
-              <div>{{ item.content }}</div>
-            </router-link>
-          </vue-seamless-scroll>
-        </div>
-        <div class="title_box" v-show="tab == 1">
-          <vue-seamless-scroll :data="info.list1" :class-option="classOption">
-            <router-link :to="{ path: '/announcement/detail/' + item.id }" v-for="item in info.list1" :key="item.label" class="list_item">
-              <div>{{ item.content }}</div>
-            </router-link>
-          </vue-seamless-scroll>
-        </div>
-        <div class="title_box" v-show="tab == 2">
-          <vue-seamless-scroll :data="info.list2" :class-option="classOption">
-            <router-link :to="{ path: '/announcement/detail/' + item.id }" v-for="item in info.list2" :key="item.label" class="list_item">
-              <div>{{ item.content }}</div>
-            </router-link>
-          </vue-seamless-scroll>
-        </div>
+        <vue-seamless-scroll :data="info.hlist" :class-option="classOption" v-if="tab == 0">
+          <router-link :to="{ path: '/announcement/detail/' + item.id }" v-for="item in info.hlist" :key="item.id" class="list_item flex am_c">
+            <div v-if="item.newsType == '医院公告'" class="hos-yiyuan f24 mr_10"></div>
+            <div v-else-if="item.newsType == '病区公告'" class="hos-keshi f24 mr_10"></div>
+            <div v-else-if="item.newsType == '宣教信息'" class="hos-yisheng f24 mr_10"></div>
+            <div>{{ item.title }}</div>
+          </router-link>
+        </vue-seamless-scroll>
+        <vue-seamless-scroll :data="info.dlist" :class-option="classOption" v-if="tab == 1">
+          <router-link :to="{ path: '/announcement/detail/' + item.id }" v-for="item in info.dlist" :key="item.id" class="list_item flex am_c">
+            <div v-if="item.newsType == '医院公告'" class="hos-yiyuan f24 mr_10"></div>
+            <div v-else-if="item.newsType == '病区公告'" class="hos-keshi f24 mr_10"></div>
+            <div v-else-if="item.newsType == '宣教信息'" class="hos-yisheng f24 mr_10"></div>
+            <div>{{ item.title }}</div>
+          </router-link>
+        </vue-seamless-scroll>
+        <vue-seamless-scroll :data="info.xjlist" :class-option="classOption" v-if="tab == 2">
+          <router-link :to="{ path: '/announcement/detail/' + item.id }" v-for="item in info.xjlist" :key="item.id" class="list_item flex am_c">
+            <div v-if="item.newsType == '医院公告'" class="hos-yiyuan f24 mr_10"></div>
+            <div v-else-if="item.newsType == '病区公告'" class="hos-keshi f24 mr_10"></div>
+            <div v-else-if="item.newsType == '宣教信息'" class="hos-yisheng f24 mr_10"></div>
+            <div>{{ item.title }}</div>
+          </router-link>
+        </vue-seamless-scroll>
       </div>
     </div>
   </div>
@@ -89,10 +92,8 @@ export default class extends Vue {
     color: #0073ff;
     font-weight: bold;
   }
-  .title_box {
-    .title_item {
-      padding: 15px 10px;
-    }
+  .title_item {
+    padding: 15px 10px;
   }
   .list_box {
     height: calc(100vh - 212px);
@@ -104,11 +105,13 @@ export default class extends Vue {
       font-size: 20px;
       text-overflow: ellipsis;
       height: 60px;
-      border: 1px solid #19448e;
+      background: #19448e;
       border-radius: 8px;
-      padding: 15px 15px 10px 15px;
+      padding: 20px 15px;
       padding-top: 50;
       padding-bottom: 50;
+      text-decoration: unset;
+      color: #fff;
     }
   }
 }

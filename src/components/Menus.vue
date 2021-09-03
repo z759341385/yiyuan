@@ -7,7 +7,8 @@
       class="item_card flex col am_c ju_c"
       :class="{ cur_menu: curPage == item.page }"
     >
-      <img :src="require('@/assets/images/' + item.icon + '.png')" class="menu_icon" alt="" />
+      <!-- <img :src="require('@/assets/images/' + item.icon + '.png')" class="menu_icon" alt="" /> -->
+      <div :class="item.icon" class="menu_icon"></div>
       <div class="title">{{ item.title }}</div>
     </router-link>
   </div>
@@ -22,14 +23,14 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class extends Vue {
   menus = [
-    { title: "患者简介", icon: "man", page: "PatientsList", path: "/patients" },
-    { title: "护理运转", icon: "man", page: "NursingOperation", path: "/nursing/operation" },
-    { title: "护理标识", icon: "man", page: "NursingInfo", path: "/nursing/info" },
-    { title: "排程信息", icon: "man", page: "Schedule", path: "/schedule" },
-    { title: "消防信息", icon: "man", page: "FireInfo", path: "/fire/info" },
-    { title: "风险评估", icon: "man", page: "RiskRecord", path: "/risk" },
-    { title: "护理站", icon: "man", page: "NursingStation", path: "/nursing/station" },
-    { title: "公告信息", icon: "man", page: "AnnouncementHome", path: "/announcement/home" },
+    { title: "患者简介", icon: "hos-geren", page: "PatientsList", path: "/patients" },
+    { title: "护理运转", icon: "hos-fanzhuan", page: "NursingOperation", path: "/nursing/operation" },
+    { title: "护理标识", icon: "hos-huli", page: "NursingInfo", path: "/nursing/info" },
+    { title: "排程信息", icon: "hos-rili", page: "Schedule", path: "/schedule" },
+    { title: "消防信息", icon: "hos-shaoshang", page: "FireInfo", path: "/fire/info" },
+    { title: "风险评估", icon: "hos-bingli", page: "RiskRecord", path: "/risk" },
+    { title: "护理站", icon: "hos-hushi", page: "NursingStation", path: "/nursing/station" },
+    { title: "公告信息", icon: "hos-jihua", page: "AnnouncementHome", path: "/announcement/home" },
   ];
 
   get curPage() {
@@ -51,15 +52,14 @@ export default class extends Vue {
   .item_card {
     height: 80px;
     width: 80px;
-    color: #a4e9ff;
-    background-color: #79a7df;
+    color: #0c376b;
+    background-color: #92bbec;
+    border-radius: 4px;
     & + .item_card {
       margin-left: 10px;
     }
     .menu_icon {
-      width: 30px;
-      height: 30px;
-      object-fit: cover;
+      font-size: 30px;
       margin-bottom: 5px;
     }
     .title {
@@ -67,7 +67,8 @@ export default class extends Vue {
     }
   }
   .cur_menu {
-    background-color: #155cb3;
+    color: #fff;
+    background-color: #0c376b;
   }
   a:-webkit-any-link {
     text-decoration: none;
