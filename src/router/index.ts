@@ -1,83 +1,72 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/home/index.vue";
-import PatientsList from "../views/patients/list/index.vue";
-import PatientsDetail from "../views/patients/detail/index.vue";
-import NursingOperation from "../views/nursing/operation/index.vue";
-import NursingInfo from "../views/nursing/info/index.vue";
-import NursingStation from "../views/nursing/station/index.vue";
-import Schedule from "../views/schedule/index.vue";
-import FireInfo from "../views/fire/index.vue";
-import RiskRecord from "../views/risk/index.vue";
-import AnnouncementHome from "../views/announcement/home/index.vue";
-import AnnouncementDetail from "../views/announcement/detail/index.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import(/* webpackChunkName: "home" */ "@/views/home/index.vue"),
     meta: { title: "首页" }
   },
   {
     path: "/patients",
     name: "PatientsList",
-    component: PatientsList,
+    component: () => import(/* webpackChunkName: "patients-list" */ "@/views/patients/list/index.vue"),
     meta: { title: "患者简介" }
   },
   {
     path: "/patients/:id",
     name: "PatientsDetail",
-    component: PatientsDetail,
+    component: () => import(/* webpackChunkName: "patients-detail" */ "@/views/patients/detail/index.vue"),
     meta: { title: "患者详情" }
   },
   {
     path: "/nursing/operation",
     name: "NursingOperation",
-    component: NursingOperation,
+    component: () => import(/* webpackChunkName: "nursing-operation" */ "@/views/nursing/operation/index.vue"),
     meta: { title: "护理运转" }
   },
   {
     path: "/nursing/station",
     name: "NursingStation",
-    component: NursingStation,
+    component: () => import(/* webpackChunkName: "nursing-station" */ "@/views/nursing/station/index.vue"),
     meta: { title: "护理站" }
   },
   {
     path: "/nursing/info",
     name: "NursingInfo",
-    component: NursingInfo,
+    component: () => import(/* webpackChunkName: "nursing-info" */ "@/views/nursing/info/index.vue"),
     meta: { title: "护理标识" }
   },
   {
     path: "/schedule",
     name: "Schedule",
-    component: Schedule,
-    meta: { title: "首页" }
+    component: () => import(/* webpackChunkName: "schedule" */ "@/views/schedule/index.vue"),
+    meta: { title: "排程信息" }
   },
   {
     path: "/fire/info",
     name: "FireInfo",
-    component: FireInfo,
+    component: () => import(/* webpackChunkName: "fire" */ "@/views/fire/index.vue"),
     meta: { title: "消防信息" }
   },
   {
     path: "/risk",
     name: "RiskRecord",
-    component: RiskRecord,
+    component: () => import(/* webpackChunkName: "risk" */ "@/views/risk/index.vue"),
     meta: { title: "风险评估" }
   },
   {
     path: "/announcement/home",
     name: "AnnouncementHome",
-    component: AnnouncementHome,
+    component: () => import(/* webpackChunkName: "announcement-home" */ "@/views/announcement/home/index.vue"),
     meta: { title: "公告信息" }
   },
   {
     path: "/announcement/detail/:id",
     name: "AnnouncementDetail",
-    component: AnnouncementDetail,
+    component: () => import(/* webpackChunkName: "announcement-detail" */ "@/views/announcement/detail/index.vue"),
     meta: { title: "公告详情" }
   }
 ];

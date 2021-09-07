@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "@/permission";
 import store from "./store";
-import ElementUI from "element-ui";
+import { Button, Select } from "element-ui";
 import "@/assets/icon/iconfont.css";
 import "element-ui/lib/theme-chalk/index.css";
 
@@ -12,7 +12,8 @@ import "./styles/index.less";
 
 Vue.config.productionTip = false;
 
-Vue.use(ElementUI);
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
 
 new Vue({
   router,

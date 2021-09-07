@@ -1,3 +1,5 @@
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 const devServerPort = 8001; // TODO: get this variable from setting.ts
 
 // const name = "济宁第一人民医院"; // TODO: get this variable from setting.ts
@@ -5,8 +7,9 @@ const name = "xxxx"; // TODO: get this variable from setting.ts
 
 module.exports = {
   // publicPath: "./", // router hash 模式使用
-  publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
   lintOnSave: process.env.NODE_ENV === "development",
+  assetsDir: "./",
   productionSourceMap: false,
   devServer: {
     port: devServerPort,
@@ -34,4 +37,7 @@ module.exports = {
       return args;
     });
   }
+  // configureWebpack: config => {
+  //   config.plugins.push(new BundleAnalyzerPlugin());
+  // }
 };
