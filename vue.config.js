@@ -7,9 +7,8 @@ const name = "xxxx"; // TODO: get this variable from setting.ts
 
 module.exports = {
   // publicPath: "./", // router hash 模式使用
-  publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/static/screen/" : "/",
   lintOnSave: process.env.NODE_ENV === "development",
-  assetsDir: "./",
   productionSourceMap: false,
   devServer: {
     port: devServerPort,

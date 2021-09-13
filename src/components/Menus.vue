@@ -23,7 +23,7 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class extends Vue {
   menus = [
-    { title: "患者简介", icon: "hos-geren", page: "PatientsList", path: "/patients" },
+    { title: "患者简介", icon: "hos-geren", page: "PatientsList", path: "/" },
     { title: "护理运转", icon: "hos-fanzhuan", page: "NursingOperation", path: "/nursing/operation" },
     { title: "护理标识", icon: "hos-huli", page: "NursingInfo", path: "/nursing/info" },
     { title: "排程信息", icon: "hos-rili", page: "Schedule", path: "/schedule" },

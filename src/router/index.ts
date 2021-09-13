@@ -4,13 +4,13 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: () => import(/* webpackChunkName: "home" */ "@/views/home/index.vue"),
     meta: { title: "首页" }
   },
   {
-    path: "/patients",
+    path: "/",
     name: "PatientsList",
     component: () => import(/* webpackChunkName: "patients-list" */ "@/views/patients/list/index.vue"),
     meta: { title: "患者简介" }
