@@ -79,3 +79,11 @@ export const userlist = (params?: any) =>
     method: "post",
     params
   });
+
+// 输液监控中心
+export const infusionMonitor = (params?: any) =>
+  request({
+    url: "dev/screen/infusionMonitor",
+    method: "get",
+    params
+  });

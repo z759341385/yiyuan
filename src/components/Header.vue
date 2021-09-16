@@ -12,10 +12,7 @@
     </div>
     <div class="right flex am_e">
       <img :src="require('@/assets/images/zuobhuadong.png')" alt="" />
-      <!-- <div class="date flex am_c">
-        {{ nowDate }}<span>{{ nowTime }}</span>
-        <p>{{ Department }}</p>
-      </div> -->
+      <div class="date flex am_c">{{ formatDate }}</div>
     </div>
   </div>
 </template>
@@ -29,6 +26,26 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 })
 export default class extends Vue {
   @Prop() title!: any;
+  @Prop() date!: any;
+
+  timer: any = null;
+  localTime = (this as any).$moment().locale("zh-cn");
+
+  get formatDate() {
+    if (this.date) {
+      return this.date;
+    } else {
+      return this.localTime.format("YYYY-MM-DD dddd HH:mm");
+    }
+  }
+
+  mounted() {
+    if (!this.date && !this.timer) {
+      this.timer = setInterval(() => {
+        this.localTime = (this as any).$moment().locale("zh-cn");
+      }, 1000);
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -78,8 +95,10 @@ export default class extends Vue {
       top: 50%;
       right: 20px;
       transform: translateY(-55%);
-      font-size: 18px;
-      color: #c9c9c9;
+      color: #72b0fd;
+      font-size: 22px;
+      font-weight: bold;
+      margin-left: 10px;
       span {
         color: #72b0fd;
         font-size: 22px;
