@@ -1,7 +1,53 @@
 <template>
   <div class="page">
     <Header :title="info.depName"></Header>
-    <div class="patients_detail_box flex col">
+    <div class="patients_detail_box flex row">
+      <div class="flex am_c flex1 card">
+        <div class="col">
+          <div class="patient_header flex row">
+            <img class="type_icon" :src="require('@/assets/images/icon_infomation.png')" alt="" />
+            <div class="patient_header_text flex col">
+              <div>个人信息</div>
+              <div class="english">personal information</div>
+            </div>
+            <div class="flex row">
+              <div class="patient_info_h1 ">张*三</div>
+              <div class="patient_info_h1">男</div>
+              <div class="patient_info_h1 ">30岁</div>
+            </div>
+          </div>
+          <div class="patient_info_h2 flex row">
+          <div>病案号 ：</div>
+          <div class="patient_info_text">20000000001</div>
+          </div>
+          <div class="patient_info_h2 flex row">
+          <div>入院时间 ：</div>
+          <div class="patient_info_text">2000-12-12 12:20</div>
+          </div>
+          <div class="patient_info_h2 flex row">
+          <div>入院请款 ：</div>
+          <div class="patient_info_text">入院情况入院情况入院情况入院情况</div>
+          </div>
+           <div class="patient_info_h2 flex row">
+          <div>医保类型 ：</div>
+          <div class="patient_info_text">个人个人</div>
+          </div> 
+            <div class="flex row">
+               <div class="patient_info_h2 flex row" style="width: 50%">
+          <div>医生 ：</div>
+          <div class="patient_info_text">李四</div>
+          </div>
+          <div class="patient_info_h2 flex row" style="width: 50%">
+          <div>护士 ：</div>
+          <div class="patient_info_text">王五</div>
+          </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="flex am_c flex2 card ml_40"></div>
+    </div>
+    <!-- <div class="patients_detail_box flex col">
       <div class="flex flex2">
         <div class="detail_info card flex col ju_a">
           <div class="title">基本信息</div>
@@ -54,7 +100,7 @@
           <div class="mt_20 mb_60 flex4">{{ info.patient.entrustTerms }}</div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -89,7 +135,7 @@ export default class extends Vue {
 
 <style lang="less" scoped>
 .patients_detail_box {
-  margin: 40px;
+  margin: 30px;
   font-size: 20px;
   height: calc(100vh - 160px);
   .title {
@@ -100,11 +146,36 @@ export default class extends Vue {
     align-items: center;
     flex: 1;
   }
+  .patient_header{
+    align-items: center;
+
+  }
+  .patient_header_text {
+    margin-left: 12px;
+    padding-bottom: 0;
+    font-size: 24px;
+  }
+  .patient_info_h1 {
+    margin-left: 30px;
+    font-size: 28px;
+    width: 150px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .patient_info_h2{
+   padding: 8px 0px 8px 0px;
+        margin-left: 12px;
+
+  }
+  .patient_info_text{
+        color: #ffffff;
+
+  }
   .card {
     // border: 8px solid #1e47cc;
     box-shadow: 0 0 10px #5389e2 inset;
     border-radius: 12px;
-    padding: 40px;
+    padding: 20px;
   }
   .detail_info {
     flex: 5;
@@ -118,6 +189,13 @@ export default class extends Vue {
   }
   .mb_60 {
     margin-bottom: 60px;
+  }
+  .english {
+    font-size: 14px;
+  }
+  .type_icon {
+    width: 60px;
+    height: 60px;
   }
 }
 </style>
