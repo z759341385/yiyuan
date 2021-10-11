@@ -106,7 +106,9 @@ export default class extends Vue {
     //获取当前url中的参数
     this.depid = this.getQueryString("depid");
 
-    this.onresize();
+    this.$nextTick(() => {
+      this.onresize();
+    });
     window.onresize = () => {
       this.onresize();
     };
@@ -626,7 +628,7 @@ body {
   border-radius: 200px;
 }
 
-.color_border {
+::v-deep .color_border {
   border: 1px solid #73e08e;
   border-radius: 200px;
 }
