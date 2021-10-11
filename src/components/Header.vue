@@ -9,6 +9,7 @@
       <img :src="require('../assets/images/biaoti_bg.png')" class="biaoti_bg" alt="" />
       <img :src="require('@/assets/images/zhuangshi_r.png')" alt="" />
       <div class="title">{{ title }}</div>
+      <div class="title_desc">护理站</div>
     </div>
     <div class="right flex am_e">
       <img :src="require('@/assets/images/zuobhuadong.png')" alt="" />
@@ -75,7 +76,15 @@ export default class extends Vue {
     padding: 0 40px;
     .title {
       position: absolute;
-      top: 50%;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      color: white;
+    }
+    .title_desc {
+      position: absolute;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -60%);
       font-size: 32px;
