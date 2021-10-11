@@ -3,7 +3,7 @@ import request from "@/utils/request";
 // 患者简介
 export const interList = (params?: any) =>
   request({
-    url: "patient/inter/list",
+    url: "inter/list",
     method: "post",
     data: params
   });
@@ -11,7 +11,7 @@ export const interList = (params?: any) =>
 // 患者详情
 export const interDetail = (params?: any) =>
   request({
-    url: "patient/inter/get",
+    url: "inter/get",
     method: "post",
     data: params
   });
@@ -19,7 +19,7 @@ export const interDetail = (params?: any) =>
 // 护理运转
 export const eventlist = (params?: any) =>
   request({
-    url: "patient/inter/eventlist",
+    url: "inter/eventlist",
     method: "post",
     data: params
   });
@@ -27,7 +27,7 @@ export const eventlist = (params?: any) =>
 // 护理标识
 export const nurselist = (params?: any) =>
   request({
-    url: "patient/inter/nurselist",
+    url: "inter/nurselist",
     method: "post",
     data: params
   });
@@ -35,7 +35,7 @@ export const nurselist = (params?: any) =>
 // 排程安排
 export const planList = (params?: any) =>
   request({
-    url: "patient/inter/planlist",
+    url: "inter/planlist",
     method: "post",
     data: params
   });
@@ -43,7 +43,7 @@ export const planList = (params?: any) =>
 // 消防信息
 export const fireList = (params?: any) =>
   request({
-    url: "patient/inter/firelist",
+    url: "inter/firelist",
     method: "post",
     data: params
   });
@@ -51,7 +51,7 @@ export const fireList = (params?: any) =>
 // 信息详情
 export const getNews = (params?: any) =>
   request({
-    url: "patient/inter/getNews",
+    url: "inter/getNews",
     method: "post",
     data: params
   });
@@ -59,7 +59,7 @@ export const getNews = (params?: any) =>
 // 信息发布
 export const newlist = (params?: any) =>
   request({
-    url: "patient/inter/newlist",
+    url: "inter/newlist",
     method: "post",
     data: params
   });
@@ -67,7 +67,7 @@ export const newlist = (params?: any) =>
 // 患者风险评估记录
 export const risklist = (params?: any) =>
   request({
-    url: "patient/inter/risklist",
+    url: "inter/risklist",
     method: "post",
     data: params
   });
@@ -75,7 +75,7 @@ export const risklist = (params?: any) =>
 // 护理站基本信息
 export const userlist = (params?: any) =>
   request({
-    url: "patient/inter/userlist",
+    url: "inter/userlist",
     method: "post",
     params
   });
