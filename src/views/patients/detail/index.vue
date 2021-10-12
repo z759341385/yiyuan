@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="patients_detail_box flex">
       <div class="flex1 card">
         <div class="flex am_c mb_20">
@@ -153,10 +153,10 @@
 
       <div class="flex2 card operation_box ml_40">
         <div class="flex am_c tab_box">
-          <div class="tab_item" :class="{ selected: tab === 0 }" @click="tab = 0">诊疗医嘱</div>
-          <div class="tab_item" :class="{ selected: tab === 1 }" @click="tab = 1">处方医嘱</div>
+          <div class="tab_item" :class="{ selected: tab === 0 }" @click="selectTab(0)">诊疗医嘱</div>
+          <div class="tab_item" :class="{ selected: tab === 1 }" @click="selectTab(1)">处方医嘱</div>
         </div>
-        <div>
+        <div class="flex col">
           <div class="title_box flex am_c" v-show="tab == 0">
             <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
               <div>{{ item.label }}</div>
@@ -169,93 +169,61 @@
               <!-- <div>{{ item.eng }}</div> -->
             </div>
           </div>
-          <div class="list_box" v-show="tab == 0">
-            <div v-for="item in info.operatelist" :key="item.label" class="flex am_c list_item">
-              <div class="t_ct col_item line1" :style="titleList[0].style">{{ item.id }}</div>
-              <div class="t_ct col_item line1" :style="titleList[1].style">{{ item.name }}</div>
-              <div class="t_ct col_item line1" :style="titleList[2].style">{{ item.sex }}</div>
-              <div class="t_ct col_item line1" :style="titleList[3].style">{{ item.age }}</div>
-              <div class="t_ct col_item line1" :style="titleList[4].style">{{ item.operateDate }}</div>
-              <div class="t_ct col_item line1" :style="titleList[5].style">{{ item.operateRoom }}</div>
-              <div class="t_ct col_item line1" :style="titleList[6].style">{{ item.operateName }}</div>
-              <div class="t_ct col_item line1" :style="titleList[7].style">{{ item.anesthesiaMode }}</div>
-              <div class="t_ct col_item line1" :style="titleList[8].style">{{ item.chiefSurgeon }}</div>
+          <template v-if="tab == 0">
+            <div class="list_box">
+              <div v-for="item in tabList[0].list" :key="item.label" class="flex am_c list_item">
+                <div class="t_ct col_item line1" :style="titleList[0].style">{{ item.id }}</div>
+                <div class="t_ct col_item line1" :style="titleList[1].style">{{ item.name }}</div>
+                <div class="t_ct col_item line1" :style="titleList[2].style">{{ item.sex }}</div>
+                <div class="t_ct col_item line1" :style="titleList[3].style">{{ item.age }}</div>
+                <div class="t_ct col_item line1" :style="titleList[4].style">{{ item.operateDate }}</div>
+                <div class="t_ct col_item line1" :style="titleList[5].style">{{ item.operateRoom }}</div>
+                <div class="t_ct col_item line1" :style="titleList[6].style">{{ item.operateName }}</div>
+                <div class="t_ct col_item line1" :style="titleList[7].style">{{ item.anesthesiaMode }}</div>
+                <div class="t_ct col_item line1" :style="titleList[8].style">{{ item.chiefSurgeon }}</div>
+              </div>
             </div>
-          </div>
-          <div class="list_box" v-show="tab == 1">
-            <div v-for="item in info.orderlist" :key="item.label" class="flex am_c list_item">
-              <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.id }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.name }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.orderType }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.proName }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.orderDate }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.proMode }}</div>
+            <el-pagination
+              background
+              @current-change="handleCurrentChange"
+              :current-page="tabList[tab].pageNo"
+              :page-size="tabList[tab].pageSize"
+              :total="tabList[tab].total"
+              layout="total, prev, pager, next, jumper"
+            >
+            </el-pagination>
+          </template>
+          <template v-else>
+            <div class="list_box">
+              <div v-for="item in tabList[1].list" :key="item.label" class="flex am_c list_item">
+                <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.id }}</div>
+                <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.name }}</div>
+                <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.orderType }}</div>
+                <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.proName }}</div>
+                <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.orderDate }}</div>
+                <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.proMode }}</div>
+              </div>
             </div>
-          </div>
+            <el-pagination
+              background
+              @current-change="handleCurrentChange"
+              :current-page="tabList[tab].pageNo"
+              :page-size="tabList[tab].pageSize"
+              :total="tabList[tab].total"
+              layout="total, prev, pager, next, jumper"
+            >
+            </el-pagination>
+          </template>
         </div>
       </div>
     </div>
-    <!-- <div class="patients_detail_box flex col">
-      <div class="flex flex2">
-        <div class="detail_info card flex col ju_a">
-          <div class="title">基本信息</div>
-          <div class="flex am_c mt_20 flex1">
-            <div class="flex1">姓名：{{ info.patient.name }}</div>
-            <div class="flex1">性别：{{ info.patient.sex }}</div>
-            <div class="flex1">年龄：{{ info.patient.age }}岁</div>
-          </div>
-          <div class="flex am_c mt_20 flex1">
-            <div class="flex2">病案号：{{ info.patient.sickNum }}</div>
-            <div class="flex1">医生：{{ info.patient.chargeDoctorName }}</div>
-          </div>
-          <div class="flex am_c mt_20 flex1">
-            <div class="flex2">入院时间：{{ info.patient.admissionTime }}</div>
-            <div class="flex1">医保类型：{{ info.patient.insuranceType }}</div>
-          </div>
-        </div>
-        <div class="flex2 card flex col ml_40">
-          <div class="title">费用信息</div>
-          <div class="mt_20 flex1 flex am_c">预交款：{{ info.patient.advancePayment }}元</div>
-          <div class="mt_20 flex1 flex am_c">总花费：{{ info.patient.totalCost }}元</div>
-          <div class="mt_20 flex1 flex am_c">余额：{{ info.patient.surplusMoney }}元</div>
-        </div>
-      </div>
-      <div class="flex flex3 mt_40">
-        <div class="flex1 card flex col">
-          <div class="title">护理标识</div>
-          <div class="mt_20 flex1 flex am_c">护理等级：{{ info.patient.nursingGrade }}</div>
-          <div class="mt_20 flex1 flex am_c">病情状态：{{ info.patient.illnessState }}</div>
-          <div class="mt_20 flex1 flex am_c">过敏信息：{{ info.patient.allergyInfo }}</div>
-          <div class="mt_20 flex1 flex am_c">饮食类型：{{ info.patient.dietType }}</div>
-        </div>
-        <div class="flex1 card flex col ju_b ml_40">
-          <div class="title">风险管理</div>
-          <div class="mt_20 flex3">风险类型：{{ info.patient.riskType }}</div>
-          <div class="view_risk flex1 flex am_c ju_e">
-            <span @click="skipView('/risk')">点击查看评估记录<i class="el-icon-arrow-right"></i></span>
-          </div>
-        </div>
-        <div class="flex1 card flex col ju_b ml_40">
-          <div class="title">处方医嘱</div>
-          <div class="mt_20 mb_60 flex4">{{ info.patient.docotorAdvice }}</div>
-        </div>
-        <div class="flex1 card flex col ju_b ml_40">
-          <div class="title">诊疗医嘱</div>
-          <div class="mt_20 mb_60 flex4">{{ info.patient.medicalAdvice }}</div>
-        </div>
-        <div class="flex1 card flex col ju_b ml_40">
-          <div class="title">嘱托术语</div>
-          <div class="mt_20 mb_60 flex4">{{ info.patient.entrustTerms }}</div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
-import { interDetail } from "@/api/index";
+import { interDetail, getMedicalAdvice, getDocotorAdvice } from "@/api/index";
 // const info = require("@/assets/patient_detail.js").json;
 
 @Component({
@@ -266,6 +234,11 @@ export default class extends Vue {
   info: any = {};
 
   tab = 0;
+
+  tabList = [
+    { pageNo: 1, pageSize: 20, total: 0, list: [] },
+    { pageNo: 1, pageSize: 20, total: 0, list: [] },
+  ];
 
   titleList = [
     { label: "类型", eng: "adviceType", style: "width: 60px" },
@@ -293,11 +266,43 @@ export default class extends Vue {
 
   mounted() {
     this.getData();
+    this.getMedicalAdvice();
+  }
+
+  selectTab(tab: number) {
+    this.tab = tab;
+    if (tab == 0) {
+      this.getMedicalAdvice();
+    } else {
+      this.getDocotorAdvice();
+    }
   }
 
   async getData() {
     const res = await interDetail({ id: this.$route.params.id });
     this.info = res;
+  }
+
+  // 诊疗医嘱
+  async getMedicalAdvice() {
+    const res: any = await getMedicalAdvice({
+      id: this.$route.params.id,
+      ...this.tabList[this.tab],
+    });
+    this.tabList[this.tab].list = res.medicalPage.list;
+  }
+
+  // 处方医嘱
+  async getDocotorAdvice() {
+    const res: any = await getDocotorAdvice({
+      id: this.$route.params.id,
+      ...this.tabList[this.tab],
+    });
+    this.tabList[this.tab].list = res.medicalPage.list;
+  }
+
+  handleCurrentChange(e: any) {
+    console.log(e);
   }
 
   // 跳转评估记录
@@ -387,6 +392,10 @@ export default class extends Vue {
       }
     }
     .title_box {
+      margin: 10px -30px;
+      padding: 0 30px;
+      background: #31558b;
+      color: white;
       .title_item {
         padding: 15px 10px;
       }
@@ -396,6 +405,36 @@ export default class extends Vue {
         padding: 15px 0;
         .col_item {
           padding: 0 10px;
+        }
+      }
+    }
+    ::v-deep .el-pagination {
+      button,
+      span:not([class*="suffix"]) {
+        font-size: 20px;
+        color: white;
+        height: 40px;
+        line-height: 40px;
+      }
+      .btn-prev,
+      .btn-next {
+        color: #606266;
+        min-width: 40px;
+        .el-icon {
+          font-size: 20px;
+        }
+      }
+      .el-pager li {
+        min-width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+      }
+      .el-pagination__editor.el-input {
+        width: 70px;
+        .el-input__inner {
+          height: 40px;
+          font-size: 20px;
         }
       }
     }

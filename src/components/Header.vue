@@ -1,7 +1,7 @@
 <template>
   <div class="top flex ju_b">
     <div class="left flex am_e">
-      <img :src="require('../assets/images/logo.png')" class="logo" alt="" />
+      <img :src="logo || require('../assets/images/logo.png')" class="logo" alt="" />
       <img :src="require('@/assets/images/zuobhuadong.png')" alt="" />
     </div>
     <div class="flex ju_c am_s middle">
@@ -9,7 +9,7 @@
       <img :src="require('../assets/images/biaoti_bg.png')" class="biaoti_bg" alt="" />
       <img :src="require('@/assets/images/zhuangshi_r.png')" alt="" />
       <div class="title">{{ title }}</div>
-      <div class="title_desc">护理站</div>
+      <div class="title_desc">{{ secondTitle }}</div>
     </div>
     <div class="right flex am_e">
       <img :src="require('@/assets/images/zuobhuadong.png')" alt="" />
@@ -26,7 +26,9 @@ import { Component, Vue, Prop } from "vue-property-decorator";
   components: {},
 })
 export default class extends Vue {
+  @Prop() logo!: any;
   @Prop() title!: any;
+  @Prop() secondTitle!: any;
   @Prop() date!: any;
 
   timer: any = null;
