@@ -16,6 +16,22 @@ export const interDetail = (params?: any) =>
     data: params
   });
 
+// 诊疗医嘱
+export const getMedicalAdvice = (params?: any) =>
+  request({
+    url: "inter/getMedicalAdvice",
+    method: "post",
+    data: params
+  });
+
+// 处方医嘱
+export const getDocotorAdvice = (params?: any) =>
+  request({
+    url: "inter/getDocotorAdvice",
+    method: "post",
+    data: params
+  });
+
 // 护理运转
 export const eventlist = (params?: any) =>
   request({
