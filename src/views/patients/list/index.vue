@@ -1,28 +1,21 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="statistics_box c_00 flex f_warp">
-      <div v-for="item in info.statistics" :key="item.type" class="sta_item flex am_c">
+      <div v-for="item in info.statisticslist" :key="item.type" class="sta_item flex am_c">
         <div class="sta_left_box" :style="{ backgroundColor: item.bg_color }">
-          <div v-if="item.no_icon" class="sta_left_view f20">{{ item.type.substr(0, 1) }}</div>
-          <img
-            v-else-if="item.no_icon === false"
-            :src="require('@/assets/images/' + item.icon + '.png')"
-            class="sta_left_view sta_icon"
-            :class="item.icon"
-            alt=""
-          />
+          <img :src="item.icon" class="sta_left_view sta_icon" alt="" />
         </div>
-        <div class="flex1 t_ct">{{ item.type }}</div>
+        <div class="flex1 t_ct">{{ item.name }}</div>
         <div class="sta_right_box">
-          <div class="sta_value">{{ item.value }}</div>
+          <div class="sta_value">{{ item.num }}</div>
         </div>
       </div>
     </div>
     <div class="flex am_s p_20">
       <div class="left_box flex1 flex f_warp">
         <div v-for="item in info.patientlist" :key="item.id" class="card_item">
-          <div class="bed_num_box f20 fw_b t_ct">{{ item.bedNum }}</div>
+          <div class="bed_num_box f20 fw_b t_ct" :style="{ '--bed-bg-color': item.bedBgColor }">{{ item.bedNum }}</div>
           <div class="flex am_c ju_b">
             <div class="t_ct f20 name_box line_1">{{ item.name }}</div>
             <div class="flex am_c ju_b age_box">
@@ -31,10 +24,21 @@
               <div>{{ item.age }}岁</div>
             </div>
           </div>
-          <div class="mt_10 flex am_c">
-            <img class="lable_icon" :src="require('@/assets/images/record.png')" alt="" />
-            <span class="title">病案号</span>
-            <span class="ml_10">{{ item.sickNum }}</span>
+          <div class="mt_10 flex am_c ju_b">
+            <div class="flex am_c">
+              <img class="lable_icon" :src="require('@/assets/images/record.png')" alt="" />
+              <span class="title">病案号</span>
+              <span class="ml_10">{{ item.sickNum }}</span>
+            </div>
+            <div class="flex am_c">
+              <img class="lable_icon ml_10" v-if="item.allergyFlag" :src="item.allergyFlag" alt="" />
+              <img class="lable_icon ml_10" v-if="item.dietType" :src="item.dietType" alt="" />
+            </div>
+          </div>
+          <div class="mt_10 flex am_c" v-if="item.userIdentity">
+            <img class="lable_icon" :src="require('@/assets/images/man.png')" alt="" />
+            <span class="title">身份</span>
+            <span class="ml_10">{{ item.userIdentity }}</span>
           </div>
           <div class="mt_10 flex am_c">
             <img class="lable_icon" :src="require('@/assets/images/doctor.png')" alt="" />
@@ -51,12 +55,12 @@
               <router-link :to="{ name: 'PatientsDetail', params: { id: item.id } }" class="flex am_c">
                 <img class="lable_icon" :src="require('@/assets/images/id_card.png')" alt="" />
               </router-link>
-              <img class="lable_icon ml_10" v-if="item.nursingGrade == '一级'" :src="require('@/assets/images/number_1.png')" alt="" />
-              <img class="lable_icon ml_10" v-else-if="item.nursingGrade == '二级'" :src="require('@/assets/images/number_2.png')" alt="" />
+              <template v-for="icon in item.bottomIcons">
+                <img class="lable_icon ml_10" :key="icon" :src="icon" alt="" />
+              </template>
             </div>
             <div class="insurance_box">
-              <div class="insurance_text">{{ item.insuranceType }}</div>
-              <img class="insurance_img" :src="require('@/assets/images/seal.png')" alt="" />
+              <img class="insurance_img" :src="item.insuranceType" alt="" />
             </div>
           </div>
         </div>
@@ -77,10 +81,10 @@
         <img :src="require('@/assets/images/total.png')" class="total_icon" alt="" />
         <div class="ml_10">全部{{ total }}</div>
       </div>
-      <div v-for="item in illustrate" :key="item.text" class="flex am_c mr_30">
+      <div v-for="item in nursingGrades" :key="item.text" class="flex am_c mr_30">
         <div class="bed_num_box" :style="{ '--bg-color': item.color }"></div>
         <div>{{ item.text }}</div>
-        <div>{{ item.total }}</div>
+        <!-- <div>{{ item.total }}</div> -->
       </div>
     </div>
   </div>
@@ -99,26 +103,14 @@ import { interList } from "@/api/index";
 })
 export default class extends Vue {
   info: any = {};
-  statistics = [
-    { type: "出入水量", value: "2" },
-    { type: "今日手术", value: "3" },
-    { type: "男", value: "4" },
-    { type: "高龄", value: "5" },
-    { type: "现住", value: "6" },
-    { type: "今日入院", value: "7" },
-    { type: "一级护理", value: "8" },
-    { type: "二级护理", value: "9" },
-    { type: "三级护理", value: "10" },
-    { type: "特级护理", value: "11" },
-  ];
 
-  illustrate = [
+  nursingGrades = [
     { color: "#652370", text: "特级", total: "36" },
     { color: "#F64FC0", text: "一级", total: "36" },
     { color: "#66D833", text: "二级", total: "36" },
     { color: "#0A33C3", text: "三级", total: "36" },
-    { color: "#AC2921", text: "病危", total: "36" },
-    { color: "#ED9849", text: "病重", total: "36" },
+    // { color: "#AC2921", text: "病危", total: "36" },
+    // { color: "#ED9849", text: "病重", total: "36" },
   ];
   total = 100;
 
@@ -127,43 +119,14 @@ export default class extends Vue {
   }
 
   async getData() {
-    const pid = this.$route.query.depid;
-    const res: any = await interList({ depid: pid });
-    this.statistics.forEach((elementa: any) => {
-      elementa.no_icon = elementa.type == "出入水量";
-      const left: any = this.getItem(elementa);
-      elementa = Object.assign(elementa, left);
+    const pid = this.$route.query.nurseDepId;
+    const res: any = await interList({ nurseDepId: pid });
+    res.patientlist.map((p: any) => {
+      p.bottomIcons = (p.nursingType + p.riskType).split(",");
+      const grade: any = this.nursingGrades.find((g: any) => g.text == p.nursingGrade);
+      p.bedBgColor = grade ? grade.color : "#0A33C3";
     });
-    // res.statistics = Object.assign({}, res, this.statistics);
-    res.statistics = this.statistics;
     this.info = res;
-  }
-
-  getItem(item: any) {
-    switch (item.type) {
-      case "出入水量":
-        return { icon: "", bg_color: "#4AA1F6" };
-      case "今日手术":
-        return { icon: "knife", bg_color: "#AB2A0E" };
-      case "男":
-        return { icon: "man", bg_color: "#411B91" };
-      case "高龄":
-        return { icon: "old_man", bg_color: "#4AA1F6" };
-      case "现住":
-        return { icon: "bed", bg_color: "#4AA1F6" };
-      case "今日入院":
-        return { icon: "hospital", bg_color: "#F6AD4A" };
-      case "一级护理":
-        return { icon: "heart_1", bg_color: "#82AB6A" };
-      case "二级护理":
-        return { icon: "heart_2", bg_color: "#82AB6A" };
-      case "三级护理":
-        return { icon: "heart_3", bg_color: "#82AB6A" };
-      case "特级护理":
-        return { icon: "heart_s", bg_color: "#82AB6A" };
-      default:
-        return { icon: "", bg_color: "" };
-    }
   }
 
   skipView(name: string) {
@@ -176,6 +139,7 @@ export default class extends Vue {
   color: #bdf0fc;
   padding-bottom: 120px;
   .statistics_box {
+    font-size: 20px;
     margin: 0 -5px;
     padding: 20px 20px 0 20px;
     .sta_item {
@@ -185,7 +149,7 @@ export default class extends Vue {
       overflow: hidden;
       .sta_left_box {
         position: relative;
-        width: 25%;
+        width: 17.5%;
         padding-bottom: 25%;
         height: 0;
         .sta_left_view {
@@ -196,8 +160,8 @@ export default class extends Vue {
           text-align: center;
         }
         .sta_icon {
-          width: 30px;
-          height: 30px;
+          // width: 30px;
+          height: 100%;
         }
         .bed {
           transform: translate(-50%, -50%) scale(1.5);
@@ -240,7 +204,8 @@ export default class extends Vue {
         height: 26px;
         line-height: 26px;
         border-radius: 4px 4px 0 0;
-        background-color: #1e47cc;
+        background-color: var(--bed-bg-color);
+        // background-color: #1e47cc;
         // box-shadow: 0 2px 5px #1e47cc;
         &::before {
           content: "";
@@ -249,7 +214,7 @@ export default class extends Vue {
           top: 10px;
           height: 20px;
           width: 5px;
-          background-color: #1e47cc;
+          background-color: var(--bed-bg-color);
           border-radius: 4px 0 4px 4px;
           // box-shadow: 0 2px 5px #1e47cc;
         }
@@ -260,7 +225,7 @@ export default class extends Vue {
           top: 10px;
           height: 20px;
           width: 5px;
-          background-color: #1e47cc;
+          background-color: var(--bed-bg-color);
           border-radius: 0 4px 4px 4px;
           // box-shadow: 0 2px 5px #1e47cc;
         }
@@ -304,7 +269,7 @@ export default class extends Vue {
         .insurance_img {
           position: absolute;
           bottom: -10px;
-          right: 0;
+          right: -10px;
           width: 70px;
           height: 70px;
         }
@@ -368,7 +333,7 @@ export default class extends Vue {
     width: calc(16.6% - 20px);
   }
   .sta_item {
-    width: calc(10% - 10px);
+    width: calc(6% - 10px);
   }
 }
 @media screen and (min-width: 2040px) and (max-width: 2650px) {
@@ -376,7 +341,7 @@ export default class extends Vue {
     width: calc(20% - 20px);
   }
   .sta_item {
-    width: calc(10% - 10px);
+    width: calc(8% - 10px);
   }
 }
 @media screen and (min-width: 1440px) and (max-width: 2040px) {

@@ -73,8 +73,8 @@ export default class extends Vue {
   }
 
   async getData() {
-    const pid = this.$route.query.depid;
-    const res = await newlist({ depid: pid });
+    const pid = this.$route.query.nurseDepId;
+    const res = await newlist({ nurseDepId: pid });
     this.info = res;
   }
 }

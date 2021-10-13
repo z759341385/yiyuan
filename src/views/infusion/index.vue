@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header title="输液监控中心" :date="nowDate"></Header>
+    <Header secondTitle="输液监控中心" :date="nowDate"></Header>
     <div class="content flex f_warp" :style="{ marginLeft: marLR + 'px', marginRight: marLR + 'px' }">
       <div
         class="item"

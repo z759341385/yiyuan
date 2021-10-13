@@ -39,8 +39,8 @@ export default class extends Vue {
   }
 
   get query() {
-    const depid = this.$route.query.depid;
-    return depid ? "?depid=" + depid : "";
+    const nurseDepId = this.$route.query.nurseDepId;
+    return nurseDepId ? "?nurseDepId=" + nurseDepId : "";
   }
 }
 </script>
