@@ -85,7 +85,7 @@ export const risklist = (params?: any) =>
   request({
     url: "inter/risklist",
     method: "post",
-    data: params
+    params
   });
 
 // 护理站基本信息

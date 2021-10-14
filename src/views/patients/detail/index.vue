@@ -180,7 +180,7 @@
           <el-pagination
             background
             @current-change="handleCurrentChange"
-            :current-page="tabList[tab].pageNo"
+            :current-page.sync="tabList[tab].pageNo"
             :page-size="tabList[tab].pageSize"
             :total="tabList[tab].total"
             layout="total, prev, pager, next, jumper"
@@ -196,18 +196,18 @@
               <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.adviceRate }}</div>
               <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.adviceDose }}</div>
               <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.adviceUnit }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.adviceType }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.doctorName }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.adviceDate }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.adviceState }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.adviceGroup }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.stopTime }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[6].style">{{ item.adviceType }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[7].style">{{ item.doctorName }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[8].style">{{ item.adviceDate }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[9].style">{{ item.adviceState }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[10].style">{{ item.adviceGroup }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[11].style">{{ item.stopTime }}</div>
             </div>
           </div>
           <el-pagination
             background
             @current-change="handleCurrentChange"
-            :current-page="tabList[tab].pageNo"
+            :current-page.sync="tabList[tab].pageNo"
             :page-size="tabList[tab].pageSize"
             :total="tabList[tab].total"
             layout="total, prev, pager, next, jumper"
@@ -242,7 +242,7 @@ export default class extends Vue {
   ];
 
   titleList = [
-    { label: "类型", eng: "adviceType", style: "width: 100px" },
+    { label: "类型", eng: "adviceType", style: "width: 120px" },
     { label: "项目名称", eng: "adviceName", style: "flex: 1" },
     { label: "执行频率", eng: "adviceRate", style: "width: 180px" },
     { label: "下嘱医生", eng: "doctorName", style: "width: 180px" },
@@ -255,14 +255,14 @@ export default class extends Vue {
     { label: "药品名称", eng: "drugName", style: "flex: 1" },
     { label: "使用方法", eng: "usageMethod", style: "flex: 1" },
     { label: "执行频率", eng: "adviceRate", style: "flex: 1" },
-    { label: "执行剂量", eng: "adviceDose", style: "flex: 1.3" },
+    { label: "执行剂量", eng: "adviceDose", style: "flex: 1" },
     { label: "单位", eng: "adviceUnit", style: "flex: 1" },
     { label: "类型", eng: "adviceType", style: "flex: 1" },
     { label: "下嘱医生", eng: "doctorName", style: "flex: 1" },
-    { label: "下嘱时间", eng: "adviceDate", style: "flex: 1" },
+    { label: "下嘱时间", eng: "adviceDate", style: "flex: 1.3" },
     { label: "医嘱状态", eng: "adviceState", style: "flex: 1" },
     { label: "组标", eng: "adviceGroup", style: "flex: 1" },
-    { label: "停止时间", eng: "stopTime", style: "flex: 1" },
+    { label: "停止时间", eng: "stopTime", style: "flex: 1.3" },
   ];
 
   mounted() {
@@ -291,7 +291,10 @@ export default class extends Vue {
       pageNo: this.tabList[this.tab].pageNo,
       pageSize: this.tabList[this.tab].pageSize,
     });
-    this.tabList[this.tab].list = res.medicalPage.list;
+    const cur = this.tabList[this.tab];
+    cur.list = res.medicalPage.list;
+    cur.total = res.medicalPage.count;
+    this.tabList.splice(this.tab, 1, cur);
   }
 
   // 处方医嘱
@@ -303,12 +306,17 @@ export default class extends Vue {
     });
     const cur = this.tabList[this.tab];
     cur.list = res.docotorlPage.list;
+    cur.total = res.docotorlPage.count;
     this.tabList.splice(this.tab, 1, cur);
     // this.tabList[this.tab].list = res.medicalPage.list;
   }
 
-  handleCurrentChange(e: any) {
-    console.log(e);
+  handleCurrentChange() {
+    if (this.tab == 0) {
+      this.getMedicalAdvice();
+    } else {
+      this.getDocotorAdvice();
+    }
   }
 
   // 跳转评估记录

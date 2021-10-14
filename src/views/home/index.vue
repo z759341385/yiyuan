@@ -1,6 +1,6 @@
 <template>
   <div class="home flex ju_c am_c">
-    <el-button type="primary" @click="skipView('/?nurseDepId=1')">患者简介</el-button>
+    <el-button type="primary" @click="skipView('/?nurseDepId=0d1100db566e4b63a2833391c9c12fce')">患者简介</el-button>
     <el-button type="primary" @click="skipView('/patients/1?nurseDepId=1')">患者详情</el-button>
     <el-button type="primary" @click="skipView('/nursing/operation?nurseDepId=1')">护理运转</el-button>
     <el-button type="primary" @click="skipView('/nursing/info?nurseDepId=1')">护理标识</el-button>
