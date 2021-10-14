@@ -52,7 +52,7 @@
           </div>
           <div class="flex am_c ju_b mt_15 mb_5">
             <div class="flex am_c">
-              <router-link :to="{ name: 'PatientsDetail', params: { id: item.id } }" class="flex am_c">
+              <router-link :to="{ path: `/patients/${item.id}?nurseDepId=${$route.query.nurseDepId}` }" class="flex am_c">
                 <img class="lable_icon" :src="require('@/assets/images/id_card.png')" alt="" />
               </router-link>
               <template v-for="icon in item.bottomIcons">

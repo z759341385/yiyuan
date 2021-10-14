@@ -37,7 +37,7 @@ export const eventlist = (params?: any) =>
   request({
     url: "inter/eventlist",
     method: "post",
-    data: params
+    params
   });
 
 // 护理标识
@@ -45,7 +45,7 @@ export const nurselist = (params?: any) =>
   request({
     url: "inter/nurselist",
     method: "post",
-    data: params
+    params
   });
 
 // 排程安排
@@ -53,7 +53,7 @@ export const planList = (params?: any) =>
   request({
     url: "inter/planlist",
     method: "post",
-    data: params
+    params
   });
 
 // 消防信息
@@ -61,7 +61,7 @@ export const fireList = (params?: any) =>
   request({
     url: "inter/firelist",
     method: "post",
-    data: params
+    params
   });
 
 // 信息详情
@@ -69,7 +69,7 @@ export const getNews = (params?: any) =>
   request({
     url: "inter/getNews",
     method: "post",
-    data: params
+    params
   });
 
 // 信息发布
@@ -77,7 +77,7 @@ export const newlist = (params?: any) =>
   request({
     url: "inter/newlist",
     method: "post",
-    data: params
+    params
   });
 
 // 患者风险评估记录
