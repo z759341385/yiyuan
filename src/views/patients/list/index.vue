@@ -79,7 +79,7 @@
     <div class="illustrate_box flex am_c">
       <div class="flex am_c mr_30">
         <img :src="require('@/assets/images/total.png')" class="total_icon" alt="" />
-        <div class="ml_10">全部{{ total }}</div>
+        <div class="ml_10">全部</div>
       </div>
       <div v-for="item in nursingGrades" :key="item.text" class="flex am_c mr_30">
         <div class="bed_num_box" :style="{ '--bg-color': item.color }"></div>
