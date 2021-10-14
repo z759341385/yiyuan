@@ -29,10 +29,10 @@ export default class extends Vue {
     { title: "护理标识", icon: "hos-huli", page: "NursingInfo", path: "/nursing/info" },
     { title: "排程信息", icon: "hos-rili", page: "Schedule", path: "/schedule" },
     { title: "消防信息", icon: "hos-shaoshang", page: "FireInfo", path: "/fire/info" },
-    { title: "风险评估", icon: "hos-bingli", page: "RiskRecord", path: "/risk" },
+    // { title: "风险评估", icon: "hos-bingli", page: "RiskRecord", path: "/risk" },
     { title: "护理站", icon: "hos-hushi", page: "NursingStation", path: "/nursing/station" },
     { title: "公告信息", icon: "hos-jihua", page: "AnnouncementHome", path: "/announcement/home" },
-    { title: "体征检测", icon: "hos-jihua", page: "SignDetection", path: "/sign/home" },
+    // { title: "体征检测", icon: "hos-jihua", page: "SignDetection", path: "/sign/home" },
   ];
 
   get curPage() {
