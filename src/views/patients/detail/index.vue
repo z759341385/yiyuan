@@ -124,7 +124,7 @@
             <div class="patient_info_text">{{ info.patient.natResults }}</div>
           </div>
           <div class="patient_info_h2 flex flex1 ju_e">
-            <router-link :to="{ name: 'SignDetection' }" class="link_text">点击查看>></router-link>
+            <router-link :to="{ path: `/sign/${info.patient.id}?nurseDepId=${$route.query.nurseDepId}` }" class="link_text">点击查看>></router-link>
           </div>
         </div>
         <div class="flex am_c mt_30 mb_20">

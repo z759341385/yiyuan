@@ -32,6 +32,14 @@ export const getDocotorAdvice = (params?: any) =>
     params
   });
 
+// 体征监测
+export const vitalSignsList = (params?: any) =>
+  request({
+    url: "inter/vitalSignsList",
+    method: "post",
+    params
+  });
+
 // 护理运转
 export const eventlist = (params?: any) =>
   request({

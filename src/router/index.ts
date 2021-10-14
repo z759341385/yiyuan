@@ -76,7 +76,7 @@ const routes: Array<RouteConfig> = [
     meta: { title: "输液监控中心" }
   },
   {
-    path: "/sign/home",
+    path: "/sign/:id",
     name: "SignDetection",
     component: () => import(/* webpackChunkName: "patients-list" */ "@/views/sign/index.vue"),
     meta: { title: "体征检测" }

@@ -122,7 +122,7 @@ export default class extends Vue {
     const pid = this.$route.query.nurseDepId;
     const res: any = await interList({ nurseDepId: pid });
     res.patientlist.map((p: any) => {
-      p.bottomIcons = (p.nursingType + p.riskType).split(",");
+      p.bottomIcons = (p.nursingType + p.riskType || "").split(",");
       const grade: any = this.nursingGrades.find((g: any) => g.text == p.nursingGrade);
       p.bedBgColor = grade ? grade.color : "#0A33C3";
     });

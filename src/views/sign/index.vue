@@ -1,51 +1,68 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
-    <div class="flex flex1 col p_20">
-      <div class="info col f_warp">
-        <div class="flex row">
-          <div class="flex1 info_h1 pl_20">张三</div>
-          <div class="flex flex1 info_h1 row">
-            <img :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
-            <!-- <img v-if="item.sex == '男'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
-              <img v-else-if="item.sex == '女'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" /> -->
-            <div>男</div>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
+    <div class="p_20">
+      <div class="info_box" ref="infoBoxRef">
+        <div class="flex wth_60p">
+          <div class="flex flex1 mr_20">
+            <span class="info_blue">姓名：</span>
+            <span class="c_ff">{{ info.patientInfo.name }}</span>
           </div>
-          <div class="flex1 info_h1">23岁</div>
-          <div class="flex flex2 info_h2_blue row">
-            病案号：
-            <div class="info_h2">00000001</div>
+          <div class="flex flex1 mr_20">
+            <span class="info_blue">性别：</span>
+            <div class="c_ff mr_10">{{ info.patientInfo.sex }}</div>
+            <img v-if="info.patientInfo.sex == '男'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
+            <img v-else-if="info.patientInfo.sex == '女'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" />
           </div>
-          <div class="flex flex2 info_h2_blue row">
-            入院时间：
-            <div class="info_h2">00000002</div>
+          <div class="flex flex1 mr_20">
+            <span class="info_blue">年龄：</span>
+            <span class="c_ff">{{ info.patientInfo.age }}岁</span>
           </div>
-          <div class="flex flex2 info_h2_blue row">
-            主治医生：
-            <div class="info_h2">00000003</div>
-          </div>
-          <div class="flex flex2 info_h2_blue row">
-            责任护士：
-            <div class="info_h2">00000004</div>
+          <div class="flex flex1 mr_20">
+            <span class="info_blue">病案号：</span>
+            <span class="c_ff">{{ info.patientInfo.sickNum }}</span>
           </div>
         </div>
+        <div class="flex wth_60p mt_20">
+          <div class="flex flex1 mr_20">
+            <span class="info_blue">主治医生：</span>
+            <div class="c_ff">{{ info.patientInfo.chargeDoctorName }}</div>
+          </div>
+          <div class="flex flex1 mr_20">
+            <span class="info_blue">责任护士：</span>
+            <div class="c_ff">{{ info.patientInfo.chargeNurseName }}</div>
+          </div>
+          <div class="flex flex2 mr_40">
+            <span class="info_blue">入院时间：</span>
+            <div class="c_ff">{{ info.patientInfo.admissionTime }}</div>
+          </div>
+        </div>
+        <div class="flex mt_20">
+          <span class="info_blue">入院诊断：</span>
+          <div class="c_ff">{{ info.patientInfo.illnessState }}</div>
+        </div>
       </div>
-      <div class="flex am_c pl_20">
-        <div class="tab_item" :class="{ selected: tab === 0 }" @click="selectTab(0)">体温</div>
-        <div class="tab_item" :class="{ selected: tab === 1 }" @click="selectTab(1)">脉搏</div>
-        <div class="tab_item" :class="{ selected: tab === 2 }" @click="selectTab(1)">呼吸</div>
-        <div class="tab_item" :class="{ selected: tab === 3 }" @click="selectTab(1)">血压</div>
-        <div class="tab_item" :class="{ selected: tab === 4 }" @click="selectTab(1)">血氧</div>
-        <div class="tab_item" :class="{ selected: tab === 5 }" @click="selectTab(1)">血糖</div>
-        <div class="tab_item" :class="{ selected: tab === 6 }" @click="selectTab(1)">心电监护</div>
-        <div class="tab_item" :class="{ selected: tab === 7 }" @click="selectTab(1)">核酸检测</div>
+      <div class="tab_box flex am_c pl_20" ref="tabBoxRef">
+        <div class="tab_item" v-for="(item, index) in tabList" :key="item.text" :class="{ selected: tab === index }" @click="selectTab(index)">
+          {{ item.text }}
+        </div>
       </div>
-      <div class="title_box flex am_c row" v-show="tab == 0">
-        <div class="card_item flex1"></div>
-        <div class="card_item flex2"></div>
+      <div class="card_box flex am_c" :style="{ height: cardHeightStr }">
+        <div class="card_item flex1">
+          <div class="row_box title_box flex">
+            <div v-for="item in tabList[tab].tableHeader" :key="item.label" class="row_item t_ct" :style="item.style">{{ item.label }}</div>
+          </div>
+          <div class="list_box">
+            <div v-for="item in tabList[tab].list" :key="item.label" class="row_box flex am_c">
+              <div v-for="header in tabList[tab].tableHeader" :key="header.label" class="row_item t_ct" :style="header.style">
+                {{ item[header.eng] }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card_item flex2 flex am_c ju_c">暂无图表</div>
       </div>
     </div>
-    <div class="title_box flex am_c" v-show="tab == 1"></div>
   </div>
 </template>
 
@@ -53,7 +70,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import SwiperView from "@/components/SwiperView.vue";
-import { risklist } from "@/api/index";
+import { vitalSignsList } from "@/api/index";
 // const info = require("@/assets/info.js").json;
 
 @Component({
@@ -61,18 +78,139 @@ import { risklist } from "@/api/index";
   components: { Header, SwiperView },
 })
 export default class extends Vue {
-  info: any = {};
+  info: any = {
+    patientInfo: {},
+  };
   tab = 0;
+
+  tabList = [
+    {
+      text: "体温",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "体温", eng: "temperature", style: "flex: 1" },
+        { label: "测量时间", eng: "tempDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "脉搏",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "脉搏", eng: "pulse", style: "flex: 1" },
+        { label: "测量时间", eng: "pulseDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "呼吸",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "呼吸", eng: "breatheRate", style: "flex: 1" },
+        { label: "测量时间", eng: "breathDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "血压",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "血压", eng: "bloodPressure", style: "flex: 1" },
+        { label: "测量时间", eng: "pressureDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "血氧",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "血氧", eng: "bloodOxygen", style: "flex: 1" },
+        { label: "测量时间", eng: "bloodOxygenDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "血糖",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "血糖", eng: "bloodSugar", style: "flex: 1" },
+        { label: "测量时间", eng: "bloodSugarDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "心电监护",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "状态", eng: "ecgMonitorState", style: "flex: 1" },
+        { label: "测量时间", eng: "ecgMonitorDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" },
+      ],
+    },
+    {
+      text: "核酸检测",
+      pageNo: 1,
+      pageSize: 20,
+      total: 0,
+      list: [],
+      tableHeader: [
+        { label: "检测结果", eng: "natResults", style: "flex: 1" },
+        { label: "检测日期", eng: "natDate", style: "flex: 2" },
+        { label: "检测机构", eng: "natFacility", style: "flex: 1" },
+      ],
+    },
+  ];
+  cardHeight = 226;
+
+  get cardHeightStr() {
+    return `calc(100vh - 250px - ${this.cardHeight}px)`;
+  }
 
   mounted() {
     this.getData();
   }
 
   async getData() {
-    const pid = this.$route.query.depid;
-    const res = await risklist({ depid: pid });
+    const id = this.$route.params.id;
+    const pid = this.$route.query.nurseDepId;
+    const res: any = await vitalSignsList({ patientId: id, nurseDepId: pid });
     this.info = res;
+    this.tabList[0].list = res.temperature;
+    this.tabList[1].list = res.pulse;
+    this.tabList[2].list = res.breathe;
+    this.tabList[3].list = res.bloodPressure;
+    this.tabList[4].list = res.bloodOxygen;
+    this.tabList[5].list = res.bloodSugar;
+    this.tabList[6].list = res.ecgMonitoring;
+    this.tabList[7].list = res.nat;
+    this.$nextTick(() => {
+      const heightInfo = (this.$refs.infoBoxRef as HTMLFormElement).offsetHeight;
+      const heightTab = (this.$refs.tabBoxRef as HTMLFormElement).offsetHeight;
+      this.cardHeight = heightInfo + heightTab;
+    });
   }
+
   selectTab(tab: number) {
     this.tab = tab;
   }
@@ -81,117 +219,57 @@ export default class extends Vue {
 <style lang="less" scoped>
 .page {
   color: #bdf0fc;
-  .info {
-    position: relative;
+  .info_box {
     padding: 20px;
-    min-height: 40pt;
-    margin: 0px 0px 20px 0px;
-    width: 80%;
-  }
-  .card_item {
-    position: relative;
-    padding: 30px 30px 30px 20px;
-    min-height: 600pt;
-    margin: 20px 10px 20px 10px;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #5389e2 inset;
-
-    .bed_num_box {
-      position: absolute;
-      top: -10px;
-      left: -5px;
-      width: 50px;
-      height: 26px;
-      line-height: 26px;
-      border-radius: 4px 4px 0 0;
-      background-color: #1e47cc;
-      box-shadow: 0 2px 5px #1e47cc;
-      &::before {
-        content: "";
-        position: absolute;
-        left: -5px;
-        top: 10px;
-        height: 20px;
-        width: 5px;
-        background-color: #1e47cc;
-        border-radius: 4px 0 4px 4px;
-        box-shadow: 0 2px 5px #1e47cc;
-      }
-      &::after {
-        content: "";
-        position: absolute;
-        right: -5px;
-        top: 10px;
-        height: 20px;
-        width: 5px;
-        background-color: #1e47cc;
-        border-radius: 0 4px 4px 4px;
-        box-shadow: 0 2px 5px #1e47cc;
-      }
+    margin-bottom: 10px;
+    font-size: 26px;
+    .wth_60p {
+      width: 60%;
     }
-    .top_box {
-      min-height: 100px;
-      width: 100%;
-    }
-
-    .title {
-      font-weight: 600;
+    .info_blue {
       color: #5389e2;
-      margin-left: 5px;
     }
-    .mb_60 {
-      margin-bottom: 60px;
+    .sec_icon {
+      width: 30px;
+      height: 30px;
     }
   }
-  .info_h1 {
-    font-size: 20px;
-    color: #ffffff;
+  .tab_box {
+    .tab_item {
+      padding: 10px 0;
+      margin-right: 30px;
+      cursor: pointer;
+      font-size: 28px;
+      color: #79a7df;
+    }
+    .selected {
+      color: #ffffff;
+    }
   }
-  .info_h2 {
-    font-size: 18px;
-    color: #ffffff;
-  }
-  .info_h2_blue {
-    font-size: 18px;
-    color: #5389e2;
-  }
-  .sec_icon {
-    width: 20px;
-    height: 20px;
-  }
-  .tab_item {
-    padding: 0px 0;
-    margin-right: 100px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #79A7DF;
-  }
-}
-
-@media screen and (min-width: 2440px) {
-  .card_item {
-    width: calc(10% - 20px);
-  }
-}
-@media screen and (min-width: 1500px) and (max-width: 2440px) {
-  .card_item {
-    width: calc(16% - 20px);
-  }
-}
-@media screen and (min-width: 1200px) and (max-width: 1500px) {
-  .card_item {
-    width: calc(20% - 20px);
-  }
-}
-@media screen and (min-width: 900px) and (max-width: 1200px) {
-  .card_item {
-    width: calc(25% - 20px);
-  }
-}
-@media screen and (max-width: 900px) {
-  .card_item {
-    width: calc(33.3% - 20px);
+  .card_box {
+    .card_item {
+      height: 100%;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #5389e2 inset;
+      .title_box {
+        border-radius: 8px 8px 0 0;
+        background: #31558b;
+      }
+      .row_box {
+        padding: 0 15px;
+        color: white;
+        .row_item {
+          font-size: 20px;
+          height: 50px;
+          line-height: 50px;
+        }
+      }
+      .list_box {
+        height: calc(100% - 50px);
+        overflow-y: scroll;
+      }
+    }
   }
 }
 </style>
