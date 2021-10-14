@@ -200,9 +200,9 @@ export default class extends Vue {
         position: absolute;
         top: -10px;
         left: -5px;
-        width: 50px;
-        height: 26px;
-        line-height: 26px;
+        width: 60px;
+        height: 32px;
+        line-height: 32px;
         border-radius: 4px 4px 0 0;
         background-color: var(--bed-bg-color);
         // background-color: #1e47cc;
@@ -212,7 +212,7 @@ export default class extends Vue {
           position: absolute;
           left: -5px;
           top: 10px;
-          height: 20px;
+          height: 26px;
           width: 5px;
           background-color: var(--bed-bg-color);
           border-radius: 4px 0 4px 4px;
@@ -223,7 +223,7 @@ export default class extends Vue {
           position: absolute;
           right: -5px;
           top: 10px;
-          height: 20px;
+          height: 26px;
           width: 5px;
           background-color: var(--bed-bg-color);
           border-radius: 0 4px 4px 4px;
@@ -296,9 +296,9 @@ export default class extends Vue {
     .bed_num_box {
       position: relative;
       margin-right: 20px;
-      width: 30px;
-      height: 20px;
-      line-height: 26px;
+      width: 60px;
+      height: 32px;
+      line-height: 32px;
       border-radius: 4px 4px 0 0;
       background-color: var(--bg-color);
       transform: translateY(-2px);
@@ -308,7 +308,7 @@ export default class extends Vue {
         position: absolute;
         left: -5px;
         top: 8px;
-        height: 15px;
+        height: 26px;
         width: 5px;
         background-color: var(--bg-color);
         border-radius: 4px 0 4px 4px;
@@ -319,7 +319,7 @@ export default class extends Vue {
         position: absolute;
         right: -5px;
         top: 8px;
-        height: 15px;
+        height: 26px;
         width: 5px;
         background-color: var(--bg-color);
         border-radius: 0 4px 4px 4px;
