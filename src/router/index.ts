@@ -52,7 +52,7 @@ const routes: Array<RouteConfig> = [
     meta: { title: "消防信息" }
   },
   {
-    path: "/risk",
+    path: "/risk/:id",
     name: "RiskRecord",
     component: () => import(/* webpackChunkName: "risk" */ "@/views/risk/index.vue"),
     meta: { title: "风险评估" }

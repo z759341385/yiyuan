@@ -77,7 +77,9 @@
           <div class="patient_info_text">{{ info.patient.riskType }}</div>
         </div>
         <div class="patient_info_h2 flex flex1 ju_e">
-          <router-link :to="{ name: 'RiskRecord' }" class="link_text">查看风险评估记录>></router-link>
+          <router-link :to="{ path: `/risk/${info.patient.id}?nurseDepId=${$route.query.nurseDepId}` }" class="link_text"
+            >查看风险评估记录>></router-link
+          >
         </div>
         <div class="flex am_c mb_20">
           <img class="type_icon" :src="require('@/assets/images/patient_detail/sign_detection.png')" alt="" />

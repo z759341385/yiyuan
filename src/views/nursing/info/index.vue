@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="operation_box">
       <div class="title_box flex am_c">
         <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
@@ -67,7 +67,8 @@ export default class extends Vue {
   }
 
   async getData() {
-    const res = await nurselist({ depid: 1 });
+    const pid = this.$route.query.nurseDepId;
+    const res = await nurselist({ nurseDepId: pid });
     this.info = res;
   }
 }

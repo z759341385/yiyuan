@@ -8,7 +8,7 @@
             <span class="info_blue">姓名：</span>
             <span class="c_ff">{{ info.patientInfo.name }}</span>
           </div>
-          <div class="flex flex1 mr_20">
+          <div class="flex am_c flex1 mr_20">
             <span class="info_blue">性别：</span>
             <div class="c_ff mr_10">{{ info.patientInfo.sex }}</div>
             <img v-if="info.patientInfo.sex == '男'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
@@ -26,20 +26,20 @@
         <div class="flex wth_60p mt_20">
           <div class="flex flex1 mr_20">
             <span class="info_blue">主治医生：</span>
-            <div class="c_ff">{{ info.patientInfo.chargeDoctorName }}</div>
+            <span class="c_ff">{{ info.patientInfo.chargeDoctorName }}</span>
           </div>
           <div class="flex flex1 mr_20">
             <span class="info_blue">责任护士：</span>
-            <div class="c_ff">{{ info.patientInfo.chargeNurseName }}</div>
+            <span class="c_ff">{{ info.patientInfo.chargeNurseName }}</span>
           </div>
           <div class="flex flex2 mr_40">
             <span class="info_blue">入院时间：</span>
-            <div class="c_ff">{{ info.patientInfo.admissionTime }}</div>
+            <span class="c_ff">{{ info.patientInfo.admissionTime }}</span>
           </div>
         </div>
         <div class="flex mt_20">
           <span class="info_blue">入院诊断：</span>
-          <div class="c_ff">{{ info.patientInfo.illnessState }}</div>
+          <span class="c_ff">{{ info.patientInfo.illnessState }}</span>
         </div>
       </div>
       <div class="tab_box flex am_c pl_20" ref="tabBoxRef">
@@ -181,10 +181,11 @@ export default class extends Vue {
       ],
     },
   ];
-  cardHeight = 226;
+
+  otherHeight = 226;
 
   get cardHeightStr() {
-    return `calc(100vh - 250px - ${this.cardHeight}px)`;
+    return `calc(100vh - 250px - ${this.otherHeight}px)`;
   }
 
   mounted() {
@@ -207,7 +208,7 @@ export default class extends Vue {
     this.$nextTick(() => {
       const heightInfo = (this.$refs.infoBoxRef as HTMLFormElement).offsetHeight;
       const heightTab = (this.$refs.tabBoxRef as HTMLFormElement).offsetHeight;
-      this.cardHeight = heightInfo + heightTab;
+      this.otherHeight = heightInfo + heightTab;
     });
   }
 
