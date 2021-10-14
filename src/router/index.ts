@@ -74,6 +74,12 @@ const routes: Array<RouteConfig> = [
     name: "Infusion",
     component: () => import(/* webpackChunkName: "patients-list" */ "@/views/infusion/index.vue"),
     meta: { title: "输液监控中心" }
+  },
+  {
+    path: "/sign/home",
+    name: "SignDetection",
+    component: () => import(/* webpackChunkName: "patients-list" */ "@/views/sign/index.vue"),
+    meta: { title: "体征检测" }
   }
 ];
 
