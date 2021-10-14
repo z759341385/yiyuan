@@ -10,35 +10,32 @@
             <div class="english">personal information</div>
           </div>
           <div class="flex flex1">
-            <div class="patient_info_h1">张*三</div>
-            <div class="patient_info_h1">男</div>
-            <div class="patient_info_h1">30岁</div>
+            <div class="patient_info_h1">{{ info.patient.name }}</div>
+            <img v-if="info.patient.sex == '1'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
+            <img v-else-if="info.patient.sex == '2'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" />
+            <div class="patient_info_h1">{{ info.patient.age }}岁</div>
           </div>
         </div>
         <div class="patient_info_h2 flex">
           <div>病案号 ：</div>
-          <div class="patient_info_text">20000000001</div>
+          <div class="patient_info_text">{{ info.patient.sickNum }}</div>
         </div>
         <div class="patient_info_h2 flex">
           <div>入院时间 ：</div>
-          <div class="patient_info_text">2000-12-12 12:20</div>
-        </div>
-        <div class="patient_info_h2 flex">
-          <div>入院请款 ：</div>
-          <div class="patient_info_text">入院情况入院情况入院情况入院情况</div>
+          <div class="patient_info_text">{{ info.patient.admissionTime }}</div>
         </div>
         <div class="patient_info_h2 flex">
           <div>医保类型 ：</div>
-          <div class="patient_info_text">个人个人</div>
+          <div class="patient_info_text">{{ info.patient.insuranceType }}</div>
         </div>
         <div class="flex">
           <div class="patient_info_h2 flex flex1">
             <div>医生 ：</div>
-            <div class="patient_info_text">李四</div>
+            <div class="patient_info_text">{{ info.patient.chargeDoctorName }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>护士 ：</div>
-            <div class="patient_info_text">王五</div>
+            <div class="patient_info_text">{{ info.patient.chargeNurseName }}</div>
           </div>
         </div>
         <div class="flex am_c mt_30 mb_20">
@@ -51,21 +48,21 @@
         <div class="flex">
           <div class="patient_info_h2 flex flex1">
             <div>护理等级 ：</div>
-            <div class="patient_info_text">A级</div>
+            <div class="patient_info_text">{{ info.patient.nursingGrade }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>病情状态 ：</div>
-            <div class="patient_info_text">正常</div>
+            <div class="patient_info_text">{{ info.patient.illnessState }}</div>
           </div>
         </div>
         <div class="flex">
           <div class="patient_info_h2 flex flex1">
             <div>过敏信息 ：</div>
-            <div class="patient_info_text">暂无过敏信息</div>
+            <div class="patient_info_text">{{ info.patient.allergyInfo }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>饮食类型 ：</div>
-            <div class="patient_info_text">清淡饮食</div>
+            <div class="patient_info_text">{{ info.patient.dietType }}</div>
           </div>
         </div>
         <div class="flex am_c mt_30 mb_20">
@@ -77,7 +74,7 @@
         </div>
         <div class="patient_info_h2 flex flex1">
           <div>风险类型 ：</div>
-          <div class="patient_info_text">我是风险类型</div>
+          <div class="patient_info_text">{{ info.patient.riskType }}</div>
         </div>
         <div class="patient_info_h2 flex flex1 ju_e">
           <router-link :to="{ name: 'RiskRecord' }" class="link_text">查看风险评估记录>></router-link>
@@ -92,39 +89,39 @@
         <div class="flex">
           <div class="patient_info_h2 flex flex1">
             <div>体温 ：</div>
-            <div class="patient_info_text">36.5</div>
+            <div class="patient_info_text">{{ info.patient.temperature }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>脉搏 ：</div>
-            <div class="patient_info_text">90次/分</div>
+            <div class="patient_info_text">9{{ info.patient.pulse }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>呼吸 ：</div>
-            <div class="patient_info_text">45次/分</div>
+            <div class="patient_info_text">{{ info.patient.breatheRate }}</div>
           </div>
         </div>
         <div class="flex">
           <div class="patient_info_h2 flex flex1">
             <div>血压 ：</div>
-            <div class="patient_info_text">80/120 mmHg</div>
+            <div class="patient_info_text">{{ info.patient.bloodPressure }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>血氧 ：</div>
-            <div class="patient_info_text">100mmH2O</div>
+            <div class="patient_info_text">{{ info.patient.bloodOxygen }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>血糖 ：</div>
-            <div class="patient_info_text">7.8mmol/L</div>
+            <div class="patient_info_text">{{ info.patient.bloodSugar }}</div>
           </div>
         </div>
         <div class="flex">
           <div class="patient_info_h2 flex flex1">
             <div>心电监护 ：</div>
-            <div class="patient_info_text">正常</div>
+            <div class="patient_info_text">{{ info.patient.ecgMonitorState }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>核酸检测 ：</div>
-            <div class="patient_info_text">阴性</div>
+            <div class="patient_info_text">{{ info.patient.natResults }}</div>
           </div>
           <div class="patient_info_h2 flex flex1 ju_e">
             <router-link :to="{ name: 'RiskRecord' }" class="link_text">点击查看>></router-link>
@@ -139,15 +136,15 @@
         </div>
         <div class="patient_info_h2 flex flex1">
           <div>预交款 ：</div>
-          <div class="patient_info_text">362.5</div>
+          <div class="patient_info_text">{{ info.patient.advancePayment }}元</div>
         </div>
         <div class="patient_info_h2 flex flex1">
           <div>总花费 ：</div>
-          <div class="patient_info_text">362.5</div>
+          <div class="patient_info_text">{{ info.patient.totalCost }}元</div>
         </div>
         <div class="patient_info_h2 flex flex1">
           <div>余额 ：</div>
-          <div class="patient_info_text">0.0</div>
+          <div class="patient_info_text">{{ info.patient.surplusMoney }}元</div>
         </div>
       </div>
 
@@ -156,65 +153,67 @@
           <div class="tab_item" :class="{ selected: tab === 0 }" @click="selectTab(0)">诊疗医嘱</div>
           <div class="tab_item" :class="{ selected: tab === 1 }" @click="selectTab(1)">处方医嘱</div>
         </div>
-        <div class="flex col">
-          <div class="title_box flex am_c" v-show="tab == 0">
-            <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
-              <div>{{ item.label }}</div>
-              <!-- <div>{{ item.eng }}</div> -->
-            </div>
+        <div class="title_box flex am_c" v-show="tab == 0">
+          <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
+            <div>{{ item.label }}</div>
+            <!-- <div>{{ item.eng }}</div> -->
           </div>
-          <div class="title_box flex am_c" v-show="tab == 1">
-            <div v-for="item in titleList1" :key="item.label" class="flex col am_c title_item" :style="item.style">
-              <div>{{ item.label }}</div>
-              <!-- <div>{{ item.eng }}</div> -->
-            </div>
-          </div>
-          <template v-if="tab == 0">
-            <div class="list_box">
-              <div v-for="item in tabList[0].list" :key="item.label" class="flex am_c list_item">
-                <div class="t_ct col_item line1" :style="titleList[0].style">{{ item.id }}</div>
-                <div class="t_ct col_item line1" :style="titleList[1].style">{{ item.name }}</div>
-                <div class="t_ct col_item line1" :style="titleList[2].style">{{ item.sex }}</div>
-                <div class="t_ct col_item line1" :style="titleList[3].style">{{ item.age }}</div>
-                <div class="t_ct col_item line1" :style="titleList[4].style">{{ item.operateDate }}</div>
-                <div class="t_ct col_item line1" :style="titleList[5].style">{{ item.operateRoom }}</div>
-                <div class="t_ct col_item line1" :style="titleList[6].style">{{ item.operateName }}</div>
-                <div class="t_ct col_item line1" :style="titleList[7].style">{{ item.anesthesiaMode }}</div>
-                <div class="t_ct col_item line1" :style="titleList[8].style">{{ item.chiefSurgeon }}</div>
-              </div>
-            </div>
-            <el-pagination
-              background
-              @current-change="handleCurrentChange"
-              :current-page="tabList[tab].pageNo"
-              :page-size="tabList[tab].pageSize"
-              :total="tabList[tab].total"
-              layout="total, prev, pager, next, jumper"
-            >
-            </el-pagination>
-          </template>
-          <template v-else>
-            <div class="list_box">
-              <div v-for="item in tabList[1].list" :key="item.label" class="flex am_c list_item">
-                <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.id }}</div>
-                <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.name }}</div>
-                <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.orderType }}</div>
-                <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.proName }}</div>
-                <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.orderDate }}</div>
-                <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.proMode }}</div>
-              </div>
-            </div>
-            <el-pagination
-              background
-              @current-change="handleCurrentChange"
-              :current-page="tabList[tab].pageNo"
-              :page-size="tabList[tab].pageSize"
-              :total="tabList[tab].total"
-              layout="total, prev, pager, next, jumper"
-            >
-            </el-pagination>
-          </template>
         </div>
+        <div class="title_box flex am_c" v-show="tab == 1">
+          <div v-for="item in titleList1" :key="item.label" class="flex col am_c title_item" :style="item.style">
+            <div>{{ item.label }}</div>
+            <!-- <div>{{ item.eng }}</div> -->
+          </div>
+        </div>
+        <template v-if="tab == 0">
+          <div class="list_box">
+            <div v-for="item in tabList[0].list" :key="item.label" class="flex am_c list_item">
+              <div class="t_ct col_item line1" :style="titleList[0].style">{{ item.adviceType }}</div>
+              <div class="t_ct col_item line1" :style="titleList[1].style">{{ item.adviceName }}</div>
+              <div class="t_ct col_item line1" :style="titleList[2].style">{{ item.adviceRate }}</div>
+              <div class="t_ct col_item line1" :style="titleList[3].style">{{ item.doctorName }}</div>
+              <div class="t_ct col_item line1" :style="titleList[4].style">{{ item.adviceDate }}</div>
+              <div class="t_ct col_item line1" :style="titleList[5].style">{{ item.adviceState }}</div>
+              <div class="t_ct col_item line1" :style="titleList[6].style">{{ item.stopTime }}</div>
+            </div>
+          </div>
+          <el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page="tabList[tab].pageNo"
+            :page-size="tabList[tab].pageSize"
+            :total="tabList[tab].total"
+            layout="total, prev, pager, next, jumper"
+          >
+          </el-pagination>
+        </template>
+        <template v-else>
+          <div class="list_box">
+            <div v-for="item in tabList[1].list" :key="item.label" class="flex am_c list_item">
+              <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.adviceNum }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.drugName }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.usageMethod }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.adviceRate }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.adviceDose }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.adviceUnit }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.adviceType }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.doctorName }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.adviceDate }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.adviceState }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.adviceGroup }}</div>
+              <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.stopTime }}</div>
+            </div>
+          </div>
+          <el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page="tabList[tab].pageNo"
+            :page-size="tabList[tab].pageSize"
+            :total="tabList[tab].total"
+            layout="total, prev, pager, next, jumper"
+          >
+          </el-pagination>
+        </template>
       </div>
     </div>
   </div>
@@ -231,7 +230,9 @@ import { interDetail, getMedicalAdvice, getDocotorAdvice } from "@/api/index";
   components: { Header },
 })
 export default class extends Vue {
-  info: any = {};
+  info: any = {
+    patient: {},
+  };
 
   tab = 0;
 
@@ -241,16 +242,16 @@ export default class extends Vue {
   ];
 
   titleList = [
-    { label: "类型", eng: "adviceType", style: "width: 60px" },
-    { label: "项目名称", eng: "adviceName", style: "width: 350px" },
+    { label: "类型", eng: "adviceType", style: "width: 100px" },
+    { label: "项目名称", eng: "adviceName", style: "flex: 1" },
     { label: "执行频率", eng: "adviceRate", style: "width: 180px" },
-    { label: "下嘱医生", eng: "doctorName", style: "flex: 1" },
-    { label: "下嘱时间", eng: "adviceDate", style: "flex: 1" },
+    { label: "下嘱医生", eng: "doctorName", style: "width: 180px" },
+    { label: "下嘱时间", eng: "adviceDate", style: "width: 180px" },
     { label: "医嘱状态", eng: "adviceState", style: "width: 180px" },
     { label: "停止时间", eng: "stopTime", style: "width: 180px" },
   ];
   titleList1 = [
-    { label: "编号", eng: "dviceNum", style: "flex: 1" },
+    { label: "编号", eng: "adviceNum", style: "flex: 1" },
     { label: "药品名称", eng: "drugName", style: "flex: 1" },
     { label: "使用方法", eng: "usageMethod", style: "flex: 1" },
     { label: "执行频率", eng: "adviceRate", style: "flex: 1" },
@@ -287,7 +288,8 @@ export default class extends Vue {
   async getMedicalAdvice() {
     const res: any = await getMedicalAdvice({
       id: this.$route.params.id,
-      ...this.tabList[this.tab],
+      pageNo: this.tabList[this.tab].pageNo,
+      pageSize: this.tabList[this.tab].pageSize,
     });
     this.tabList[this.tab].list = res.medicalPage.list;
   }
@@ -296,9 +298,13 @@ export default class extends Vue {
   async getDocotorAdvice() {
     const res: any = await getDocotorAdvice({
       id: this.$route.params.id,
-      ...this.tabList[this.tab],
+      pageNo: this.tabList[this.tab].pageNo,
+      pageSize: this.tabList[this.tab].pageSize,
     });
-    this.tabList[this.tab].list = res.medicalPage.list;
+    const cur = this.tabList[this.tab];
+    cur.list = res.docotorlPage.list;
+    this.tabList.splice(this.tab, 1, cur);
+    // this.tabList[this.tab].list = res.medicalPage.list;
   }
 
   handleCurrentChange(e: any) {
@@ -336,6 +342,10 @@ export default class extends Vue {
     .type_icon {
       width: 50px;
       height: 50px;
+    }
+    .sec_icon {
+      width: 30px;
+      height: 30px;
     }
     .patient_header {
       align-items: center;
@@ -401,6 +411,8 @@ export default class extends Vue {
       }
     }
     .list_box {
+      height: calc(100% - 150px);
+      overflow-y: scroll;
       .list_item {
         padding: 15px 0;
         .col_item {
@@ -409,6 +421,9 @@ export default class extends Vue {
       }
     }
     ::v-deep .el-pagination {
+      border-top: 1px solid #79a7df;
+      margin: 0 -30px;
+      padding: 10px 35px;
       button,
       span:not([class*="suffix"]) {
         font-size: 20px;

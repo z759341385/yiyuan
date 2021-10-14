@@ -5,7 +5,7 @@ export const interList = (params?: any) =>
   request({
     url: "inter/list",
     method: "post",
-    data: params
+    params
   });
 
 // 患者详情
@@ -13,7 +13,7 @@ export const interDetail = (params?: any) =>
   request({
     url: "inter/get",
     method: "post",
-    data: params
+    params
   });
 
 // 诊疗医嘱
@@ -21,7 +21,7 @@ export const getMedicalAdvice = (params?: any) =>
   request({
     url: "inter/getMedicalAdvice",
     method: "post",
-    data: params
+    params
   });
 
 // 处方医嘱
@@ -29,7 +29,7 @@ export const getDocotorAdvice = (params?: any) =>
   request({
     url: "inter/getDocotorAdvice",
     method: "post",
-    data: params
+    params
   });
 
 // 护理运转

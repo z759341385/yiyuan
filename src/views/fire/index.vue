@@ -88,8 +88,8 @@ export default class extends Vue {
   }
 
   async getData() {
-    const pid = this.$route.query.depid;
-    const res = await fireList({ depid: pid });
+    const pid = this.$route.query.nurseDepId;
+    const res = await fireList({ nurseDepId: pid });
     this.info = res;
   }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="top flex ju_b">
     <div class="left flex am_e">
-      <img :src="logo || require('../assets/images/logo.png')" class="logo" alt="" />
+      <img :src="logo" class="logo" alt="" />
       <img :src="require('@/assets/images/zuobhuadong.png')" alt="" />
     </div>
     <div class="flex ju_c am_s middle">
