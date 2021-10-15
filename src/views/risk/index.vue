@@ -112,19 +112,6 @@ export default class extends Vue {
     const id = this.$route.params.id;
     const pid = this.$route.query.nurseDepId;
     const res: any = await risklist({ patientId: id, nurseDepId: pid });
-    res.patientInfo = {
-      name: "name",
-      sex: "sex",
-      age: "age",
-      sickNum: "sickNum",
-      admissionTime: "admissionTime",
-      chargeDoctorName: "cDoctorName",
-      chargeNurseName: "ceNurseName",
-      illnessState: "illnessState",
-    };
-    for (let index = 0; index < 30; index++) {
-      res.riskArr[0].logArr.push(res.riskArr[0].logArr[0]);
-    }
     this.info = res;
     this.$nextTick(() => {
       const heightInfo = (this.$refs.infoBoxRef as HTMLFormElement).offsetHeight;

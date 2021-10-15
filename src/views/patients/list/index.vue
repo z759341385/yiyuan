@@ -50,13 +50,13 @@
             <span class="title">入院时间</span>
             <span class="ml_10">{{ item.admissionTime }}</span>
           </div>
-          <div class="flex am_c ju_b mt_15 mb_5">
-            <div class="flex am_c">
-              <router-link :to="{ path: `/patients/${item.id}?nurseDepId=${$route.query.nurseDepId}` }" class="flex am_c">
+          <div class="flex am_c ju_b mt_15">
+            <div class="flex f_warp am_c icon_box">
+              <router-link :to="{ path: `/patients/${item.id}?nurseDepId=${$route.query.nurseDepId}` }" class="flex am_c mr_10 mb_5">
                 <img class="lable_icon" :src="require('@/assets/images/id_card.png')" alt="" />
               </router-link>
               <template v-for="icon in item.bottomIcons">
-                <img class="lable_icon ml_10" :key="icon" :src="icon" alt="" />
+                <img class="lable_icon mr_10 mb_5" :key="icon" :src="icon" alt="" />
               </template>
             </div>
             <div class="insurance_box">
@@ -77,10 +77,10 @@
       </div>
     </div>
     <div class="illustrate_box flex am_c">
-      <div class="flex am_c mr_30">
+      <!-- <div class="flex am_c mr_30">
         <img :src="require('@/assets/images/total.png')" class="total_icon" alt="" />
         <div class="ml_10">全部{{ total }}</div>
-      </div>
+      </div> -->
       <div v-for="item in nursingGrades" :key="item.text" class="flex am_c mr_30">
         <div class="bed_num_box" :style="{ '--bg-color': item.color }"></div>
         <div>{{ item.text }}</div>
@@ -122,7 +122,8 @@ export default class extends Vue {
     const pid = this.$route.query.nurseDepId;
     const res: any = await interList({ nurseDepId: pid });
     res.patientlist.map((p: any) => {
-      p.bottomIcons = (p.nursingType + p.riskType || "").split(",");
+      const str = p.nursingType + p.riskType;
+      p.bottomIcons = str ? str.split(",") : [];
       const grade: any = this.nursingGrades.find((g: any) => g.text == p.nursingGrade);
       p.bedBgColor = grade ? grade.color : "#0A33C3";
     });
@@ -249,6 +250,9 @@ export default class extends Vue {
         font-weight: 600;
         color: #5389e2;
         margin-left: 5px;
+      }
+      .icon_box {
+        width: calc(100% - 40px);
       }
       .insurance_box {
         position: absolute;
