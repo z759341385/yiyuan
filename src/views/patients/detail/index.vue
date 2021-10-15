@@ -170,13 +170,13 @@
         <template v-if="tab == 0">
           <div class="list_box">
             <div v-for="item in tabList[0].list" :key="item.label" class="flex am_c list_item">
-              <div class="t_ct col_item line1" :style="titleList[0].style">{{ item.adviceType }}</div>
-              <div class="t_ct col_item line1" :style="titleList[1].style">{{ item.adviceName }}</div>
-              <div class="t_ct col_item line1" :style="titleList[2].style">{{ item.adviceRate }}</div>
-              <div class="t_ct col_item line1" :style="titleList[3].style">{{ item.doctorName }}</div>
-              <div class="t_ct col_item line1" :style="titleList[4].style">{{ item.adviceDate }}</div>
-              <div class="t_ct col_item line1" :style="titleList[5].style">{{ item.adviceState }}</div>
-              <div class="t_ct col_item line1" :style="titleList[6].style">{{ item.stopTime }}</div>
+              <div class="t_ct col_item" :style="titleList[0].style">{{ item.adviceType }}</div>
+              <div class="t_ct col_item" :style="titleList[1].style">{{ item.adviceName }}</div>
+              <div class="t_ct col_item" :style="titleList[2].style">{{ item.adviceRate }}</div>
+              <div class="t_ct col_item" :style="titleList[3].style">{{ item.doctorName }}</div>
+              <div class="t_ct col_item" :style="titleList[4].style">{{ item.adviceDate }}</div>
+              <div class="t_ct col_item" :style="titleList[5].style">{{ item.adviceState }}</div>
+              <div class="t_ct col_item" :style="titleList[6].style">{{ item.stopTime }}</div>
             </div>
           </div>
           <el-pagination
@@ -192,18 +192,18 @@
         <template v-else>
           <div class="list_box">
             <div v-for="item in tabList[1].list" :key="item.label" class="flex am_c list_item">
-              <div class="t_ct col_item line1" :style="titleList1[0].style">{{ item.adviceNum }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[1].style">{{ item.drugName }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[2].style">{{ item.usageMethod }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[3].style">{{ item.adviceRate }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[4].style">{{ item.adviceDose }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[5].style">{{ item.adviceUnit }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[6].style">{{ item.adviceType }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[7].style">{{ item.doctorName }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[8].style">{{ item.adviceDate }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[9].style">{{ item.adviceState }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[10].style">{{ item.adviceGroup }}</div>
-              <div class="t_ct col_item line1" :style="titleList1[11].style">{{ item.stopTime }}</div>
+              <div class="t_ct col_item" :style="titleList1[0].style">{{ item.adviceNum }}</div>
+              <div class="t_ct col_item" :style="titleList1[1].style">{{ item.drugName }}</div>
+              <div class="t_ct col_item" :style="titleList1[2].style">{{ item.usageMethod }}</div>
+              <div class="t_ct col_item" :style="titleList1[3].style">{{ item.adviceRate }}</div>
+              <div class="t_ct col_item" :style="titleList1[4].style">{{ item.adviceDose }}</div>
+              <div class="t_ct col_item" :style="titleList1[5].style">{{ item.adviceUnit }}</div>
+              <div class="t_ct col_item" :style="titleList1[6].style">{{ item.adviceType }}</div>
+              <div class="t_ct col_item" :style="titleList1[7].style">{{ item.doctorName }}</div>
+              <div class="t_ct col_item" :style="titleList1[8].style">{{ item.adviceDate }}</div>
+              <div class="t_ct col_item" :style="titleList1[9].style">{{ item.adviceState }}</div>
+              <div class="t_ct col_item" :style="titleList1[10].style">{{ item.adviceGroup }}</div>
+              <div class="t_ct col_item" :style="titleList1[11].style">{{ item.stopTime }}</div>
             </div>
           </div>
           <el-pagination
@@ -245,16 +245,16 @@ export default class extends Vue {
 
   titleList = [
     { label: "类型", eng: "adviceType", style: "width: 120px" },
-    { label: "项目名称", eng: "adviceName", style: "flex: 1" },
-    { label: "执行频率", eng: "adviceRate", style: "width: 180px" },
-    { label: "下嘱医生", eng: "doctorName", style: "width: 180px" },
-    { label: "下嘱时间", eng: "adviceDate", style: "width: 180px" },
-    { label: "医嘱状态", eng: "adviceState", style: "width: 180px" },
-    { label: "停止时间", eng: "stopTime", style: "width: 180px" },
+    { label: "项目名称", eng: "adviceName", style: "flex: 5" },
+    { label: "执行频率", eng: "adviceRate", style: "flex: 1" },
+    { label: "下嘱医生", eng: "doctorName", style: "flex: 1" },
+    { label: "下嘱时间", eng: "adviceDate", style: "flex: 3" },
+    { label: "医嘱状态", eng: "adviceState", style: "flex: 1" },
+    { label: "停止时间", eng: "stopTime", style: "flex: 3" },
   ];
   titleList1 = [
     { label: "编号", eng: "adviceNum", style: "flex: 1" },
-    { label: "药品名称", eng: "drugName", style: "flex: 1" },
+    { label: "药品名称", eng: "drugName", style: "flex: 2" },
     { label: "使用方法", eng: "usageMethod", style: "flex: 1" },
     { label: "执行频率", eng: "adviceRate", style: "flex: 1" },
     { label: "执行剂量", eng: "adviceDose", style: "flex: 1" },
