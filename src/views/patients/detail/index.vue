@@ -51,19 +51,17 @@
             <div class="patient_info_text">{{ info.patient.nursingGrade }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
-            <div>病情状态 ：</div>
-            <div class="patient_info_text">{{ info.patient.illnessState }}</div>
-          </div>
-        </div>
-        <div class="flex">
-          <div class="patient_info_h2 flex flex1">
-            <div>过敏信息 ：</div>
-            <div class="patient_info_text">{{ info.patient.allergyInfo }}</div>
-          </div>
-          <div class="patient_info_h2 flex flex1">
             <div>饮食类型 ：</div>
             <div class="patient_info_text">{{ info.patient.dietType }}</div>
           </div>
+        </div>
+        <div class="patient_info_h2 flex flex1">
+          <div>诊断情况 ：</div>
+          <div class="patient_info_text">{{ info.patient.illnessState }}</div>
+        </div>
+        <div class="patient_info_h2 flex flex1">
+          <div>过敏信息 ：</div>
+          <div class="patient_info_text">{{ info.patient.allergyInfo }}</div>
         </div>
         <div class="flex am_c mt_30 mb_20">
           <img class="type_icon" :src="require('@/assets/images/patient_detail/risk_manage.png')" alt="" />
@@ -95,7 +93,7 @@
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>脉搏 ：</div>
-            <div class="patient_info_text">9{{ info.patient.pulse }}</div>
+            <div class="patient_info_text">{{ info.patient.pulse }}</div>
           </div>
           <div class="patient_info_h2 flex flex1">
             <div>呼吸 ：</div>
