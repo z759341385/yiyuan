@@ -424,40 +424,8 @@ export default class extends Vue {
       .list_item {
         padding: 15px 0;
         .col_item {
+          word-break: break-all;
           padding: 0 10px;
-        }
-      }
-    }
-    ::v-deep .el-pagination {
-      border-top: 1px solid #79a7df;
-      margin: 0 -30px;
-      padding: 10px 35px;
-      button,
-      span:not([class*="suffix"]) {
-        font-size: 20px;
-        color: white;
-        height: 40px;
-        line-height: 40px;
-      }
-      .btn-prev,
-      .btn-next {
-        color: #606266;
-        min-width: 40px;
-        .el-icon {
-          font-size: 20px;
-        }
-      }
-      .el-pager li {
-        min-width: 40px;
-        height: 40px;
-        line-height: 40px;
-        font-size: 20px;
-      }
-      .el-pagination__editor.el-input {
-        width: 70px;
-        .el-input__inner {
-          height: 40px;
-          font-size: 20px;
         }
       }
     }

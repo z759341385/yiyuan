@@ -1,45 +1,52 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="patients_detail_box flex">
       <div class="flex5 flex col">
         <div class="card img_box flex col">
           <div class="title t_ct">消防消散平面图</div>
-          <img class="mt_20 img" :src="info.fireControl.contorlPic" />
+          <img class="img mt_20" :src="info.fireControl.contorlPic" />
         </div>
         <div class="add_record flex am_c">
           <div class="title">巡检记录新增</div>
           <div class="flex am_c">
             <div class="mr_20">选择设备</div>
             <el-select v-model="equipment" placeholder="请选择">
-              <el-option v-for="item in equipments" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              <el-option v-for="item in equipments" :key="item.key" :label="item.value" :value="item.key"> </el-option>
             </el-select>
           </div>
           <div class="flex am_c ml_40">
             <div class="mr_20">检查人</div>
             <el-select v-model="checker" placeholder="请选择">
-              <el-option v-for="item in checkers" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              <el-option v-for="item in checkers" :key="item.key" :label="item.value" :value="item.key"> </el-option>
             </el-select>
           </div>
-          <el-button class="ml_40" type="primary">确定</el-button>
+          <el-button class="ml_40" type="primary" :loading="isLoading" @click="commit()">提交</el-button>
         </div>
       </div>
       <div class="flex2 card flex col ml_40">
         <div class="operation_box">
-          <div class="title" style="text-align: center">消防器材巡检记录</div>
+          <div class="title t_ct">消防器材巡检记录</div>
           <div class="title_box flex am_c">
             <div v-for="item in titleList" :key="item.label" class="flex col am_c title_item" :style="item.style">
               <div>{{ item.label }}</div>
-              <!-- <div>{{ item.eng }}</div> -->
             </div>
           </div>
           <div class="list_box">
-            <div v-for="item in info.checklist" :key="item.label" class="flex am_c list_item">
-              <div class="t_ct" :style="titleList[1].style">{{ item.explain }}</div>
-              <div class="t_ct" :style="titleList[2].style">{{ item.checkUserName }}</div>
-              <div class="t_ct" :style="titleList[2].style">{{ item.checkDate }}</div>
+            <div v-for="item in chickpage.list" :key="item.label" class="flex am_c list_item">
+              <div class="t_ct col_item" :style="titleList[0].style">{{ item.fireDevName }}</div>
+              <div class="t_ct col_item" :style="titleList[1].style">{{ item.checkUserName }}</div>
+              <div class="t_ct col_item" :style="titleList[2].style">{{ item.checkDate }}</div>
             </div>
           </div>
+          <el-pagination
+            background
+            @current-change="handleCurrentChange"
+            :current-page.sync="chickpage.pageNo"
+            :page-size="chickpage.pageSize"
+            :total="chickpage.count"
+            layout="total, prev, pager, next, jumper"
+          />
         </div>
       </div>
     </div>
@@ -49,15 +56,22 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
-import { fireList } from "@/api/index";
-// const info = require("@/assets/patient_detail.js").json;
+import { fireList, fireChecklist, fireDevlist, fireUserlist, addFireCheck } from "@/api/index";
 
 @Component({
   name: "FireInfo",
   components: { Header },
 })
 export default class extends Vue {
-  info: any = {};
+  info: any = {
+    fireControl: {
+      contorlPic: "",
+    },
+  };
+  chickpage: any = {
+    pageNo: 1,
+    pageSize: 30,
+  };
 
   titleList = [
     { label: "检查内容", eng: "name", style: "flex: 1" },
@@ -66,25 +80,17 @@ export default class extends Vue {
   ];
 
   equipment = "";
-  equipments = [
-    { value: "选项1", label: "黄金糕" },
-    { value: "选项2", label: "双皮奶" },
-    { value: "选项3", label: "蚵仔煎" },
-    { value: "选项4", label: "龙须面" },
-    { value: "选项5", label: "北京烤鸭" },
-  ];
+  equipments = [];
 
   checker = "";
-  checkers = [
-    { value: "选项1", label: "黄金糕" },
-    { value: "选项2", label: "双皮奶" },
-    { value: "选项3", label: "蚵仔煎" },
-    { value: "选项4", label: "龙须面" },
-    { value: "选项5", label: "北京烤鸭" },
-  ];
+  checkers = [];
+  isLoading = false;
 
   mounted() {
     this.getData();
+    this.getFireChecklist();
+    this.getFireDevlist();
+    this.getFireUserlist();
   }
 
   async getData() {
@@ -93,9 +99,45 @@ export default class extends Vue {
     this.info = res;
   }
 
-  // 跳转评估记录
-  navigate() {
-    // this.$router.push({ name: name });
+  async getFireChecklist() {
+    const pid = this.$route.query.nurseDepId;
+    const res: any = await fireChecklist({ nurseDepId: pid, pageNo: this.chickpage.pageNo, pageSize: this.chickpage.pageSize });
+    this.chickpage = Object.assign({}, this.chickpage, res.chickpage);
+  }
+
+  async getFireDevlist() {
+    const pid = this.$route.query.nurseDepId;
+    const res: any = await fireDevlist({ nurseDepId: pid });
+    this.equipments = res;
+  }
+
+  async getFireUserlist() {
+    const pid = this.$route.query.nurseDepId;
+    const res: any = await fireUserlist({ nurseDepId: pid });
+    this.checkers = res;
+  }
+
+  async commit() {
+    if (!this.equipment) {
+      this.$message.error("请选择设备");
+      return;
+    }
+    if (!this.checker) {
+      this.$message.error("请选择检查人");
+      return;
+    }
+    try {
+      this.isLoading = true;
+      const pid = this.$route.query.nurseDepId;
+      await addFireCheck({ nurseDepId: pid, devId: this.equipment, userId: this.checker });
+      this.$message.success("添加成功");
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  handleCurrentChange() {
+    this.getFireChecklist();
   }
 }
 </script>
@@ -108,21 +150,22 @@ export default class extends Vue {
     color: #00a3ff;
     font-weight: 600;
     font-size: 24px;
+    padding: 20px;
   }
 
   .card {
-    // border: 8px solid #1e47cc;
     box-shadow: 0 0 10px #5389e2 inset;
     border-radius: 12px;
-    padding: 40px;
+    // padding: 40px;
+  }
+  .img_box {
+    height: calc(100% - 240px);
+    padding: 0 40px 40px 40px;
     .img {
       width: 100%;
       height: calc(100% - 48px);
       object-fit: contain;
     }
-  }
-  .img_box {
-    height: calc(100% - 240px);
   }
   .add_record {
     position: relative;
@@ -136,27 +179,33 @@ export default class extends Vue {
       top: 0;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #0f0f10;
+      background-color: #01004a;
     }
   }
   .operation_box {
     margin: 0px 0px;
     font-size: 18px;
     .title_box {
+      padding: 0 30px;
+      background: #31558b;
+      color: white;
       .title_item {
         padding: 15px 10px;
       }
     }
     .list_box {
-      height: 100%;
-      overflow: hidden;
-      border: 1px dashed #979797;
+      height: calc(100vh - 68px - 51px - 160px - 61px);
+      padding: 0 30px;
+      overflow-y: scroll;
       .list_item {
         padding: 15px 0;
         .col_item {
           padding: 0 10px;
         }
       }
+    }
+    ::v-deep .el-pagination {
+      margin: 0 0 5px;
     }
   }
 }

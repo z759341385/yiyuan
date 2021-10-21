@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="flex pl_20 pr_20">
       <div class="card_item flex col am_c">
         <img class="mt_40 img" :src="info.hsz.photo" />
@@ -42,8 +42,8 @@ export default class extends Vue {
   }
 
   async getData() {
-    const pid = this.$route.query.depid;
-    const res = await userlist({ depid: pid });
+    const pid = this.$route.query.nurseDepId;
+    const res = await userlist({ nurseDepId: pid });
     this.info = res;
   }
 

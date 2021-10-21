@@ -64,10 +64,58 @@ export const planList = (params?: any) =>
     params
   });
 
+// 手术排程
+export const operateList = (params?: any) =>
+  request({
+    url: "inter/operatelist",
+    method: "post",
+    params
+  });
+
+// 检查预约
+export const checkList = (params?: any) =>
+  request({
+    url: "inter/checklist",
+    method: "post",
+    params
+  });
+
 // 消防信息
 export const fireList = (params?: any) =>
   request({
     url: "inter/firelist",
+    method: "post",
+    params
+  });
+
+// 消防器材巡检记录
+export const fireChecklist = (params?: any) =>
+  request({
+    url: "inter/fireChecklist",
+    method: "post",
+    params
+  });
+
+// 消防设备
+export const fireDevlist = (params?: any) =>
+  request({
+    url: "inter/fireDevlist",
+    method: "post",
+    params
+  });
+
+// 消防巡检人
+export const fireUserlist = (params?: any) =>
+  request({
+    url: "inter/fireUserlist",
+    method: "post",
+    params
+  });
+
+// 添加消防巡查记录
+export const addFireCheck = (params?: any) =>
+  request({
+    url: "inter/addFireCheck",
     method: "post",
     params
   });
@@ -81,9 +129,33 @@ export const getNews = (params?: any) =>
   });
 
 // 信息发布
-export const newlist = (params?: any) =>
+export const newInfo = (params?: any) =>
   request({
     url: "inter/newlist",
+    method: "post",
+    params
+  });
+
+// 医院公告
+export const hospitalList = (params?: any) =>
+  request({
+    url: "inter/hlist",
+    method: "post",
+    params
+  });
+
+// 病区公告
+export const depList = (params?: any) =>
+  request({
+    url: "inter/deplist",
+    method: "post",
+    params
+  });
+
+// 宣教信息
+export const xxList = (params?: any) =>
+  request({
+    url: "inter/xxlist",
     method: "post",
     params
   });
@@ -107,7 +179,7 @@ export const userlist = (params?: any) =>
 // 输液监控中心
 export const infusionMonitor = (params?: any) =>
   request({
-    url: "dev/screen/infusionMonitor",
-    method: "get",
+    url: "inter/infusionMonitor",
+    method: "post",
     params
   });

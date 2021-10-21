@@ -1,12 +1,12 @@
 <template>
   <div class="page">
-    <Header :title="info.depName"></Header>
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="patients_detail_box flex col">
       <div class="flex flex2">
         <div class="detail_info card">
-          <div class="time">发布时间：{{ info.newsInfo.createDate }}</div>
-          <div class="subTitle" style="text-align: center">{{ info.newsInfo.title }}</div>
-          <div>{{ info.newsInfo.newsContent }}</div>
+          <div class="subTitle t_ct">{{ info.newsInfo.title }}</div>
+          <div class="mt_20 mb_20">发布时间：{{ info.newsInfo.createDate }}</div>
+          <div v-html="info.newsInfo.newsContent"></div>
         </div>
       </div>
     </div>
@@ -45,9 +45,9 @@ export default class extends Vue {
   // align-items: center;
 }
 .patients_detail_box {
-  margin: 40px;
+  padding: 40px 40px 130px 40px;
   font-size: 20px;
-  height: calc(100vh - 160px);
+  min-height: calc(100vh - 160px);
   .title {
     color: #00a3ff;
     font-weight: 600;
@@ -66,11 +66,6 @@ export default class extends Vue {
   .detail_info {
     flex: 5;
     position: relative;
-    .time {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-    }
   }
   .operation_box {
     margin: 0px 0px;

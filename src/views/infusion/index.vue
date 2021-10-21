@@ -1,6 +1,7 @@
 <template>
   <div class="page">
-    <Header secondTitle="输液监控中心" :date="nowDate"></Header>
+    <!-- <Header secondTitle="输液监控中心" :date="nowDate"></Header> -->
+    <Header :logo="info.logo" :title="info.depName" :secondTitle="info.nurseDepName"></Header>
     <div class="content flex f_warp" :style="{ marginLeft: marLR + 'px', marginRight: marLR + 'px' }">
       <div
         class="item"
@@ -35,6 +36,20 @@
         <div class="flex am_c mt_10"></div>
       </div>
     </div>
+    <div class="bottom_box flex ju_c am_c">
+      <div class="bot_item">
+        <span>输液异常：</span>
+        <span>{{ info.syycnum || 0 }}</span>
+      </div>
+      <div class="bot_item">
+        <span>输液中：</span>
+        <span>{{ info.synum || 0 }}</span>
+      </div>
+      <div class="bot_item">
+        <span>输液即将结束：</span>
+        <span>{{ info.jjjsnum || 0 }}</span>
+      </div>
+    </div>
     <div id="audioBox" style="display: none"></div>
   </div>
 </template>
@@ -50,9 +65,8 @@ import { infusionMonitor } from "@/api/index";
   components: { Header, ["svg-progress-bar"]: svg },
 })
 export default class extends Vue {
-  depid = "";
-  httpReq: any = null;
-  date = new Date();
+  timer: any = null;
+  info: any = {};
   marLR = 0;
   audioList: any = [];
   list: any = [];
@@ -103,9 +117,6 @@ export default class extends Vue {
   }
 
   mounted() {
-    //获取当前url中的参数
-    this.depid = this.getQueryString("depid");
-
     this.$nextTick(() => {
       this.onresize();
     });
@@ -114,14 +125,14 @@ export default class extends Vue {
     };
     this.getData();
 
-    this.httpReq = setInterval(() => {
+    this.timer = setInterval(() => {
       this.getData();
     }, 5000);
   }
 
   beforeDestroy() {
-    if (this.httpReq) {
-      clearInterval(this.httpReq);
+    if (this.timer) {
+      clearInterval(this.timer);
     }
   }
 
@@ -143,9 +154,10 @@ export default class extends Vue {
   }
 
   async getData() {
-    const pid = this.$route.query.depid;
-    const res = await infusionMonitor({ depid: pid });
-    const data = res.data;
+    const pid = this.$route.query.nurseDepId;
+    const res = await infusionMonitor({ nurseDepId: pid });
+    this.info = res.data;
+    const data = res.data.list;
     const arr = [];
     const his = [];
     // data[0].devstatus = "开始输液异常";
@@ -336,24 +348,26 @@ export default class extends Vue {
   position: relative;
   background-color: #0f0f10;
   min-height: 100vh;
-}
+  .content {
+    padding-top: 20px;
+    .item {
+      position: relative;
+      width: 210px;
+      /* height: 100%; */
+      padding: 10px 20px;
+      margin: 0 15px 30px 15px;
+    }
+    .calling {
+      animation: slidein 1.5s ease-in infinite;
+    }
+  }
 
-.page .content {
-  padding-top: 100px;
-  padding-bottom: 120px;
-  /* margin: 0 20px; */
-}
-
-.content .item {
-  position: relative;
-  width: 210px;
-  /* height: 100%; */
-  padding: 10px 20px;
-  margin: 0 15px 30px 15px;
-}
-
-.content .calling {
-  animation: slidein 1.5s ease-in infinite;
+  .bottom_box {
+    padding-bottom: 140px;
+    .bot_item {
+      padding: 0 20px;
+    }
+  }
 }
 
 @keyframes slidein {

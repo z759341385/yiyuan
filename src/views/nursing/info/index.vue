@@ -8,20 +8,29 @@
           <!-- <div>{{ item.eng }}</div> -->
         </div>
       </div>
-      <vue-seamless-scroll :data="info.list" class="list_box" :class-option="classOption">
-        <div>
-          <div v-for="item in info.list" :key="item.label" class="flex am_c list_item">
-            <div class="t_ct" :style="titleList[0].style">{{ item.id }}</div>
-            <div class="t_ct" :style="titleList[1].style">{{ item.name }}</div>
-            <div class="t_ct" :style="titleList[2].style">{{ item.sex }}</div>
-            <div class="t_ct" :style="titleList[3].style">{{ item.age }}</div>
-            <div class="t_ct" :style="titleList[4].style">{{ item.nursingGrade }}</div>
-            <div class="t_ct" :style="titleList[5].style">{{ item.illnessState }}</div>
-            <div class="t_ct" :style="titleList[5].style">{{ item.allergyInfo }}</div>
-            <div class="t_ct" :style="titleList[5].style">{{ item.dietType }}</div>
+      <div class="card_box">
+        <div class="list_box">
+          <div v-for="item in info.page.list" :key="item.label" class="flex am_c list_item">
+            <div class="t_ct col_item" :style="titleList[0].style">{{ item.id }}</div>
+            <div class="t_ct col_item" :style="titleList[1].style">{{ item.name }}</div>
+            <div class="t_ct col_item" :style="titleList[2].style">{{ item.sex }}</div>
+            <div class="t_ct col_item" :style="titleList[3].style">{{ item.age }}</div>
+            <div class="t_ct col_item" :style="titleList[4].style">{{ item.nursingGrade }}</div>
+            <div class="t_ct col_item" :style="titleList[5].style">{{ item.illnessState }}</div>
+            <div class="t_ct col_item" :style="titleList[5].style">{{ item.allergyInfo }}</div>
+            <div class="t_ct col_item" :style="titleList[5].style">{{ item.dietType }}</div>
           </div>
         </div>
-      </vue-seamless-scroll>
+        <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          :current-page.sync="info.page.pageNo"
+          :page-size="info.page.pageSize"
+          :total="info.page.count"
+          layout="total, prev, pager, next, jumper"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -38,7 +47,13 @@ import { nurselist } from "@/api/index";
   components: { Header, vueSeamlessScroll },
 })
 export default class extends Vue {
-  info: any = {};
+  info: any = {
+    page: {
+      pageNo: 1,
+      pageSize: 20,
+      count: 0,
+    },
+  };
 
   titleList = [
     { label: "序号", eng: "num", style: "width: 180px" },
@@ -51,16 +66,16 @@ export default class extends Vue {
     { label: "饮食类型", eng: "dietType", style: "flex: 1" },
   ];
 
-  classOption = {
-    step: 1, // 数值越大速度滚动越快
-    limitMoveNum: 10, // 开始无缝滚动的数据量 this.dataList.length
-    hoverStop: true, // 是否开启鼠标悬停stop
-    direction: 1, // 0向下 1向上 2向左 3向右
-    openWatch: true, // 开启数据实时监控刷新dom
-    singleHeight: 51, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-    singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-    waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
-  };
+  // classOption = {
+  //   step: 1, // 数值越大速度滚动越快
+  //   limitMoveNum: 10, // 开始无缝滚动的数据量 this.dataList.length
+  //   hoverStop: true, // 是否开启鼠标悬停stop
+  //   direction: 1, // 0向下 1向上 2向左 3向右
+  //   openWatch: true, // 开启数据实时监控刷新dom
+  //   singleHeight: 51, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+  //   singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+  //   waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+  // };
 
   mounted() {
     this.getData();
@@ -68,8 +83,12 @@ export default class extends Vue {
 
   async getData() {
     const pid = this.$route.query.nurseDepId;
-    const res = await nurselist({ nurseDepId: pid });
+    const res = await nurselist({ nurseDepId: pid, pageNo: this.info.page.pageNo, pageSize: this.info.page.pageSize });
     this.info = res;
+  }
+
+  handleCurrentChange() {
+    this.getData();
   }
 }
 </script>
@@ -82,13 +101,22 @@ export default class extends Vue {
       padding: 15px 10px;
     }
   }
-  .list_box {
-    height: calc(100vh - 171px);
-    overflow: hidden;
+  .card_box {
     box-shadow: 0 0 10px #5389e2 inset;
     border-radius: 8px;
-    .list_item {
-      padding: 15px 0;
+    .list_box {
+      height: calc(100vh - 352px);
+      overflow-y: scroll;
+      .list_item {
+        padding: 15px 0;
+        .col_item {
+          word-break: break-all;
+          padding: 0 10px;
+        }
+      }
+    }
+    ::v-deep .el-pagination {
+      margin: 0;
     }
   }
 }
