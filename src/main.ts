@@ -6,6 +6,7 @@ import store from "./store";
 import moment from "moment";
 // import { Button, Select, Option, Pagination } from "element-ui";
 import ElementUI from "element-ui";
+import * as echarts from "echarts/lib/echarts";
 
 import "@/assets/icon/iconfont.css";
 import "element-ui/lib/theme-chalk/index.css";
@@ -21,6 +22,9 @@ Vue.config.productionTip = false;
 // Vue.component(Pagination.name, Pagination);
 Vue.use(ElementUI);
 Vue.prototype.$moment = moment;
+
+import { GridComponent } from "echarts/components";
+echarts.use([GridComponent]);
 
 new Vue({
   router,

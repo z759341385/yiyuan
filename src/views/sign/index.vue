@@ -60,7 +60,10 @@
             </div>
           </div>
         </div>
-        <div class="card_item flex2 flex am_c ju_c">暂无图表</div>
+        <div class="card_item flex2">
+          <!-- <ve-line :data="tabList[tab].chartData" :settings="{ yAxisName: tabList[tab].text }"></ve-line> -->
+          <ve-line :data="tabList[tab].chartData" :settings="{ yAxisName: [tabList[tab].text] }"></ve-line>
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +71,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import VeLine from "v-charts/lib/line";
 import Header from "@/components/Header.vue";
 import SwiperView from "@/components/SwiperView.vue";
 import { vitalSignsList } from "@/api/index";
@@ -75,7 +79,7 @@ import { vitalSignsList } from "@/api/index";
 
 @Component({
   name: "SignDetection",
-  components: { Header, SwiperView },
+  components: { Header, VeLine, SwiperView },
 })
 export default class extends Vue {
   info: any = {
@@ -83,7 +87,7 @@ export default class extends Vue {
   };
   tab = 0;
 
-  tabList = [
+  tabList: any = [
     {
       text: "体温",
       pageNo: 1,
@@ -95,6 +99,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "tempDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "体温"],
+        rows: [],
+      },
     },
     {
       text: "脉搏",
@@ -107,6 +115,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "pulseDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "脉搏"],
+        rows: [],
+      },
     },
     {
       text: "呼吸",
@@ -119,6 +131,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "breathDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "呼吸"],
+        rows: [],
+      },
     },
     {
       text: "血压",
@@ -131,6 +147,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "pressureDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "高压", "低压"],
+        rows: [],
+      },
     },
     {
       text: "血氧",
@@ -143,6 +163,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "bloodOxygenDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "血氧"],
+        rows: [],
+      },
     },
     {
       text: "血糖",
@@ -155,6 +179,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "bloodSugarDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "血糖"],
+        rows: [],
+      },
     },
     {
       text: "心电监护",
@@ -167,6 +195,10 @@ export default class extends Vue {
         { label: "测量时间", eng: "ecgMonitorDate", style: "flex: 2" },
         { label: "护士", eng: "nurseName", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["测量时间", "状态"],
+        rows: [],
+      },
     },
     {
       text: "核酸检测",
@@ -179,6 +211,10 @@ export default class extends Vue {
         { label: "检测日期", eng: "natDate", style: "flex: 2" },
         { label: "检测机构", eng: "natFacility", style: "flex: 1" },
       ],
+      chartData: {
+        columns: ["检测日期", "检测结果"],
+        rows: [],
+      },
     },
   ];
 
@@ -205,6 +241,31 @@ export default class extends Vue {
     this.tabList[5].list = res.bloodSugar;
     this.tabList[6].list = res.ecgMonitoring;
     this.tabList[7].list = res.nat;
+    this.tabList[0].chartData.rows = res.temperature.map((d: any) => {
+      return { 测量时间: d.tempDate, 体温: d.temperature };
+    });
+    this.tabList[1].chartData.rows = res.pulse.map((d: any) => {
+      return { 测量时间: d.pulseDate, 脉搏: d.pulse };
+    });
+    this.tabList[2].chartData.rows = res.breathe.map((d: any) => {
+      return { 测量时间: d.breatheDate, 呼吸: d.breatheRate };
+    });
+    this.tabList[3].chartData.rows = res.bloodPressure.map((d: any) => {
+      const blood = d.bloodPressure.split("-");
+      return { 测量时间: d.pressureDate, 高压: blood[1], 低压: blood[0] };
+    });
+    this.tabList[4].chartData.rows = res.bloodOxygen.map((d: any) => {
+      return { 测量时间: d.bloodOxygenDate, 血氧: d.bloodOxygen };
+    });
+    this.tabList[5].chartData.rows = res.bloodSugar.map((d: any) => {
+      return { 测量时间: d.bloodSugarDate, 血糖: d.bloodSugar };
+    });
+    this.tabList[6].chartData.rows = res.ecgMonitoring.map((d: any) => {
+      return { 测量时间: d.ecgMonitorDate, 心电监护: d.ecgMonitorState };
+    });
+    this.tabList[7].chartData.rows = res.nat.map((d: any) => {
+      return { 检测日期: d.natDate, 核酸检测: d.natResults };
+    });
     this.$nextTick(() => {
       const heightInfo = (this.$refs.infoBoxRef as HTMLFormElement).offsetHeight;
       const heightTab = (this.$refs.tabBoxRef as HTMLFormElement).offsetHeight;

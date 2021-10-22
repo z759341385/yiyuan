@@ -163,7 +163,7 @@ export default class extends Vue {
     padding: 0 40px 40px 40px;
     .img {
       width: 100%;
-      height: calc(100% - 48px);
+      height: calc(100% - 88px);
       object-fit: contain;
     }
   }
