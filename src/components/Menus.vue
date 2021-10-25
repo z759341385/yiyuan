@@ -32,6 +32,8 @@ export default class extends Vue {
     // { title: "风险评估", icon: "hos-bingli", page: "RiskRecord", path: "/risk" },
     { title: "护理站", icon: "hos-hushi", page: "NursingStation", path: "/nursing/station" },
     { title: "公告信息", icon: "hos-jihua", page: "AnnouncementHome", path: "/announcement/home" },
+    { title: "交班报告", icon: "hos-querengongdan", page: "Handover", path: "/handover" },
+
     // { title: "体征检测", icon: "hos-jihua", page: "SignDetection", path: "/sign/home" },
   ];
 

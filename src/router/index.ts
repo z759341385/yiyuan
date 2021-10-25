@@ -80,6 +80,12 @@ const routes: Array<RouteConfig> = [
     name: "SignDetection",
     component: () => import(/* webpackChunkName: "patients-list" */ "@/views/sign/index.vue"),
     meta: { title: "体征检测" }
+  },
+  {
+    path: "/handover",
+    name: "Handover",
+    component: () => import(/* webpackChunkName: "patients-list" */ "@/views/handover/index.vue"),
+    meta: { title: "交班报告" }
   }
 ];
 

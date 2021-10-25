@@ -183,3 +183,19 @@ export const infusionMonitor = (params?: any) =>
     method: "post",
     params
   });
+
+// 交班信息
+export const shiftList = (params?: any) =>
+  request({
+    url: "inter/shiftlist",
+    method: "post",
+    params
+  });
+
+// 交班内容
+export const shiftReportList = (params?: any) =>
+  request({
+    url: "inter/shiftReportlist",
+    method: "post",
+    params
+  });

@@ -60,9 +60,9 @@
             </div>
           </div>
         </div>
-        <div class="card_item flex2">
+        <div class="card_item flex2 pt_20 pb_20">
           <!-- <ve-line :data="tabList[tab].chartData" :settings="{ yAxisName: tabList[tab].text }"></ve-line> -->
-          <ve-line :data="tabList[tab].chartData" :settings="{ yAxisName: [tabList[tab].text] }"></ve-line>
+          <ve-line :data="tabList[tab].chartData" :extend="chartExtend" :settings="{ yAxisName: [tabList[tab].text] }" height="100%"></ve-line>
         </div>
       </div>
     </div>
@@ -86,6 +86,16 @@ export default class extends Vue {
     patientInfo: {},
   };
   tab = 0;
+  chartExtend = {
+    "title.color": "white",
+    "xAxis.0.axisLabel.color": "white", //x轴文本颜色
+    "yAxis.0.axisLabel.color": "white", //y轴文本改变颜色
+    legend: {
+      textStyle: {
+        color: "white",
+      },
+    },
+  };
 
   tabList: any = [
     {
@@ -330,6 +340,9 @@ export default class extends Vue {
       .list_box {
         height: calc(100% - 50px);
         overflow-y: scroll;
+      }
+      .ve-line {
+        margin: 0 20px;
       }
     }
   }
