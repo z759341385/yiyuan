@@ -11,7 +11,7 @@
       <div class="card_box">
         <div class="list_box">
           <div v-for="item in info.page.list" :key="item.label" class="flex am_c list_item">
-            <div class="t_ct col_item" :style="titleList[0].style">{{ item.id }}</div>
+            <div class="t_ct col_item" :style="titleList[0].style">{{ item.no }}</div>
             <div class="t_ct col_item" :style="titleList[1].style">{{ item.name }}</div>
             <div class="t_ct col_item" :style="titleList[2].style">{{ item.sex }}</div>
             <div class="t_ct col_item" :style="titleList[3].style">{{ item.age }}</div>
@@ -80,9 +80,9 @@ export default class extends Vue {
   async getData() {
     const pid = this.$route.query.nurseDepId;
     const res: any = await eventlist({ nurseDepId: pid, pageNo: this.info.page.pageNo, pageSize: this.info.page.pageSize });
-    // for (let index = 0; index < 3; index++) {
-    //   res.page.list.push(...res.page.list);
-    // }
+    for (let index = 0; index < res.page.list.length; index++) {
+      res.page.list[index].no = index + 1 + (this.info.page.pageNo - 1) * this.info.page.pageSize;
+    }
     this.info = res;
   }
 

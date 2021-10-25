@@ -111,7 +111,7 @@ export default class extends Vue {
 
   async getData() {
     const pid = this.$route.query.nurseDepId;
-    const res = await shiftList({ nurseDepId: pid });
+    const res = await shiftList({ nurseDepId: pid, reportDay: this.selectData });
     this.info = res;
   }
 
@@ -132,7 +132,7 @@ export default class extends Vue {
   async referTo() {
     try {
       this.isLoading = true;
-      await this.shiftReportList();
+      await Promise.all([this.getData(), this.shiftReportList()]);
     } finally {
       this.isLoading = false;
     }
@@ -147,7 +147,7 @@ export default class extends Vue {
     border-radius: 12px;
     .top_box {
       .top_left_box {
-        padding: 0 50px;
+        padding: 10px 50px;
         .time_title {
           color: #00a3ff;
           font-size: 28px;

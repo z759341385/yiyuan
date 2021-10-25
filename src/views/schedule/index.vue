@@ -19,7 +19,7 @@
       <template v-if="tab == 0">
         <div class="list_box">
           <div v-for="item in tabList[0].list" :key="item.label" class="flex am_c list_item">
-            <div class="t_ct col_item" :style="titleList[0].style">{{ item.id }}</div>
+            <div class="t_ct col_item" :style="titleList[0].style">{{ item.no }}</div>
             <div class="t_ct col_item" :style="titleList[1].style">{{ item.name }}</div>
             <div class="t_ct col_item" :style="titleList[2].style">{{ item.sex }}</div>
             <div class="t_ct col_item" :style="titleList[3].style">{{ item.age }}</div>
@@ -42,7 +42,7 @@
       <template v-else>
         <div class="list_box">
           <div v-for="item in tabList[1].list" :key="item.label" class="flex am_c list_item">
-            <div class="t_ct col_item" :style="titleList1[0].style">{{ item.id }}</div>
+            <div class="t_ct col_item" :style="titleList1[0].style">{{ item.no }}</div>
             <div class="t_ct col_item" :style="titleList1[1].style">{{ item.name }}</div>
             <div class="t_ct col_item" :style="titleList1[2].style">{{ item.orderType }}</div>
             <div class="t_ct col_item" :style="titleList1[3].style">{{ item.proName }}</div>
@@ -133,6 +133,9 @@ export default class extends Vue {
       pageSize: this.tabList[this.tab].pageSize,
     });
     const cur = this.tabList[this.tab];
+    for (let index = 0; index < res.operatepage.list.length; index++) {
+      res.operatepage.list[index].no = index + 1 + (res.operatepage.pageNo - 1) * res.operatepage.pageSize;
+    }
     cur.list = res.operatepage.list;
     cur.total = res.operatepage.count;
     this.tabList.splice(this.tab, 1, cur);
@@ -146,6 +149,9 @@ export default class extends Vue {
       pageSize: this.tabList[this.tab].pageSize,
     });
     const cur = this.tabList[this.tab];
+    for (let index = 0; index < res.orderpage.list.length; index++) {
+      res.orderpage.list[index].no = index + 1 + (res.orderpage.pageNo - 1) * res.orderpage.pageSize;
+    }
     cur.list = res.orderpage.list;
     cur.total = res.orderpage.count;
     this.tabList.splice(this.tab, 1, cur);
@@ -199,7 +205,7 @@ export default class extends Vue {
       font-weight: bold;
     }
     .title_box {
-      padding: 0 30px;
+      padding: 0 15px;
       background: #31558b;
       color: white;
       .title_item {
