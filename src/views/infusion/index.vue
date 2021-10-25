@@ -155,9 +155,9 @@ export default class extends Vue {
 
   async getData() {
     const pid = this.$route.query.nurseDepId;
-    const res = await infusionMonitor({ nurseDepId: pid });
-    this.info = res.data;
-    const data = res.data.list;
+    const res: any = await infusionMonitor({ nurseDepId: pid });
+    this.info = res;
+    const data = res.list;
     const arr = [];
     const his = [];
     // data[0].devstatus = "开始输液异常";
