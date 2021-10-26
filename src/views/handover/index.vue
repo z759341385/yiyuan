@@ -99,8 +99,8 @@ export default class extends Vue {
     { label: "类型", eng: "schedulingType", style: "flex: 1" },
     { label: "床号", eng: "bedNo", style: "flex: 1" },
     { label: "姓名", eng: "patientName", style: "flex: 1" },
-    { label: "诊断", eng: "diagnosis", style: "flex: 1" },
-    { label: "交班内容", eng: "shiftContent", style: "flex: 1" },
+    { label: "诊断", eng: "diagnosis", style: "flex: 3" },
+    { label: "交班内容", eng: "shiftContent", style: "flex: 3" },
   ];
 
   mounted() {
