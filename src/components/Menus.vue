@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-26 09:08:11
+ * @LastEditTime: 2021-10-26 09:16:12
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /yiyuan/src/components/Menus.vue
+-->
 <template>
   <div class="menu_box flex am_c">
     <router-link
@@ -33,6 +41,7 @@ export default class extends Vue {
     { title: "护理站", icon: "hos-hushi", page: "NursingStation", path: "/nursing/station" },
     { title: "公告信息", icon: "hos-jihua", page: "AnnouncementHome", path: "/announcement/home" },
     { title: "交班报告", icon: "hos-querengongdan", page: "Handover", path: "/handover" },
+    { title: "心语苑", icon: "hos-querengongdan", page: "DepartmentInfo", path: "/departmentInfo" },
 
     // { title: "体征检测", icon: "hos-jihua", page: "SignDetection", path: "/sign/home" },
   ];

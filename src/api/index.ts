@@ -199,3 +199,35 @@ export const shiftReportList = (params?: any) =>
     method: "post",
     params
   });
+
+// 荣誉表彰信息
+export const getHonorarylist = (params?: any) =>
+  request({
+    url: "inter/honorarylist",
+    method: "post",
+    params
+  });
+
+  // 日常记录信息详情
+export const getDailyRecordlist = (params?: any) =>
+request({
+  url: "inter/dailyRecordlist",
+  method: "post",
+  params
+});
+ 
+// 留言板信息
+export const getMessageBoardlist = (params?: any) =>
+request({
+  url: "inter/messageBoardlist",
+  method: "post",
+  params
+});
+// 留言板信息
+export const addMessageBoard = (params?: any) =>
+request({
+  url: "inter/addMessageBoard",
+  method: "post",
+  params
+});
+

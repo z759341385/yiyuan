@@ -27,6 +27,7 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "nursing-operation" */ "@/views/nursing/operation/index.vue"),
     meta: { title: "护理运转" }
   },
+
   {
     path: "/nursing/station",
     name: "NursingStation",
@@ -86,6 +87,12 @@ const routes: Array<RouteConfig> = [
     name: "Handover",
     component: () => import(/* webpackChunkName: "patients-list" */ "@/views/handover/index.vue"),
     meta: { title: "交班报告" }
+  },
+  {
+    path: "/departmentInfo",
+    name: "DepartmentInfo",
+    component: () => import(/* webpackChunkName: "patients-list" */ "@/views/departmentInfo/index.vue"),
+    meta: { title: "心语苑" }
   }
 ];
 
