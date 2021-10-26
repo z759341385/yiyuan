@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-26 09:14:49
- * @LastEditTime: 2021-10-26 13:53:29
+ * @LastEditTime: 2021-10-26 16:04:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /yiyuan/src/views/departmentInfo/index.vue
@@ -102,7 +102,7 @@ export default {
         pageSize: 10
       },
       loadding: false,
-      nurseDepId:"",
+      nurseDepId: ""
     };
   },
   computed: {
@@ -117,10 +117,9 @@ export default {
     this.getHonorarylist();
     this.getDailyRecordlist();
     this.getMessageBoardlist();
-    
   },
-  mounted(){
-   this.nurseDepId = this.$route.query.nurseDepId;
+  mounted() {
+    this.nurseDepId = this.$route.query.nurseDepId;
   },
   methods: {
     getData() {
@@ -131,7 +130,7 @@ export default {
     // 获取荣誉
     getHonorarylist() {
       const params = {
-        nurseDepId:this.nurseDepId
+        nurseDepId: this.nurseDepId
       };
       getHonorarylist(params)
         .then(res => {
@@ -139,12 +138,14 @@ export default {
             this.honorarylist = res.list;
           }
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     },
     // 获取日常
     getDailyRecordlist() {
       const params = {
-        nurseDepId:this.nurseDepId
+        nurseDepId: this.nurseDepId
       };
       getDailyRecordlist(params)
         .then(res => {
@@ -152,13 +153,15 @@ export default {
             this.dailyRecordlist = res.list;
           }
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     },
 
     // 留言板
     getMessageBoardlist() {
       const params = {
-        nurseDepId:this.nurseDepId,
+        nurseDepId: this.nurseDepId,
         ...this.page
       };
       getMessageBoardlist(params)
@@ -168,7 +171,9 @@ export default {
             this.messageList = res.page.list;
           }
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     },
     openVideo(item) {
       if (item.videoUrl) this.dialogVisible = true;
@@ -180,17 +185,21 @@ export default {
     addMessageBoard() {
       if (this.addMessageContext) {
         const params = {
-          nurseDepId:this.nurseDepId,
+          nurseDepId: this.nurseDepId,
           contents: this.addMessageContext
         };
         addMessageBoard(params)
           .then(res => {
-            this.$message.success("留言成功");
-            this.page.pageNo = 1;
-            this.addMessageContext = "";
-            this.getMessageBoardlist();
+            if (res) {
+              this.$message.success("留言成功");
+              this.page.pageNo = 1;
+              this.addMessageContext = "";
+              this.getMessageBoardlist();
+            }
           })
-          .catch(err => {});
+          .catch(err => {
+            console.log(err);
+          });
       }
     },
     handleCurrentChange(current) {
@@ -272,7 +281,7 @@ export default {
       }
       .infinite-list {
         height: calc(100vh - 68px - 51px - 160px - 110px);
-        .message-list-null{
+        .message-list-null {
           list-style: none;
         }
         li {
@@ -288,30 +297,6 @@ export default {
       margin: 0 0 5px;
     }
   }
-  // .swiper-container {
-  //   width: 100%;
-  //   height: 100%;
-  // }
-
-  // .swiper-slide {
-  //   text-align: center;
-  //   font-size: 18px;
-  //   background: #fff;
-  //   height: 200px;
-  //   /* Center slide text vertically */
-  //   display: -webkit-box;
-  //   display: -ms-flexbox;
-  //   display: -webkit-flex;
-  //   display: flex;
-  //   -webkit-box-pack: center;
-  //   -ms-flex-pack: center;
-  //   -webkit-justify-content: center;
-  //   justify-content: center;
-  //   -webkit-box-align: center;
-  //   -ms-flex-align: center;
-  //   -webkit-align-items: center;
-  //   align-items: center;
-  // }
   .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;
