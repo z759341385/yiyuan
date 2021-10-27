@@ -215,7 +215,7 @@ request({
   method: "post",
   params
 });
- 
+
 // 留言板信息
 export const getMessageBoardlist = (params?: any) =>
 request({
@@ -224,9 +224,9 @@ request({
   params
 });
 // 留言板信息
-export const addMessageBoard = (params?: any) =>
+export const getXyyInfo = (params?: any) =>
 request({
-  url: "inter/addMessageBoard",
+  url: "inter/xyy",
   method: "post",
   params
 });

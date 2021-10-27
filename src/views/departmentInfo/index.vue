@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-26 09:14:49
- * @LastEditTime: 2021-10-26 16:04:20
+ * @LastEditTime: 2021-10-27 13:52:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /yiyuan/src/views/departmentInfo/index.vue
@@ -37,6 +37,7 @@
         <div class="operation_box">
           <div class="title t_ct">留言板</div>
           <div class="list_box">
+            <div class=""></div>
             <ul class="infinite-list" style="overflow:auto">
               <li v-for="(item, index) in messageList" :key="index" class="infinite-list-item">
                 <p v-text="item.contents"></p>
@@ -81,7 +82,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import { fireList, getHonorarylist, getDailyRecordlist, getMessageBoardlist, addMessageBoard } from "@/api/index";
+import { getXyyInfo, getHonorarylist, getDailyRecordlist, getMessageBoardlist, addMessageBoard } from "@/api/index";
 import "swiper/swiper-bundle.css";
 export default {
   name: "DepartmentInfo",
@@ -114,18 +115,22 @@ export default {
     }
   },
   created() {
+    this.getData()
     this.getHonorarylist();
     this.getDailyRecordlist();
     this.getMessageBoardlist();
   },
   mounted() {
-    this.nurseDepId = this.$route.query.nurseDepId;
+    this.nurseDepId = this.$route.query.nurseDepId||'0d1100db566e4b63a2833391c9c12fce';
   },
   methods: {
     getData() {
       const pid = this.$route.query.nurseDepId;
-      const res = fireList({ nurseDepId: pid });
+    getXyyInfo({ nurseDepId: pid }).then(res=>{
       this.info = res;
+
+      });
+      console.log(11111,this.info)
     },
     // 获取荣誉
     getHonorarylist() {
@@ -210,6 +215,7 @@ export default {
 };
 </script>
 <style lang="less">
+
 .department-info-dialog {
   .el-dialog {
     background: #1e3162;
@@ -217,6 +223,10 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
 .patients_detail_box {
   margin: 40px;
   font-size: 20px;
@@ -270,9 +280,9 @@ export default {
       }
     }
     .list_box {
-      height: calc(100vh - 68px - 51px - 160px);
+      height: calc(100vh - 68px - 51px - 180px);
       padding: 0 30px;
-      overflow-y: scroll;
+      // overflow-y: scroll;
       .list_item {
         padding: 15px 0;
         .col_item {
@@ -280,6 +290,8 @@ export default {
         }
       }
       .infinite-list {
+        scrollbar-width: none; /* Firefox */
+
         height: calc(100vh - 68px - 51px - 160px - 110px);
         .message-list-null {
           list-style: none;
