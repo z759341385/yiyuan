@@ -247,3 +247,10 @@ export const addMessageBoard = (params?: any) =>
     method: "post",
     params
   });
+
+export const getXyyInfo = (params?: any) =>
+  request({
+    url: "inter/xyy",
+    method: "post",
+    params
+  });
