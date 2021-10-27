@@ -89,6 +89,12 @@ const routes: Array<RouteConfig> = [
     meta: { title: "交班报告" }
   },
   {
+    path: "/workshop",
+    name: "Workshop",
+    component: () => import(/* webpackChunkName: "patients-list" */ "@/views/workshop/index.vue"),
+    meta: { title: "工作动态" }
+  },
+  {
     path: "/departmentInfo",
     name: "DepartmentInfo",
     component: () => import(/* webpackChunkName: "patients-list" */ "@/views/departmentInfo/index.vue"),

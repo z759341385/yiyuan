@@ -200,6 +200,22 @@ export const shiftReportList = (params?: any) =>
     params
   });
 
+// 排班信息
+export const scheduling = (params?: any) =>
+  request({
+    url: "inter/scheduling",
+    method: "post",
+    params
+  });
+
+// 更新排班信息
+export const updatePlan = (params?: any) =>
+  request({
+    url: "inter/updatePlan",
+    method: "post",
+    params
+  });
+
 // 荣誉表彰信息
 export const getHonorarylist = (params?: any) =>
   request({
@@ -208,26 +224,26 @@ export const getHonorarylist = (params?: any) =>
     params
   });
 
-  // 日常记录信息详情
+// 日常记录信息详情
 export const getDailyRecordlist = (params?: any) =>
-request({
-  url: "inter/dailyRecordlist",
-  method: "post",
-  params
-});
- 
+  request({
+    url: "inter/dailyRecordlist",
+    method: "post",
+    params
+  });
+
 // 留言板信息
 export const getMessageBoardlist = (params?: any) =>
-request({
-  url: "inter/messageBoardlist",
-  method: "post",
-  params
-});
+  request({
+    url: "inter/messageBoardlist",
+    method: "post",
+    params
+  });
+
 // 留言板信息
 export const addMessageBoard = (params?: any) =>
-request({
-  url: "inter/addMessageBoard",
-  method: "post",
-  params
-});
-
+  request({
+    url: "inter/addMessageBoard",
+    method: "post",
+    params
+  });
