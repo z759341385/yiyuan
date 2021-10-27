@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-26 09:14:49
- * @LastEditTime: 2021-10-27 13:52:15
+ * @LastEditTime: 2021-10-27 14:01:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /yiyuan/src/views/departmentInfo/index.vue
@@ -115,22 +115,20 @@ export default {
     }
   },
   created() {
-    this.getData()
+    this.getData();
     this.getHonorarylist();
     this.getDailyRecordlist();
     this.getMessageBoardlist();
   },
   mounted() {
-    this.nurseDepId = this.$route.query.nurseDepId||'0d1100db566e4b63a2833391c9c12fce';
+    this.nurseDepId = this.$route.query.nurseDepId || "0d1100db566e4b63a2833391c9c12fce";
   },
   methods: {
     getData() {
-      const pid = this.$route.query.nurseDepId;
-    getXyyInfo({ nurseDepId: pid }).then(res=>{
-      this.info = res;
-
+      const pid = this.$route.query.nurseDepId || "0d1100db566e4b63a2833391c9c12fce";
+      getXyyInfo({ nurseDepId: pid }).then(res => {
+        this.info = res;
       });
-      console.log(11111,this.info)
     },
     // 获取荣誉
     getHonorarylist() {
@@ -215,7 +213,6 @@ export default {
 };
 </script>
 <style lang="less">
-
 .department-info-dialog {
   .el-dialog {
     background: #1e3162;
