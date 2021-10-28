@@ -1,6 +1,6 @@
 <template>
   <swiper :key="type" class="swiper" :options="swiperOption">
-    <swiper-slide v-for="item in list" :key="item.id" :class="[isRemind ? 'warning' : 'calling']">
+    <swiper-slide v-for="item in list" :key="item.id" :class="[isRemind ? 'warning' : 'calling', 't_ct']">
       <div class="f28 fw_b">{{ item.bedNum }}</div>
       <div class="f18 mt_10">{{ isRemind ? item.remindName : item.callName }}</div>
     </swiper-slide>
@@ -18,8 +18,8 @@ import "swiper/swiper-bundle.css";
   name: "SwiperView",
   components: {
     Swiper,
-    SwiperSlide,
-  },
+    SwiperSlide
+  }
 })
 export default class extends Vue {
   @Prop() type!: string;
@@ -36,8 +36,8 @@ export default class extends Vue {
     autoplay: {
       delay: 2000,
       stopOnLastSlide: false,
-      disableOnInteraction: true,
-    },
+      disableOnInteraction: true
+    }
   };
 }
 </script>
