@@ -11,8 +11,8 @@
           </div>
           <div class="flex flex1">
             <div class="patient_info_h1">{{ info.patient.name }}</div>
-            <img v-if="info.patient.sex == '1'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
-            <img v-else-if="info.patient.sex == '2'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" />
+            <img v-if="info.patient.sex == '男'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
+            <img v-else-if="info.patient.sex == '女'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" />
             <div class="patient_info_h1">{{ info.patient.age }}岁</div>
           </div>
         </div>
