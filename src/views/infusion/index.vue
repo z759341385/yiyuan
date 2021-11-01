@@ -62,7 +62,7 @@ import { infusionMonitor } from "@/api/index";
 
 @Component({
   name: "Infusion",
-  components: { Header, ["svg-progress-bar"]: svg },
+  components: { Header, ["svg-progress-bar"]: svg }
 })
 export default class extends Vue {
   timer: any = null;
@@ -104,7 +104,7 @@ export default class extends Vue {
           html += '<div class="f12 mt_5">' + item.flowRate + "滴/分钟</div>";
         }
         return html;
-      },
+      }
     };
   }
 
@@ -163,8 +163,8 @@ export default class extends Vue {
     // data[0].devstatus = "开始输液异常";
     // data[0].remaining = 60;
     // data[2].devstatus = "输液结束";
-    // data[1].remaining = 60;
-    // data[2].devstatus = "滴速过快";
+    // data[0].remaining = 60;
+    // data[0].devstatus = "滴速过快";
     // data[3].devstatus = "滴速过慢";
     // data[4].devstatus = "低电离线";
     // data[0].devstatus = "输液结束";
@@ -637,7 +637,7 @@ body {
   opacity: 0;
 }
 
-.white_border {
+::v-deep .white_border {
   border: 1px solid white;
   border-radius: 200px;
 }
