@@ -40,7 +40,7 @@
             <div class=""></div>
             <ul class="infinite-list" style="overflow:auto">
               <li v-for="(item, index) in messageList" :key="index" class="infinite-list-item">
-                <p v-text="item.contents"></p>
+                <p v-html="item.contents"></p>
                 <p class="message-time" v-text="item.createDate"></p>
               </li>
               <li v-if="messageList.length === 0" class="message-list-null"><el-empty description="暂无数据"></el-empty></li>
