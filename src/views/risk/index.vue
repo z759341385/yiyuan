@@ -94,8 +94,8 @@ export default class extends Vue {
     { label: "评分", eng: "riskScore", style: "flex: 1" },
     { label: "护理措施", eng: "nursingMeasures", style: "flex: 2" },
     { label: "护理结果", eng: "evaluateResults", style: "flex: 2" },
-    { label: "评估人员", eng: "logUserName", style: "flex: 1" },
-    { label: "再评估时间", eng: "expectNextDate", style: "flex: 2" }
+    // { label: "评估人员", eng: "logUserName", style: "flex: 1" },
+    { label: "预计下次评估时间", eng: "expectNextDate", style: "flex: 2" }
   ];
 
   otherHeight = 231;
