@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-26 09:14:49
- * @LastEditTime: 2021-10-27 14:01:03
+ * @LastEditTime: 2021-11-03 16:52:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /yiyuan/src/views/departmentInfo/index.vue
@@ -132,8 +132,9 @@ export default {
     },
     // 获取荣誉
     getHonorarylist() {
+      const pid = this.$route.query.nurseDepId || "0d1100db566e4b63a2833391c9c12fce";
       const params = {
-        nurseDepId: this.nurseDepId
+        nurseDepId: pid
       };
       getHonorarylist(params)
         .then(res => {
@@ -147,8 +148,9 @@ export default {
     },
     // 获取日常
     getDailyRecordlist() {
+      const pid = this.$route.query.nurseDepId || "0d1100db566e4b63a2833391c9c12fce";
       const params = {
-        nurseDepId: this.nurseDepId
+        nurseDepId: pid
       };
       getDailyRecordlist(params)
         .then(res => {
@@ -163,8 +165,9 @@ export default {
 
     // 留言板
     getMessageBoardlist() {
+      const pid = this.$route.query.nurseDepId || "0d1100db566e4b63a2833391c9c12fce";
       const params = {
-        nurseDepId: this.nurseDepId,
+        nurseDepId: pid,
         ...this.page
       };
       getMessageBoardlist(params)
@@ -187,8 +190,9 @@ export default {
     },
     addMessageBoard() {
       if (this.addMessageContext) {
+        const pid = this.$route.query.nurseDepId || "0d1100db566e4b63a2833391c9c12fce";
         const params = {
-          nurseDepId: this.nurseDepId,
+          nurseDepId: pid,
           contents: this.addMessageContext
         };
         addMessageBoard(params)
