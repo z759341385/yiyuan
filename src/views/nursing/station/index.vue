@@ -32,7 +32,7 @@ import { userlist } from "@/api/index";
 
 @Component({
   name: "NursingStation",
-  components: { Header, SwiperView },
+  components: { Header, SwiperView }
 })
 export default class extends Vue {
   info: any = {};
@@ -54,6 +54,7 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .page {
+  padding: 80px 0 120px;
   color: #bdf0fc;
   .card_item {
     position: relative;

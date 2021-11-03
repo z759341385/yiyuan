@@ -11,8 +11,8 @@
           </div>
           <div class="flex flex1">
             <div class="patient_info_h1">{{ info.patient.name }}</div>
-            <img v-if="info.patient.sex == '1'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
-            <img v-else-if="info.patient.sex == '2'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" />
+            <img v-if="info.patient.sex == '男'" :src="require('@/assets/images/man.png')" class="sec_icon" alt="" />
+            <img v-else-if="info.patient.sex == '女'" :src="require('@/assets/images/woman.png')" class="sec_icon" alt="" />
             <div class="patient_info_h1">{{ info.patient.age }}岁</div>
           </div>
         </div>
@@ -227,18 +227,18 @@ import { interDetail, getMedicalAdvice, getDocotorAdvice } from "@/api/index";
 
 @Component({
   name: "PatientsDetail",
-  components: { Header },
+  components: { Header }
 })
 export default class extends Vue {
   info: any = {
-    patient: {},
+    patient: {}
   };
 
   tab = 0;
 
   tabList = [
     { pageNo: 1, pageSize: 20, total: 0, list: [] },
-    { pageNo: 1, pageSize: 20, total: 0, list: [] },
+    { pageNo: 1, pageSize: 20, total: 0, list: [] }
   ];
 
   titleList = [
@@ -248,7 +248,7 @@ export default class extends Vue {
     { label: "下嘱医生", eng: "doctorName", style: "flex: 1" },
     { label: "下嘱时间", eng: "adviceDate", style: "flex: 3" },
     { label: "医嘱状态", eng: "adviceState", style: "flex: 1" },
-    { label: "停止时间", eng: "stopTime", style: "flex: 3" },
+    { label: "停止时间", eng: "stopTime", style: "flex: 3" }
   ];
   titleList1 = [
     { label: "编号", eng: "adviceNum", style: "flex: 1" },
@@ -262,7 +262,7 @@ export default class extends Vue {
     { label: "下嘱时间", eng: "adviceDate", style: "flex: 1.3" },
     { label: "医嘱状态", eng: "adviceState", style: "flex: 1" },
     { label: "组标", eng: "adviceGroup", style: "flex: 1" },
-    { label: "停止时间", eng: "stopTime", style: "flex: 1.3" },
+    { label: "停止时间", eng: "stopTime", style: "flex: 1.3" }
   ];
 
   mounted() {
@@ -289,7 +289,7 @@ export default class extends Vue {
     const res: any = await getMedicalAdvice({
       id: this.$route.params.id,
       pageNo: this.tabList[this.tab].pageNo,
-      pageSize: this.tabList[this.tab].pageSize,
+      pageSize: this.tabList[this.tab].pageSize
     });
     const cur = this.tabList[this.tab];
     cur.list = res.medicalPage.list;
@@ -302,7 +302,7 @@ export default class extends Vue {
     const res: any = await getDocotorAdvice({
       id: this.$route.params.id,
       pageNo: this.tabList[this.tab].pageNo,
-      pageSize: this.tabList[this.tab].pageSize,
+      pageSize: this.tabList[this.tab].pageSize
     });
     const cur = this.tabList[this.tab];
     cur.list = res.docotorlPage.list;
@@ -375,6 +375,7 @@ export default class extends Vue {
     }
     .patient_info_text {
       color: #ffffff;
+      flex: 1;
     }
     .link_text {
       color: #7cb785;

@@ -29,7 +29,7 @@
             <span class="c_ff">{{ info.patientInfo.chargeDoctorName }}</span>
           </div>
           <div class="flex flex1 mr_20">
-            <span class="info_blue">责任护士：</span>
+            <span class="info_blue">主管护士：</span>
             <span class="c_ff">{{ info.patientInfo.chargeNurseName }}</span>
           </div>
           <div class="flex flex2 mr_40">
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="flex mt_20">
-          <span class="info_blue">入院诊断：</span>
+          <span class="info_blue">诊断情况：</span>
           <span class="c_ff">{{ info.patientInfo.illnessState }}</span>
         </div>
       </div>
@@ -80,22 +80,22 @@ import { risklist } from "@/api/index";
 
 @Component({
   name: "RiskRecord",
-  components: { Header, SwiperView },
+  components: { Header, SwiperView }
 })
 export default class extends Vue {
   info: any = {
     patientInfo: {},
-    riskArr: [],
+    riskArr: []
   };
 
   tab = 0;
   tableHeader = [
-    { label: "评估时间", eng: "logDate", style: "flex: 2" },
+    { label: "时间", eng: "logDate", style: "flex: 2" },
     { label: "评分", eng: "riskScore", style: "flex: 1" },
     { label: "护理措施", eng: "nursingMeasures", style: "flex: 2" },
     { label: "护理结果", eng: "evaluateResults", style: "flex: 2" },
-    { label: "评估人员", eng: "logUserName", style: "flex: 1" },
-    { label: "再评估时间", eng: "expectNextDate", style: "flex: 2" },
+    // { label: "评估人员", eng: "logUserName", style: "flex: 1" },
+    { label: "预计下次评估时间", eng: "expectNextDate", style: "flex: 2" }
   ];
 
   otherHeight = 231;

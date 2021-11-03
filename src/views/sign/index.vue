@@ -29,7 +29,7 @@
             <span class="c_ff">{{ info.patientInfo.chargeDoctorName }}</span>
           </div>
           <div class="flex flex1 mr_20">
-            <span class="info_blue">责任护士：</span>
+            <span class="info_blue">主管护士：</span>
             <span class="c_ff">{{ info.patientInfo.chargeNurseName }}</span>
           </div>
           <div class="flex flex2 mr_40">
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="flex mt_20">
-          <span class="info_blue">入院诊断：</span>
+          <span class="info_blue">诊断情况：</span>
           <span class="c_ff">{{ info.patientInfo.illnessState }}</span>
         </div>
       </div>
@@ -61,8 +61,13 @@
           </div>
         </div>
         <div class="card_item flex2 pt_20 pb_20">
-          <!-- <ve-line :data="tabList[tab].chartData" :settings="{ yAxisName: tabList[tab].text }"></ve-line> -->
-          <ve-line :data="tabList[tab].chartData" :extend="chartExtend" :settings="{ yAxisName: [tabList[tab].text] }" height="100%"></ve-line>
+          <ve-line
+            :data="tabList[tab].chartData"
+            :extend="chartExtend"
+            :tooltip="tooltip"
+            :settings="{ yAxisName: [`${tabList[tab].text}`] }"
+            height="100%"
+          ></ve-line>
         </div>
       </div>
     </div>
@@ -79,23 +84,16 @@ import { vitalSignsList } from "@/api/index";
 
 @Component({
   name: "SignDetection",
-  components: { Header, VeLine, SwiperView },
+  components: { Header, VeLine, SwiperView }
 })
 export default class extends Vue {
   info: any = {
-    patientInfo: {},
+    patientInfo: {}
   };
   tab = 0;
-  chartExtend = {
-    "title.color": "white",
-    "xAxis.0.axisLabel.color": "white", //x轴文本颜色
-    "yAxis.0.axisLabel.color": "white", //y轴文本改变颜色
-    legend: {
-      textStyle: {
-        color: "white",
-      },
-    },
-  };
+
+  ecgMonitorState = ["偏低", "正常", "偏高"];
+  natResults = ["阴性", "阳性"];
 
   tabList: any = [
     {
@@ -107,12 +105,13 @@ export default class extends Vue {
       tableHeader: [
         { label: "体温", eng: "temperature", style: "flex: 1" },
         { label: "测量时间", eng: "tempDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "℃",
       chartData: {
         columns: ["测量时间", "体温"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "脉搏",
@@ -123,12 +122,13 @@ export default class extends Vue {
       tableHeader: [
         { label: "脉搏", eng: "pulse", style: "flex: 1" },
         { label: "测量时间", eng: "pulseDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "次/分钟",
       chartData: {
         columns: ["测量时间", "脉搏"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "呼吸",
@@ -138,13 +138,14 @@ export default class extends Vue {
       list: [],
       tableHeader: [
         { label: "呼吸", eng: "breatheRate", style: "flex: 1" },
-        { label: "测量时间", eng: "breathDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "测量时间", eng: "breatheDate", style: "flex: 2" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "次/分钟",
       chartData: {
         columns: ["测量时间", "呼吸"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "血压",
@@ -155,12 +156,13 @@ export default class extends Vue {
       tableHeader: [
         { label: "血压", eng: "bloodPressure", style: "flex: 1" },
         { label: "测量时间", eng: "pressureDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "mmHg",
       chartData: {
         columns: ["测量时间", "高压", "低压"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "血氧",
@@ -171,12 +173,13 @@ export default class extends Vue {
       tableHeader: [
         { label: "血氧", eng: "bloodOxygen", style: "flex: 1" },
         { label: "测量时间", eng: "bloodOxygenDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "%",
       chartData: {
         columns: ["测量时间", "血氧"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "血糖",
@@ -187,12 +190,13 @@ export default class extends Vue {
       tableHeader: [
         { label: "血糖", eng: "bloodSugar", style: "flex: 1" },
         { label: "测量时间", eng: "bloodSugarDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "mmol/L",
       chartData: {
         columns: ["测量时间", "血糖"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "心电监护",
@@ -203,12 +207,13 @@ export default class extends Vue {
       tableHeader: [
         { label: "状态", eng: "ecgMonitorState", style: "flex: 1" },
         { label: "测量时间", eng: "ecgMonitorDate", style: "flex: 2" },
-        { label: "护士", eng: "nurseName", style: "flex: 1" },
+        { label: "护士", eng: "nurseName", style: "flex: 1" }
       ],
+      unit: "",
       chartData: {
         columns: ["测量时间", "状态"],
-        rows: [],
-      },
+        rows: []
+      }
     },
     {
       text: "核酸检测",
@@ -219,16 +224,58 @@ export default class extends Vue {
       tableHeader: [
         { label: "检测结果", eng: "natResults", style: "flex: 1" },
         { label: "检测日期", eng: "natDate", style: "flex: 2" },
-        { label: "检测机构", eng: "natFacility", style: "flex: 1" },
+        { label: "检测机构", eng: "natFacility", style: "flex: 1" }
       ],
+      unit: "",
       chartData: {
         columns: ["检测日期", "检测结果"],
-        rows: [],
-      },
-    },
+        rows: []
+      }
+    }
   ];
 
   otherHeight = 226;
+  get tooltip() {
+    const tooltip = {
+      formatter: (e: any) => {
+        let val = "";
+        if (e.seriesName == "状态") {
+          val = this.ecgMonitorState[e.value[1]];
+        } else if (e.seriesName == "检测结果") {
+          val = this.natResults[e.value[1]];
+        } else {
+          val = e.value[1];
+        }
+        const str = `${e.value[0]}<br />${e.marker}${e.seriesName}：${val}${this.tabList[this.tab].unit}`;
+        return str;
+      }
+    };
+    return tooltip;
+  }
+
+  get chartExtend() {
+    return {
+      "title.color": "white",
+      "xAxis.0.axisLabel.color": "white", //x轴文本颜色
+      "yAxis.0.axisLabel.color": "white", //y轴文本改变颜色
+      "yAxis.0.axisLabel.formatter": (value: any) => {
+        let formatter = "";
+        if (this.tab == 6) {
+          formatter = this.ecgMonitorState[value] || "";
+        } else if (this.tab == 7) {
+          formatter = this.natResults[value] || "";
+        } else {
+          formatter = `${value} ${this.tabList[this.tab].unit}`;
+        }
+        return formatter;
+      },
+      legend: {
+        textStyle: {
+          color: "white"
+        }
+      }
+    };
+  }
 
   get cardHeightStr() {
     return `calc(100vh - 250px - ${this.otherHeight}px)`;
@@ -251,31 +298,49 @@ export default class extends Vue {
     this.tabList[5].list = res.bloodSugar;
     this.tabList[6].list = res.ecgMonitoring;
     this.tabList[7].list = res.nat;
-    this.tabList[0].chartData.rows = res.temperature.map((d: any) => {
-      return { 测量时间: d.tempDate, 体温: d.temperature };
-    });
-    this.tabList[1].chartData.rows = res.pulse.map((d: any) => {
-      return { 测量时间: d.pulseDate, 脉搏: d.pulse };
-    });
-    this.tabList[2].chartData.rows = res.breathe.map((d: any) => {
-      return { 测量时间: d.breatheDate, 呼吸: d.breatheRate };
-    });
-    this.tabList[3].chartData.rows = res.bloodPressure.map((d: any) => {
-      const blood = d.bloodPressure.split("-");
-      return { 测量时间: d.pressureDate, 高压: blood[1], 低压: blood[0] };
-    });
-    this.tabList[4].chartData.rows = res.bloodOxygen.map((d: any) => {
-      return { 测量时间: d.bloodOxygenDate, 血氧: d.bloodOxygen };
-    });
-    this.tabList[5].chartData.rows = res.bloodSugar.map((d: any) => {
-      return { 测量时间: d.bloodSugarDate, 血糖: d.bloodSugar };
-    });
-    this.tabList[6].chartData.rows = res.ecgMonitoring.map((d: any) => {
-      return { 测量时间: d.ecgMonitorDate, 心电监护: d.ecgMonitorState };
-    });
-    this.tabList[7].chartData.rows = res.nat.map((d: any) => {
-      return { 检测日期: d.natDate, 核酸检测: d.natResults };
-    });
+    this.tabList[0].chartData.rows = res.temperature
+      .map((d: any) => {
+        return { 测量时间: d.tempDate, 体温: d.temperature };
+      })
+      .reverse();
+    this.tabList[1].chartData.rows = res.pulse
+      .map((d: any) => {
+        return { 测量时间: d.pulseDate, 脉搏: d.pulse };
+      })
+      .reverse();
+    this.tabList[2].chartData.rows = res.breathe
+      .map((d: any) => {
+        return { 测量时间: d.breatheDate, 呼吸: d.breatheRate };
+      })
+      .reverse();
+    this.tabList[3].chartData.rows = res.bloodPressure
+      .map((d: any) => {
+        const blood = d.bloodPressure.split("-");
+        return { 测量时间: d.pressureDate, 高压: blood[1], 低压: blood[0] };
+      })
+      .reverse();
+    this.tabList[4].chartData.rows = res.bloodOxygen
+      .map((d: any) => {
+        return { 测量时间: d.bloodOxygenDate, 血氧: d.bloodOxygen };
+      })
+      .reverse();
+    this.tabList[5].chartData.rows = res.bloodSugar
+      .map((d: any) => {
+        return { 测量时间: d.bloodSugarDate, 血糖: d.bloodSugar };
+      })
+      .reverse();
+    this.tabList[6].chartData.rows = res.ecgMonitoring
+      .map((d: any) => {
+        const stateFormat = this.ecgMonitorState.indexOf(d.ecgMonitorState);
+        return { 测量时间: d.ecgMonitorDate, 状态: stateFormat };
+      })
+      .reverse();
+    this.tabList[7].chartData.rows = res.nat
+      .map((d: any) => {
+        const resultFormat = this.natResults.indexOf(d.natResults);
+        return { 检测日期: d.natDate, 检测结果: resultFormat };
+      })
+      .reverse();
     this.$nextTick(() => {
       const heightInfo = (this.$refs.infoBoxRef as HTMLFormElement).offsetHeight;
       const heightTab = (this.$refs.tabBoxRef as HTMLFormElement).offsetHeight;

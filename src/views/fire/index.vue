@@ -60,23 +60,23 @@ import { fireList, fireChecklist, fireDevlist, fireUserlist, addFireCheck } from
 
 @Component({
   name: "FireInfo",
-  components: { Header },
+  components: { Header }
 })
 export default class extends Vue {
   info: any = {
     fireControl: {
-      contorlPic: "",
-    },
+      contorlPic: ""
+    }
   };
   chickpage: any = {
     pageNo: 1,
-    pageSize: 30,
+    pageSize: 30
   };
 
   titleList = [
     { label: "检查内容", eng: "name", style: "flex: 1" },
     { label: "检查人", eng: "sex", style: "flex: 1" },
-    { label: "检查时间", eng: "sex", style: "flex: 2" },
+    { label: "检查时间", eng: "sex", style: "flex: 2" }
   ];
 
   equipment = "";
@@ -131,6 +131,7 @@ export default class extends Vue {
       const pid = this.$route.query.nurseDepId;
       await addFireCheck({ nurseDepId: pid, devId: this.equipment, userId: this.checker });
       this.$message.success("添加成功");
+      this.getFireChecklist();
     } finally {
       this.isLoading = false;
     }

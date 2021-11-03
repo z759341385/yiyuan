@@ -13,7 +13,6 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import "./styles/app.less";
 import "./styles/index.less";
-import vGanttChart from "v-gantt-chart";
 
 Vue.config.productionTip = false;
 
@@ -22,7 +21,6 @@ Vue.config.productionTip = false;
 // Vue.component(Option.name, Option);
 // Vue.component(Pagination.name, Pagination);
 Vue.use(ElementUI);
-Vue.use(vGanttChart);
 Vue.prototype.$moment = moment;
 
 import { GridComponent } from "echarts/components";

@@ -6,7 +6,7 @@
         <div class="detail_info card">
           <div class="subTitle t_ct">{{ info.newsInfo.title }}</div>
           <div class="mt_20 mb_20">发布时间：{{ info.newsInfo.createDate }}</div>
-          <div v-html="info.newsInfo.newsContent"></div>
+          <p v-html="info.newsInfo.newsContentFormat"></p>
         </div>
       </div>
     </div>
@@ -21,18 +21,30 @@ import { getNews } from "@/api/index";
 
 @Component({
   name: "AnnouncementDetail",
-  components: { Header },
+  components: { Header }
 })
 export default class extends Vue {
-  info: any = {};
+  info: any = {
+    newsInfo: {}
+  };
 
   mounted() {
     this.getData();
   }
 
   async getData() {
-    const res = await getNews({ id: this.$route.params.id });
+    const res: any = await getNews({ id: this.$route.params.id });
+    res.newsInfo.newsContentFormat = this.htmlDecode(res.newsInfo.newsContent);
     this.info = res;
+  } /*2.用浏览器内部转换器实现html解码（反转义）*/
+
+  htmlDecode(text: string) {
+    //1.首先动态创建一个容器标签元素，如DIV
+    let temp: any = document.createElement("div"); //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+    temp.innerHTML = text; //3.最后返回这个元素的innerText或者textContent，即得到经过HTML解码的字符串了。
+    const output = temp.innerText || temp.textContent;
+    temp = null;
+    return output;
   }
 }
 </script>
