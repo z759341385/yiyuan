@@ -60,7 +60,7 @@ export default class extends Vue {
         start: "prev,next", // will normally be on the left. if RTL, will be on the right
         center: "title",
         //控制年月日  resourceTimelineMonth
-        end: "today,resourceTimelineDay,resourceTimelineWeek" // will normally be on the right. if RTL, will be on the left
+        end: "resourceTimelineDay,resourceTimelineWeek" // will normally be on the right. if RTL, will be on the left
       },
       buttonText: {
         today: "今天",

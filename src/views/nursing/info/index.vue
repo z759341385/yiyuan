@@ -44,15 +44,15 @@ import { nurselist } from "@/api/index";
 
 @Component({
   name: "NursingInfo",
-  components: { Header, vueSeamlessScroll },
+  components: { Header, vueSeamlessScroll }
 })
 export default class extends Vue {
   info: any = {
     page: {
       pageNo: 1,
       pageSize: 20,
-      count: 0,
-    },
+      count: 0
+    }
   };
 
   titleList = [
@@ -61,9 +61,9 @@ export default class extends Vue {
     { label: "性别", eng: "sex", style: "width: 180px" },
     { label: "年龄", eng: "age", style: "width: 180px" },
     { label: "护理等级", eng: "nursingGrade", style: "width: 240px" },
-    { label: "病情状态", eng: "illnessState", style: "flex: 1" },
+    { label: "诊断情况", eng: "illnessState", style: "flex: 1" },
     { label: "过敏信息", eng: "allergyInfo", style: "flex: 1" },
-    { label: "饮食类型", eng: "dietType", style: "flex: 1" },
+    { label: "饮食类型", eng: "dietType", style: "flex: 1" }
   ];
 
   // classOption = {
